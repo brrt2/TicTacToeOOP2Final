@@ -9,28 +9,28 @@
 //
 ////    @BeforeTest
 ////    public void init(){
-////        Board board = new Board(3,3);
+////        Board playBoard = new Board(3,3);
 ////    }
 //
 //    @Test
 //    public void testShowBoard() throws Exception {
-//        Board board = new Board(3,3);
-//        assertFalse(board.playBoard.isEmpty());
-//        assertTrue(board.playBoard.get(2)=='e');
+//        Board playBoard = new Board(3,3);
+//        assertFalse(playBoard.playBoard.isEmpty());
+//        assertTrue(playBoard.playBoard.get(2)=='e');
 //    }
 //
 ////    @Test
 ////    public void testMarkField() throws Exception {
-////        Board board = new Board(3,3);
-////        board.markField(3);
-////        assertEquals(board.playBoard.get(3),new Character('x'));
+////        Board playBoard = new Board(3,3);
+////        playBoard.markField(3);
+////        assertEquals(playBoard.playBoard.get(3),new Character('x'));
 ////    }
 //
 //    @Test
 //    public void testClearBoard() throws Exception {
-//        Board board = new Board(3,3);
-//        board.clearBoard();
-//        assertTrue(board.playBoard.isEmpty());
+//        Board playBoard = new Board(3,3);
+//        playBoard.clearBoard();
+//        assertTrue(playBoard.playBoard.isEmpty());
 //    }
 //
 //}

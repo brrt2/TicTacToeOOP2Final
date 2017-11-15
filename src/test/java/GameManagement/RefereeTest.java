@@ -10,10 +10,10 @@ import static org.testng.Assert.*;
 //public class RefereeTest {
 //
 //    public void testCheckIfWonHorizontally() throws Exception {
-//        Board board = BoardFactory.createBoard(3,3);
-//        Referee referee = new Referee(board);
-//        MoveValidator mv = new MoveValidator(board);
-//        List<Character> list = board.getPlayBoard();
+//        Board playBoard = BoardFactory.createBoard(3,3);
+//        Referee referee = new Referee(playBoard);
+//        MoveValidator mv = new MoveValidator(playBoard);
+//        List<Character> list = playBoard.getPlayBoard();
 //        Move move = new Move(1);
 //        Move move2 = new Move(2);
 //        Move move3 = new Move(3);
@@ -25,10 +25,10 @@ import static org.testng.Assert.*;
 //
 //
 //    public void testCheckIfWonVertically() throws Exception {
-//        Board board = BoardFactory.createBoard(3,3);
-//        Referee referee = new Referee(board);
-//        MoveValidator mv = new MoveValidator(board);
-//        List<Character> list = board.getPlayBoard();
+//        Board playBoard = BoardFactory.createBoard(3,3);
+//        Referee referee = new Referee(playBoard);
+//        MoveValidator mv = new MoveValidator(playBoard);
+//        List<Character> list = playBoard.getPlayBoard();
 //        Move move = new Move(1);
 //        Move move2 = new Move(2);
 //        Move move3 = new Move(3);
@@ -41,10 +41,10 @@ import static org.testng.Assert.*;
 //
 //
 //    public void testCheckIfWonDiagonallyLeftToRight() throws Exception {
-//        Board board = BoardFactory.createBoard(3,3);
-//        Referee referee = new Referee(board);
-//        MoveValidator mv = new MoveValidator(board);
-//        List<Character> list = board.getPlayBoard();
+//        Board playBoard = BoardFactory.createBoard(3,3);
+//        Referee referee = new Referee(playBoard);
+//        MoveValidator mv = new MoveValidator(playBoard);
+//        List<Character> list = playBoard.getPlayBoard();
 //        Move move = new Move(1);
 //        Move move2 = new Move(2);
 //        Move move3 = new Move(3);

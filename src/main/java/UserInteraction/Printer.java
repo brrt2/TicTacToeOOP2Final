@@ -2,6 +2,7 @@ package UserInteraction;
 
 import GameManagement.Board;
 import GameManagement.Game;
+import GameManagement.Referee;
 import Players.Player;
 
 import java.util.Scanner;
@@ -29,13 +30,14 @@ public class Printer {
             int width = scan.nextInt();
             System.out.println("Please provide the number of adjacent signs necessary to win ");
             int adjacentSigns = scan.nextInt();
-            Game game = new Game(first,second,height,width,adjacentSigns);
+            Board board = new Board(height,width);
+            Game game = new Game(first,second,board,adjacentSigns);
             game.setCurrentPlayer(first);
 
             do{
                 game.play();
 
-            }while(game.isWin==false&&game.isDraw==false);
+            }while(!game.isWin);
         }
     }
 
