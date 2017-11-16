@@ -10,8 +10,12 @@ public class Tile {
         this.number = number;
     }
 
+    public String getMark() {
+        return mark;
+    }
+
     @Override
     public String toString() {
-        return mark + " ";
+        return "| "+ mark + " |";
     }
 }

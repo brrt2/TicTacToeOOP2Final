@@ -18,5 +18,8 @@ public class Player {
         return name;
     }
 
-
+    @Override
+    public String toString() {
+        return  name;
+    }
 }

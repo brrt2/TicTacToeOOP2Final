@@ -9,6 +9,7 @@ public class Board {
     int row;
     int column;
     List<Tile> playBoard;
+    int moveCounter=0;
 
 
     public Board(int row, int column) {
@@ -47,15 +48,22 @@ public class Board {
 //    }
 
     void markTile(int number, String toMark) {
+
         playBoard.get(number-1).mark=toMark;
+        moveCounter++;
     }
 //
     public void clearBoard(){
-        for(int i=0; i< playBoard.size(); i++){
-            playBoard.add(new Tile(i));
-        }
+        playBoard=new ArrayList<Tile>(row*column);
+        populateTheBoard();
     }
-//
+
+    public List<Tile> getPlayBoard() {
+        return playBoard;
+    }
+
+
+    //
 //
 //
 //    public String[][] getPlayBoard() {
