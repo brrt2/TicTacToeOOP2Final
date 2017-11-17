@@ -78,11 +78,9 @@ public class Referee {
     public void increaseScore(Player currentPlayer){
         if(currentPlayer.getPlayerSign().equals("x")){
             crossPlayerPoints++;
-            System.out.println("Increased x score");
         }
         else if(currentPlayer.getPlayerSign().equals("o")){
             noughtPlayerPoints++;
-            System.out.println("Increased o score");
         }
     }
 

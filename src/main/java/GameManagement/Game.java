@@ -9,6 +9,7 @@ public class Game {
     public boolean isWin = false;
     public boolean isDraw = false;
     Board board;
+    InputValidator mv;
 
     Player firstPlayer;
     Player secondPlayer;
@@ -32,6 +33,7 @@ public class Game {
         this.board = board;
         tilesToWin = adjacentSigns;
         referee = new Referee(board,tilesToWin);
+        mv= new InputValidator(board);
     }
 
     public Player switchCurrentPlayer() {
@@ -49,14 +51,22 @@ public class Game {
         Scanner scan = new Scanner(System.in);
         System.out.println(board);
         System.out.println("Now is the turn of : " + currentPlayer.getName() + " whose sign is : " +currentPlayer.getPlayerSign());
-        System.out.println(referee.getCrossPlayerPoints());
-        System.out.println(referee.getNoughtPlayerPoints());
+
         System.out.println("Please provide the  number of the tile you want to mark ");
         int number = scan.nextInt();
-        board.markTile(number,currentPlayer.getPlayerSign());
+        //board.markTile(number,currentPlayer.getPlayerSign());
+        try {
+            mv.validateMove(number,currentPlayer.getPlayerSign());
+        }catch(IllegalArgumentException e){
+            System.out.println("The provided tile number is outside the board ! You loose your move ! ");
+            System.out.println();
+        }
+
         if(referee.checkIfWonHoritontally(currentPlayer)) {
             isWin=true;
-            System.out.println(currentPlayer+ " has won");
+            System.out.println(currentPlayer+" whose sign is : "+currentPlayer.getPlayerSign()+ " has won this round !");
+            System.out.println("Player X has : " +referee.getCrossPlayerPoints());
+            System.out.println("Player O has : " + referee.getNoughtPlayerPoints());
             referee.checkIfWonMatch(currentPlayer);
             askIfWantsToContinue();
         }
@@ -82,7 +92,7 @@ public class Game {
     }
 
     public void askIfWantsToContinue() {
-        System.out.println(currentPlayer.getName() + " has won this game, do you wish to continue Y/N ?");
+        System.out.println("Do you wish to continue Y/N ?");
         Scanner scan = new Scanner(System.in);
         char choice = scan.nextLine().charAt(0);
         if(choice=='Y'){
@@ -101,7 +111,7 @@ public class Game {
     }
 
     public void askIfWantsToContinueWonEntireMatch() {
-        System.out.println("It is a draw, do you wish to continue Y/N ?");
+        System.out.println("Do you want to play again Y/N ?");
         Scanner scan = new Scanner(System.in);
         char choice = scan.nextLine().charAt(0);
         if(choice=='Y'){
@@ -110,6 +120,5 @@ public class Game {
         }
         else if(choice=='N') isWin=true;
     }
-
 
 }

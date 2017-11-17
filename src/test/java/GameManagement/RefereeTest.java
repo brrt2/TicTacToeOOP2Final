@@ -12,7 +12,7 @@ import static org.testng.Assert.*;
 //    public void testCheckIfWonHorizontally() throws Exception {
 //        Board playBoard = BoardFactory.createBoard(3,3);
 //        Referee referee = new Referee(playBoard);
-//        MoveValidator mv = new MoveValidator(playBoard);
+//        InputValidator mv = new InputValidator(playBoard);
 //        List<Character> list = playBoard.getPlayBoard();
 //        Move move = new Move(1);
 //        Move move2 = new Move(2);
@@ -27,7 +27,7 @@ import static org.testng.Assert.*;
 //    public void testCheckIfWonVertically() throws Exception {
 //        Board playBoard = BoardFactory.createBoard(3,3);
 //        Referee referee = new Referee(playBoard);
-//        MoveValidator mv = new MoveValidator(playBoard);
+//        InputValidator mv = new InputValidator(playBoard);
 //        List<Character> list = playBoard.getPlayBoard();
 //        Move move = new Move(1);
 //        Move move2 = new Move(2);
@@ -43,7 +43,7 @@ import static org.testng.Assert.*;
 //    public void testCheckIfWonDiagonallyLeftToRight() throws Exception {
 //        Board playBoard = BoardFactory.createBoard(3,3);
 //        Referee referee = new Referee(playBoard);
-//        MoveValidator mv = new MoveValidator(playBoard);
+//        InputValidator mv = new InputValidator(playBoard);
 //        List<Character> list = playBoard.getPlayBoard();
 //        Move move = new Move(1);
 //        Move move2 = new Move(2);
