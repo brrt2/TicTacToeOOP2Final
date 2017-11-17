@@ -9,11 +9,8 @@ public class Referee {
     Board board;
     int tilesToWin;
 
-    int crossPlayerPoints;
-    int noughtPlayerPoints;
-
-
-
+    int crossPlayerPoints=0;
+    int noughtPlayerPoints=0;
 
     public Referee(Board board, int tilesToWin) {
         this.board = board;
@@ -27,6 +24,7 @@ public class Referee {
         else counter =0;
             if(counter==tilesToWin){
                 increaseScore(currentPlayer);
+                board.moveCounter=0;
                 return true;
             }
         }
@@ -70,6 +68,7 @@ public class Referee {
 
             if(counter==tilesToWin){
                 increaseScore(currentPlayer);
+                board.moveCounter=0;
                 return true;
             }
         }
@@ -77,21 +76,36 @@ public class Referee {
     }
 
     public void increaseScore(Player currentPlayer){
-        if(currentPlayer.getPlayerSign().equals("x")) crossPlayerPoints++;
-        else noughtPlayerPoints++;
-    }
-
-    public void checkIfWonMatch(Player currentPlayer){
-        if(currentPlayer.getPlayerSign()=="x"&&crossPlayerPoints==3) {
-            System.out.println("Player"+ currentPlayer+ " has won the entire match ! ");
-            System.exit(0);
-        }else if(currentPlayer.getPlayerSign()=="o"&&noughtPlayerPoints==3) {
-            System.out.println("Player"+ currentPlayer+ " has won the entire match ! ");
-            System.exit(0);
+        if(currentPlayer.getPlayerSign().equals("x")){
+            crossPlayerPoints++;
+            System.out.println("Increased x score");
+        }
+        else if(currentPlayer.getPlayerSign().equals("o")){
+            noughtPlayerPoints++;
+            System.out.println("Increased o score");
         }
     }
 
+    public void checkIfWonMatch(Player currentPlayer){
+        if(currentPlayer.getPlayerSign().equals("x")&&crossPlayerPoints==3) {
 
+            System.out.println("Player"+ currentPlayer+ " has won the entire match ! ");
+        }else if(currentPlayer.getPlayerSign().equals("o")&&noughtPlayerPoints==3) {
 
+            System.out.println("Player"+ currentPlayer+ " has won the entire match ! ");
+        }
+    }
 
+    public int getCrossPlayerPoints() {
+        return crossPlayerPoints;
+    }
+
+    public int getNoughtPlayerPoints() {
+        return noughtPlayerPoints;
+    }
+
+    public void resetScore() {
+        crossPlayerPoints=0;
+        noughtPlayerPoints=0;
+    }
 }
