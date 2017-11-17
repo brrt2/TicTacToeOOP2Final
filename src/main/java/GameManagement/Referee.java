@@ -31,9 +31,23 @@ public class Referee {
         return false;
     }
 
-    public boolean checkDiagonal() {
+    public boolean checkDiagonal(Player currentPlayer, int number) {
 
-        int lastMove;
+        int counter = 0;
+        for (int i = number-1; i>=0; i-=board.column+1) {
+            System.out.println("Checked first loop  " + board.getPlayBoard().get(i));
+            if(currentPlayer.getPlayerSign().equals(board.playBoard.get(i).mark))
+                counter++;
+        }
+        for (int i = number-1; i <board.getPlayBoard().size(); i+=board.column+1) {
+            System.out.println("Checked second loop " + board.getPlayBoard().get(i));
+            if(currentPlayer.getPlayerSign().equals(board.playBoard.get(i).mark)) counter++;
+            if(counter-1==tilesToWin){
+                increaseScore(currentPlayer);
+                board.moveCounter=0;
+                return true;
+            }
+        }
 
 
 
@@ -60,14 +74,15 @@ public class Referee {
         return false;
     }
 
-    public boolean checkIfWonVertically(Player currentPlayer) {
+    public boolean checkIfWonVertically(Player currentPlayer,int number) {
         int counter = 0;
-        for (int i = 0; i < board.column; i+=board.row) {
+        for (int i = number-1; i>=0; i-=board.column) {
             if(currentPlayer.getPlayerSign().equals(board.playBoard.get(i).mark)) counter++;
-            else counter =0;
-
-            if(counter==tilesToWin){
-                increaseScore(currentPlayer);
+        }
+        for (int i = number-1; i <board.getPlayBoard().size(); i+=board.column) {
+            if(currentPlayer.getPlayerSign().equals(board.playBoard.get(i).mark)) counter++;
+            if(counter-1==tilesToWin){
+               increaseScore(currentPlayer);
                 board.moveCounter=0;
                 return true;
             }

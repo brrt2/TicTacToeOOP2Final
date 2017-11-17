@@ -70,16 +70,19 @@ public class Game {
             referee.checkIfWonMatch(currentPlayer);
             askIfWantsToContinue();
         }
-        if(referee.checkIfWonVertically(currentPlayer)){
+        if(referee.checkIfWonVertically(currentPlayer,number)){
             isWin=true;
             System.out.println(currentPlayer+ " has won");
             referee.checkIfWonMatch(currentPlayer);
             askIfWantsToContinue();
         }
-//        if(referee.checkDiagonalWin(currentPlayer.getPlayerSign())){
-//            isWin=true;
-//            System.out.println(currentPlayer+ "has won diag0");
-//        }
+        if(referee.checkDiagonal(currentPlayer,number)){
+            System.out.println(currentPlayer+ "has won diag0");
+            isWin=true;
+            askIfWantsToContinue();
+
+
+        }
 //        if(referee.checkIfWonDiagonally2(currentPlayer.getPlayerSign())){
 //            isWin=true;
 //            System.out.println(currentPlayer+ "has won");
