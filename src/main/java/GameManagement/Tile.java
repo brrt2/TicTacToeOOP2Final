@@ -16,6 +16,7 @@ public class Tile {
 
     @Override
     public String toString() {
-        return "| "+ mark + " |";
+        if(mark.length()==1)return "| "+mark + "  |";
+        else return "| "+ mark + " |";
     }
 }

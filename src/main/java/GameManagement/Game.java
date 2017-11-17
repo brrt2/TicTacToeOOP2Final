@@ -33,7 +33,7 @@ public class Game {
         this.board = board;
         tilesToWin = adjacentSigns;
         referee = new Referee(board,tilesToWin);
-        mv= new InputValidator(board);
+        mv= new InputValidator();
     }
 
     public Player switchCurrentPlayer() {
@@ -45,7 +45,6 @@ public class Game {
         return currentPlayer;
     }
 
-
     public void play() {
 
         Scanner scan = new Scanner(System.in);
@@ -56,41 +55,45 @@ public class Game {
         int number = scan.nextInt();
         //board.markTile(number,currentPlayer.getPlayerSign());
         try {
-            mv.validateMove(number,currentPlayer.getPlayerSign());
-        }catch(IllegalArgumentException e){
-            System.out.println("The provided tile number is outside the board ! You loose your move ! ");
+            mv.validateMove(number,currentPlayer.getPlayerSign(),board);
+        }catch(IllegalArgumentException  | IllegalAccessException e){
+          System.out.println("Wrong number ! You loose your move ! ");
             System.out.println();
         }
 
-        if(referee.checkIfWonHoritontally(currentPlayer)) {
+        if(referee.checkIfWonHorizontally(currentPlayer)) {
             isWin=true;
             System.out.println(currentPlayer+" whose sign is : "+currentPlayer.getPlayerSign()+ " has won this round !");
             System.out.println("Player X has : " +referee.getCrossPlayerPoints());
             System.out.println("Player O has : " + referee.getNoughtPlayerPoints());
-            referee.checkIfWonMatch(currentPlayer);
-            askIfWantsToContinue();
+            if(referee.checkIfWonMatch(currentPlayer)==false) askIfWantsToContinue();
+            else askIfWantsToContinueWonEntireMatch();
         }
         if(referee.checkIfWonVertically(currentPlayer,number)){
             isWin=true;
-            System.out.println(currentPlayer+ " has won");
-            referee.checkIfWonMatch(currentPlayer);
-            askIfWantsToContinue();
+            System.out.println(currentPlayer+" whose sign is : "+currentPlayer.getPlayerSign()+ " has won this round !");
+            System.out.println("Player X has : " +referee.getCrossPlayerPoints());
+            System.out.println("Player O has : " + referee.getNoughtPlayerPoints());
+            if(referee.checkIfWonMatch(currentPlayer)==false) askIfWantsToContinue();
+            else askIfWantsToContinueWonEntireMatch();
         }
         if(referee.checkDiagonal(currentPlayer,number)){
-            System.out.println(currentPlayer+ "has won diag0");
             isWin=true;
-            askIfWantsToContinue();
-
-
+            System.out.println(currentPlayer+" whose sign is : "+currentPlayer.getPlayerSign()+ " has won this round !");
+            System.out.println("Player X has : " +referee.getCrossPlayerPoints());
+            System.out.println("Player O has : " + referee.getNoughtPlayerPoints());
+            if(referee.checkIfWonMatch(currentPlayer)==false) askIfWantsToContinue();
+            else askIfWantsToContinueWonEntireMatch();
         }
-//        if(referee.checkIfWonDiagonally2(currentPlayer.getPlayerSign())){
-//            isWin=true;
-//            System.out.println(currentPlayer+ "has won");
-//        }
-
+        if(referee.checkDiagonal2(currentPlayer,number)){
+            isWin=true;
+            System.out.println(currentPlayer+" whose sign is : "+currentPlayer.getPlayerSign()+ " has won this round !");
+            System.out.println("Player X has : " +referee.getCrossPlayerPoints());
+            System.out.println("Player O has : " + referee.getNoughtPlayerPoints());
+            if(referee.checkIfWonMatch(currentPlayer)==false) askIfWantsToContinue();
+            else askIfWantsToContinueWonEntireMatch();
+        }
         if(referee.checkIfDraw()) askIfWantsToContinueDraw();
-
-
         switchCurrentPlayer();
     }
 
@@ -114,7 +117,7 @@ public class Game {
     }
 
     public void askIfWantsToContinueWonEntireMatch() {
-        System.out.println("Do you want to play again Y/N ?");
+        System.out.println("Do you want to play one more match Y/N ?");
         Scanner scan = new Scanner(System.in);
         char choice = scan.nextLine().charAt(0);
         if(choice=='Y'){
