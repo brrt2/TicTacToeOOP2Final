@@ -53,12 +53,13 @@ public class Game {
 
         System.out.println("Please provide the  number of the tile you want to mark ");
         int number = scan.nextInt();
-        //board.markTile(number,currentPlayer.getPlayerSign());
+
         try {
             mv.validateMove(number,currentPlayer.getPlayerSign(),board);
-        }catch(IllegalArgumentException  | IllegalAccessException e){
-          System.out.println("Wrong number ! You loose your move ! ");
+        }catch(IllegalArgumentException |IndexOutOfBoundsException e){
+          System.out.println("Wrong number - it has to be posivite and fit within the board! You loose your move !");
             System.out.println();
+
         }
 
         if(referee.checkIfWonHorizontally(currentPlayer)) {
@@ -69,14 +70,16 @@ public class Game {
             if(referee.checkIfWonMatch(currentPlayer)==false) askIfWantsToContinue();
             else askIfWantsToContinueWonEntireMatch();
         }
-        if(referee.checkIfWonVertically(currentPlayer,number)){
-            isWin=true;
-            System.out.println(currentPlayer+" whose sign is : "+currentPlayer.getPlayerSign()+ " has won this round !");
-            System.out.println("Player X has : " +referee.getCrossPlayerPoints());
-            System.out.println("Player O has : " + referee.getNoughtPlayerPoints());
-            if(referee.checkIfWonMatch(currentPlayer)==false) askIfWantsToContinue();
-            else askIfWantsToContinueWonEntireMatch();
-        }
+        try {
+            if (referee.checkIfWonVertically(currentPlayer, number)) {
+                isWin = true;
+                System.out.println(currentPlayer + " whose sign is : " + currentPlayer.getPlayerSign() + " has won this round !");
+                System.out.println("Player X has : " + referee.getCrossPlayerPoints());
+                System.out.println("Player O has : " + referee.getNoughtPlayerPoints());
+                if (referee.checkIfWonMatch(currentPlayer) == false) askIfWantsToContinue();
+                else askIfWantsToContinueWonEntireMatch();
+            }
+
         if(referee.checkDiagonal(currentPlayer,number)){
             isWin=true;
             System.out.println(currentPlayer+" whose sign is : "+currentPlayer.getPlayerSign()+ " has won this round !");
@@ -94,6 +97,10 @@ public class Game {
             else askIfWantsToContinueWonEntireMatch();
         }
         if(referee.checkIfDraw()) askIfWantsToContinueDraw();
+        }catch(IndexOutOfBoundsException e){
+            System.out.println("Wrong number - it has to be posivite and fit within the board! You loose your move !");
+           // scan.next();
+        }
         switchCurrentPlayer();
     }
 
