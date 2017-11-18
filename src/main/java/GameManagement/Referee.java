@@ -19,7 +19,7 @@ public class Referee {
 
     public boolean checkIfWonHorizontally(Player currentPlayer) {
         int counter = 0;
-        for (int i = 0; i < board.playBoard.size(); i++) {
+        for (int i = 0; i < board.column; i++) {
         if(currentPlayer.getPlayerSign().equals(board.playBoard.get(i).mark)) counter++;
         else counter =0;
             if(counter==tilesToWin){
@@ -50,13 +50,13 @@ public class Referee {
     }
 
     public boolean checkDiagonal2(Player currentPlayer, int number) {
-
+        
         int counter = 0;
-        for (int i = number-1; i>=0; i-=board.column-1) {
+        for (int i = number-1; i>0; i-=board.column-1) {
             if(currentPlayer.getPlayerSign().equals(board.playBoard.get(i).mark))
                 counter++;
         }
-        for (int i = number-1; i <board.getPlayBoard().size(); i+=board.column-1) {
+        for (int i = number-1; i <board.getPlayBoard().size()-1; i+=board.column-1) {
             if(currentPlayer.getPlayerSign().equals(board.playBoard.get(i).mark)) counter++;
             if(counter-1==tilesToWin){
                 increaseScore(currentPlayer);

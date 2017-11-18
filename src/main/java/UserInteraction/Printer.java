@@ -108,4 +108,10 @@ public class Printer {
            }while(!game.isWin);
         }
 
+
+
+        public void validateAdjacent(){
+
+        }
+
     }

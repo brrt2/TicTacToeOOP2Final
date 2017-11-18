@@ -26,22 +26,29 @@ public class InputValidator {
 
     void validateMove(int numbertoMark, String playerSign,Board board) throws IllegalArgumentException,ArrayIndexOutOfBoundsException {
 
+        String str= String.valueOf(numbertoMark);
+        int f;
+        try {
+            f= Integer.parseInt(str);
+        } catch (NumberFormatException e) {
+            //error
+        }
+
         if(numbertoMark<0||numbertoMark>board.getPlayBoard().size()){
             throw new IndexOutOfBoundsException("The provided number is outside the board ! ");
         }else {
             board.markTile(numbertoMark,playerSign);
         }
-
-
         if(numbertoMark<0) throw new ArrayIndexOutOfBoundsException();
 
-       if(board.getPlayBoard().get(numbertoMark-1).getMark().equals("x")||board.getPlayBoard().get(numbertoMark-1).getMark().equals("o")){
-           throw new IllegalArgumentException("The selected tile is already taken !");
-       }else {
-           board.markTile(numbertoMark,playerSign);
-       }
+    }
 
-
+    void checkIfTileTaken(int numbertoMark,String playerSign,Board board) throws IllegalArgumentException {
+        System.out.println("Checking if file taken");
+        System.out.println("Znak jedynki " + board.playBoard.get(numbertoMark-1).getMark());
+        if(board.getPlayBoard().get(numbertoMark-1).getMark().equals("x")||board.getPlayBoard().get(numbertoMark-1).getMark().equals("o")){
+            throw new IllegalArgumentException("The selected tile is already taken !");
+        }
     }
 
 

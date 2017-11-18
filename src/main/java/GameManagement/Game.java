@@ -2,6 +2,7 @@ package GameManagement;
 
 import Players.Player;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Game {
@@ -46,25 +47,28 @@ public class Game {
     }
 
     public void play() {
-
+        int number=-1;
         Scanner scan = new Scanner(System.in);
         System.out.println(board);
         System.out.println("Now is the turn of : " + currentPlayer.getName() + " whose sign is : " +currentPlayer.getPlayerSign());
 
         System.out.println("Please provide the  number of the tile you want to mark ");
-        int number = scan.nextInt();
-
+       try {
+           number = scan.nextInt();
+       }catch(InputMismatchException e){
+           System.out.println("Wrong value type !");
+       }
         try {
+            mv.checkIfTileTaken(number,currentPlayer.getPlayerSign(),board);
             mv.validateMove(number,currentPlayer.getPlayerSign(),board);
         }catch(IllegalArgumentException |IndexOutOfBoundsException e){
-          System.out.println("Wrong number - it has to be posivite and fit within the board! You loose your move !");
+          System.out.println("Wrong number - it has to be posivite and fit within the board and not overlap ! You loose your move !");
             System.out.println();
-
         }
 
         if(referee.checkIfWonHorizontally(currentPlayer)) {
             isWin=true;
-            System.out.println(currentPlayer+" whose sign is : "+currentPlayer.getPlayerSign()+ " has won this round !");
+            System.out.println(currentPlayer+" whose sign is : "+currentPlayer.getPlayerSign()+ " has won this round  hor!");
             System.out.println("Player X has : " +referee.getCrossPlayerPoints());
             System.out.println("Player O has : " + referee.getNoughtPlayerPoints());
             if(referee.checkIfWonMatch(currentPlayer)==false) askIfWantsToContinue();
@@ -73,7 +77,7 @@ public class Game {
         try {
             if (referee.checkIfWonVertically(currentPlayer, number)) {
                 isWin = true;
-                System.out.println(currentPlayer + " whose sign is : " + currentPlayer.getPlayerSign() + " has won this round !");
+                System.out.println(currentPlayer + " whose sign is : " + currentPlayer.getPlayerSign() + " has won this round ver !");
                 System.out.println("Player X has : " + referee.getCrossPlayerPoints());
                 System.out.println("Player O has : " + referee.getNoughtPlayerPoints());
                 if (referee.checkIfWonMatch(currentPlayer) == false) askIfWantsToContinue();
@@ -82,7 +86,7 @@ public class Game {
 
         if(referee.checkDiagonal(currentPlayer,number)){
             isWin=true;
-            System.out.println(currentPlayer+" whose sign is : "+currentPlayer.getPlayerSign()+ " has won this round !");
+            System.out.println(currentPlayer+" whose sign is : "+currentPlayer.getPlayerSign()+ " has won this round diag1 !");
             System.out.println("Player X has : " +referee.getCrossPlayerPoints());
             System.out.println("Player O has : " + referee.getNoughtPlayerPoints());
             if(referee.checkIfWonMatch(currentPlayer)==false) askIfWantsToContinue();
@@ -90,7 +94,7 @@ public class Game {
         }
         if(referee.checkDiagonal2(currentPlayer,number)){
             isWin=true;
-            System.out.println(currentPlayer+" whose sign is : "+currentPlayer.getPlayerSign()+ " has won this round !");
+            System.out.println(currentPlayer+" whose sign is : "+currentPlayer.getPlayerSign()+ " has won this round diag2 !");
             System.out.println("Player X has : " +referee.getCrossPlayerPoints());
             System.out.println("Player O has : " + referee.getNoughtPlayerPoints());
             if(referee.checkIfWonMatch(currentPlayer)==false) askIfWantsToContinue();
