@@ -1,5 +1,9 @@
 package GameManagement;
 
+import GameManagement.MoveManagement.Move;
+import GameManagement.MoveManagement.MoveFactory;
+import GameManagement.MoveManagement.MoveHistory;
+import GameManagement.Validation.InputValidator;
 import Players.Player;
 
 import java.util.InputMismatchException;
@@ -7,19 +11,19 @@ import java.util.Scanner;
 
 public class Game {
 
-    public boolean isWin = false;
-    public boolean isDraw = false;
-    Board board;
-    InputValidator mv;
+   private  boolean isWin = false;
+   private Board board;
+   private InputValidator mv;
+   private Move move;
 
-    Player firstPlayer;
-    Player secondPlayer;
-    Player currentPlayer;
-    Referee referee;
+    private Player firstPlayer;
+    private Player secondPlayer;
+    private Player currentPlayer;
+    private Referee referee;
 
-    int height;
-    int width;
-    int tilesToWin;
+    private int height;
+    private int width;
+    private int tilesToWin;
 
 
     public void setCurrentPlayer(Player currentPlayer) {
@@ -55,22 +59,25 @@ public class Game {
         System.out.println("Please provide the  number of the tile you want to mark ");
        try {
            number = scan.nextInt();
+
        }catch(InputMismatchException e){
            System.out.println("Wrong value type !");
        }
+        Move move= MoveFactory.createMove(number,currentPlayer);
+        MoveHistory.addToArchive(move);
+
         try {
-            mv.checkIfTileTaken(number,currentPlayer.getPlayerSign(),board);
-            mv.validateMove(number,currentPlayer.getPlayerSign(),board);
-        }catch(IllegalArgumentException |IndexOutOfBoundsException e){
-          System.out.println("Wrong number - it has to be posivite and fit within the board and not overlap ! You have lost your move !");
+            mv.checkIfTileTaken(move.getIndex(),currentPlayer.getPlayerSign(),board);
+            mv.validateMove(move.getIndex(),currentPlayer.getPlayerSign(),board);
+        }catch(IllegalArgumentException | IndexOutOfBoundsException e){
+          System.out.println("Wrong number - it has to be positive, fit within the board and point to an empty tile. You have lost your move.");
             System.out.println();
         }
 
         if(referee.checkIfWonHorizontally(currentPlayer)) {
             isWin=true;
             System.out.println(currentPlayer+" whose sign is : "+currentPlayer.getPlayerSign()+ " has won this round  hor!");
-            System.out.println("Player X has : " +referee.getCrossPlayerPoints());
-            System.out.println("Player O has : " + referee.getNoughtPlayerPoints());
+            referee.getScore().getCurrentScore();
             if(referee.checkIfWonMatch(currentPlayer)==false) askIfWantsToContinue();
             else askIfWantsToContinueWonEntireMatch();
         }
@@ -78,8 +85,7 @@ public class Game {
             if (referee.checkIfWonVertically(currentPlayer, number)) {
                 isWin = true;
                 System.out.println(currentPlayer + " whose sign is : " + currentPlayer.getPlayerSign() + " has won this round ver !");
-                System.out.println("Player X has : " + referee.getCrossPlayerPoints());
-                System.out.println("Player O has : " + referee.getNoughtPlayerPoints());
+                referee.getScore().getCurrentScore();
                 if (referee.checkIfWonMatch(currentPlayer) == false) askIfWantsToContinue();
                 else askIfWantsToContinueWonEntireMatch();
             }
@@ -87,22 +93,20 @@ public class Game {
         if(referee.checkDiagonal(currentPlayer,number)){
             isWin=true;
             System.out.println(currentPlayer+" whose sign is : "+currentPlayer.getPlayerSign()+ " has won this round diag1 !");
-            System.out.println("Player X has : " +referee.getCrossPlayerPoints());
-            System.out.println("Player O has : " + referee.getNoughtPlayerPoints());
+            referee.getScore().getCurrentScore();
             if(referee.checkIfWonMatch(currentPlayer)==false) askIfWantsToContinue();
             else askIfWantsToContinueWonEntireMatch();
         }
         if(referee.checkDiagonal2(currentPlayer,number)){
             isWin=true;
             System.out.println(currentPlayer+" whose sign is : "+currentPlayer.getPlayerSign()+ " has won this round diag2 !");
-            System.out.println("Player X has : " +referee.getCrossPlayerPoints());
-            System.out.println("Player O has : " + referee.getNoughtPlayerPoints());
+            referee.getScore().getCurrentScore();
             if(referee.checkIfWonMatch(currentPlayer)==false) askIfWantsToContinue();
             else askIfWantsToContinueWonEntireMatch();
         }
         if(referee.checkIfDraw()) askIfWantsToContinueDraw();
         }catch(IndexOutOfBoundsException e){
-            System.out.println("Wrong number - it has to be posivite and fit within the board! You have lost your move !");
+         // System.out.println("Wrong number - it has to be posivite and fit within the board! You have lost your move !");
            // scan.next();
         }
         switchCurrentPlayer();
@@ -143,14 +147,18 @@ public class Game {
         char choice = scan.nextLine().toUpperCase().charAt(0);
         if(choice=='Y'){
             board.clearBoard();
-            referee.resetScore();
+            referee.getScore().resetScore();
+            play();
         }
         else if(choice=='N') isWin=true;
         else {
-            System.out.println("None of the possible values selected, the game will be terminted");
+            System.out.println("None of the proposed values has been selected, the game will be terminted");
             System.out.println("Thank you for playing");
             System.exit(0);
         }
     }
 
+    public boolean isWin() {
+        return isWin;
+    }
 }

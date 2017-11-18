@@ -2,7 +2,7 @@ package UserInteraction;
 
 import GameManagement.Board;
 import GameManagement.Game;
-import GameManagement.InputValidator;
+import GameManagement.Validation.InputValidator;
 import Players.Player;
 
 import java.util.InputMismatchException;
@@ -107,6 +107,6 @@ public class Printer {
            do{
                game.play();
 
-           }while(!game.isWin);
+           }while(!game.isWin());
         }
     }

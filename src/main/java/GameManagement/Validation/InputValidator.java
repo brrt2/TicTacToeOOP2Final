@@ -1,10 +1,7 @@
-package GameManagement;
+package GameManagement.Validation;
 
-import Players.Player;
+import GameManagement.Board;
 
-import java.util.InputMismatchException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class InputValidator {
 
@@ -24,17 +21,17 @@ public class InputValidator {
       return true;
     }
 
-    void validateMove(int numbertoMark, String playerSign,Board board) throws IllegalArgumentException,ArrayIndexOutOfBoundsException {
+   public void validateMove(int numbertoMark, String playerSign, Board board) throws IllegalArgumentException,ArrayIndexOutOfBoundsException {
 
         String str= String.valueOf(numbertoMark);
         int f;
         try {
             f= Integer.parseInt(str);
         } catch (NumberFormatException e) {
-            //error
         }
 
         if(numbertoMark<0||numbertoMark>board.getPlayBoard().size()){
+            System.out.println("from validateMove");
             throw new IndexOutOfBoundsException("The provided number is outside the board ! ");
         }else {
             board.markTile(numbertoMark,playerSign);
@@ -43,14 +40,11 @@ public class InputValidator {
 
     }
 
-    void checkIfTileTaken(int numbertoMark,String playerSign,Board board) throws IllegalArgumentException {
+   public void checkIfTileTaken(int numbertoMark,String playerSign,Board board) throws IllegalArgumentException {
 
         if(board.getPlayBoard().get(numbertoMark-1).getMark().equals("x")||board.getPlayBoard().get(numbertoMark-1).getMark().equals("o")){
+
             throw new IllegalArgumentException("The selected tile is already taken !");
         }
     }
-
-
-
-
 }
