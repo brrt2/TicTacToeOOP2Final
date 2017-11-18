@@ -56,7 +56,6 @@ public class Referee {
 
         int counter = 0;
         for (int i = number-1; i>0; i-=board.getColumn()-1) {
-            String sign = board.getPlayBoard().get(i-board.getColumn()-1).getMark();
             if(currentPlayer.getPlayerSign().equals(board.getPlayBoard().get(i).getMark()))
                 counter++;
             else if(counter>=2){

@@ -106,7 +106,7 @@ public class Game {
         }
         if(referee.checkIfDraw()) askIfWantsToContinueDraw();
         }catch(IndexOutOfBoundsException e){
-         // System.out.println("Wrong number - it has to be posivite and fit within the board! You have lost your move !");
+          System.out.println("Exc diag !");
            // scan.next();
         }
         switchCurrentPlayer();
