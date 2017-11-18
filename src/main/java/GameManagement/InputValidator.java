@@ -44,8 +44,7 @@ public class InputValidator {
     }
 
     void checkIfTileTaken(int numbertoMark,String playerSign,Board board) throws IllegalArgumentException {
-        System.out.println("Checking if file taken");
-        System.out.println("Znak jedynki " + board.playBoard.get(numbertoMark-1).getMark());
+
         if(board.getPlayBoard().get(numbertoMark-1).getMark().equals("x")||board.getPlayBoard().get(numbertoMark-1).getMark().equals("o")){
             throw new IllegalArgumentException("The selected tile is already taken !");
         }

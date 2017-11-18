@@ -29,22 +29,23 @@ public class Printer {
 
 
         while (value == null) {
-            System.out.println("Please provide your name");
-            name = scan.next();
+            System.out.println("Please provide the name of the first player");
+            name = scan.nextLine();
             if (inputValidator.validatePlayerName(name) == false) {
-                System.out.println("Wrong name, please provide a correct name !");
+                System.out.println("Wrong name !");
             } else {
                 value = name;
             }
         }
         value=null;
         while (value == null) {
-            System.out.println("Please provide your name");
-            name2 = scan.next();
+            System.out.println("Please provide the name of the second player");
+            name2 = scan.nextLine();
             if (inputValidator.validatePlayerName(name2) == false) {
-                System.out.println("Wrong name, please provide a correct name !");
+                System.out.println("Wrong name!");
             } else {
-                value = name2;
+                value = name;
+               // scan.next();
             }
         }
         value=null;
@@ -54,12 +55,12 @@ public class Printer {
             try {
                 height = scan.nextInt();
             } catch (InputMismatchException e) {
-                System.out.println("The provided value is not a number ! ");
+                System.out.println("Incorrect value");
                 scan.next();
             }
 
             if (inputValidator.validateBoardDimensions(height) == false) {
-                System.out.println("Wrong value, please provide a number higher than 0 and lower than 1000!");
+                System.out.println("Please provide a number higher than 0 and lower than 1000!");
             } else {
                 value = name;
             }
@@ -70,12 +71,12 @@ public class Printer {
             try {
                 width = scan.nextInt();
             } catch (InputMismatchException e) {
-                System.out.println("The provided value is not a number ! ");
+                System.out.println("Incorrect value");
                 scan.next();
             }
 
             if (inputValidator.validateBoardDimensions(width) == false) {
-                System.out.println("Please provide a number higher than 0 and lower than 1000!");
+                System.out.println("Please provide a positive number lower than 1000!");
             } else {
                 value = name;
             }
@@ -86,8 +87,9 @@ public class Printer {
             try {
                 adjacentSigns = scan.nextInt();
             } catch (InputMismatchException e) {
-                System.out.println("The provided value is not a number ! ");
+                System.out.println("Incorrect value");
                 scan.next();
+                adjacentSigns=scan.nextInt();
             }
             if (inputValidator.validateAdjacentSignsToWin(adjacentSigns,height,width) == false) {
                 System.out.println("Please provide a positive number lower or equal to board height and width !");
@@ -107,11 +109,4 @@ public class Printer {
 
            }while(!game.isWin);
         }
-
-
-
-        public void validateAdjacent(){
-
-        }
-
     }

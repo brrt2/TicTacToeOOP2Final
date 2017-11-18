@@ -37,9 +37,13 @@ public class Referee {
         for (int i = number-1; i>=0; i-=board.column+1) {
             if(currentPlayer.getPlayerSign().equals(board.playBoard.get(i).mark))
                 counter++;
+            else if(counter>=2){
+                counter+=0;
+            }else counter =0;
         }
         for (int i = number-1; i <board.getPlayBoard().size(); i+=board.column+1) {
             if(currentPlayer.getPlayerSign().equals(board.playBoard.get(i).mark)) counter++;
+            else counter =0;
             if(counter-1==tilesToWin){
                 increaseScore(currentPlayer);
                 board.moveCounter=0;
@@ -50,14 +54,20 @@ public class Referee {
     }
 
     public boolean checkDiagonal2(Player currentPlayer, int number) {
-        
+
         int counter = 0;
         for (int i = number-1; i>0; i-=board.column-1) {
+            String sign = board.getPlayBoard().get(i-board.column-1).getMark();
             if(currentPlayer.getPlayerSign().equals(board.playBoard.get(i).mark))
                 counter++;
+            else if(counter>=2){
+                counter+=0;
+            }else counter =0;
+
         }
         for (int i = number-1; i <board.getPlayBoard().size()-1; i+=board.column-1) {
             if(currentPlayer.getPlayerSign().equals(board.playBoard.get(i).mark)) counter++;
+            else counter=0;
             if(counter-1==tilesToWin){
                 increaseScore(currentPlayer);
                 board.moveCounter=0;
@@ -79,9 +89,13 @@ public class Referee {
         int counter = 0;
         for (int i = number-1; i>=0; i-=board.column) {
             if(currentPlayer.getPlayerSign().equals(board.playBoard.get(i).mark)) counter++;
+            else if(counter>=2){
+                counter+=0;
+            }else counter =0;
         }
         for (int i = number-1; i <board.getPlayBoard().size(); i+=board.column) {
             if(currentPlayer.getPlayerSign().equals(board.playBoard.get(i).mark)) counter++;
+            else counter=0;
             if(counter-1==tilesToWin){
                increaseScore(currentPlayer);
                 board.moveCounter=0;

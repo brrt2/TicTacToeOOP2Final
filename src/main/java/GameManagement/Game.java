@@ -62,7 +62,7 @@ public class Game {
             mv.checkIfTileTaken(number,currentPlayer.getPlayerSign(),board);
             mv.validateMove(number,currentPlayer.getPlayerSign(),board);
         }catch(IllegalArgumentException |IndexOutOfBoundsException e){
-          System.out.println("Wrong number - it has to be posivite and fit within the board and not overlap ! You loose your move !");
+          System.out.println("Wrong number - it has to be posivite and fit within the board and not overlap ! You have lost your move !");
             System.out.println();
         }
 
@@ -102,7 +102,7 @@ public class Game {
         }
         if(referee.checkIfDraw()) askIfWantsToContinueDraw();
         }catch(IndexOutOfBoundsException e){
-            System.out.println("Wrong number - it has to be posivite and fit within the board! You loose your move !");
+            System.out.println("Wrong number - it has to be posivite and fit within the board! You have lost your move !");
            // scan.next();
         }
         switchCurrentPlayer();
@@ -111,31 +111,46 @@ public class Game {
     public void askIfWantsToContinue() {
         System.out.println("Do you wish to continue Y/N ?");
         Scanner scan = new Scanner(System.in);
-        char choice = scan.nextLine().charAt(0);
+        char choice = scan.nextLine().toUpperCase().charAt(0);
         if(choice=='Y'){
             isWin=false;
             board.clearBoard();
         }
         else if(choice=='N') isWin=true;
+        else {
+            System.out.println("None of the possible values selected, the game will be terminted");
+            System.out.println("Thank you for playing");
+            System.exit(0);
+        }
     }
 
     public void askIfWantsToContinueDraw() {
         System.out.println("It is a draw, do you wish to continue Y/N ?");
         Scanner scan = new Scanner(System.in);
-        char choice = scan.nextLine().charAt(0);
+        char choice = scan.nextLine().toUpperCase().charAt(0);
         if(choice=='Y')  board.clearBoard();
         else if(choice=='N') isWin=true;
+        else {
+            System.out.println("None of the possible values selected, the game will be terminted");
+            System.out.println("Thank you for playing");
+            System.exit(0);
+        }
     }
 
     public void askIfWantsToContinueWonEntireMatch() {
         System.out.println("Do you want to play one more match Y/N ?");
         Scanner scan = new Scanner(System.in);
-        char choice = scan.nextLine().charAt(0);
+        char choice = scan.nextLine().toUpperCase().charAt(0);
         if(choice=='Y'){
             board.clearBoard();
             referee.resetScore();
         }
         else if(choice=='N') isWin=true;
+        else {
+            System.out.println("None of the possible values selected, the game will be terminted");
+            System.out.println("Thank you for playing");
+            System.exit(0);
+        }
     }
 
 }
