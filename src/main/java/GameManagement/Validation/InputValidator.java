@@ -24,9 +24,9 @@ public class InputValidator {
    public void validateMove(int numbertoMark, String playerSign, Board board) throws IllegalArgumentException,ArrayIndexOutOfBoundsException {
 
         String str= String.valueOf(numbertoMark);
-        int f;
+        int valueOfstr;
         try {
-            f= Integer.parseInt(str);
+            valueOfstr= Integer.parseInt(str);
         } catch (NumberFormatException e) {
         }
 

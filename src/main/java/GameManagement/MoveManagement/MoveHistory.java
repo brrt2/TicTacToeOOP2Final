@@ -11,4 +11,7 @@ public class MoveHistory {
         moveArchive.add(move);
     }
 
+    public static List<Move> getMoveArchive() {
+        return moveArchive;
+    }
 }
