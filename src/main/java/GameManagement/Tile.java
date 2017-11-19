@@ -19,4 +19,8 @@ public class Tile {
         if(mark.length()==1)return "| "+mark + "  |";
         else return "| "+ mark + " |";
     }
+
+    public int getNumber() {
+        return number;
+    }
 }
