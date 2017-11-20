@@ -1,26 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b190aae7-b6e2-4d4f-abea-0ed8117d57a7" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TicTacToeOOP.iml" afterPath="$PROJECT_DIR$/TicTacToeOOP.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gameManagement/Board.java" afterPath="$PROJECT_DIR$/src/main/java/gameManagement/Board.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gameManagement/Game.java" afterPath="$PROJECT_DIR$/src/main/java/gameManagement/Game.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gameManagement/Referee.java" afterPath="$PROJECT_DIR$/src/main/java/gameManagement/Referee.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gameManagement/moveManagement/Move.java" afterPath="$PROJECT_DIR$/src/main/java/gameManagement/moveManagement/Move.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gameManagement/moveManagement/MoveFactory.java" afterPath="$PROJECT_DIR$/src/main/java/gameManagement/moveManagement/MoveFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gameManagement/moveManagement/MoveHistory.java" afterPath="$PROJECT_DIR$/src/main/java/gameManagement/moveManagement/MoveHistory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gameManagement/tiles/Tile.java" afterPath="$PROJECT_DIR$/src/main/java/gameManagement/tiles/Tile.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gameManagement/validation/InputValidator.java" afterPath="$PROJECT_DIR$/src/main/java/gameManagement/validation/InputValidator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gameManagement/validation/Score.java" afterPath="$PROJECT_DIR$/src/main/java/gameManagement/validation/Score.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/players/Player.java" afterPath="$PROJECT_DIR$/src/main/java/players/Player.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/userInteraction/Printer.java" afterPath="$PROJECT_DIR$/src/main/java/userInteraction/Printer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/gameManagement/BoardTest.java" afterPath="$PROJECT_DIR$/src/test/java/gameManagement/BoardTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/gameManagement/RefereeTest.java" afterPath="$PROJECT_DIR$/src/test/java/gameManagement/RefereeTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/gameManagement/moveManagement/MoveFactoryTest.java" afterPath="$PROJECT_DIR$/src/test/java/gameManagement/moveManagement/MoveFactoryTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/gameManagement/moveManagement/MoveHistoryTest.java" afterPath="$PROJECT_DIR$/src/test/java/gameManagement/moveManagement/MoveHistoryTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/gameManagement/validation/InputValidatorTest.java" afterPath="$PROJECT_DIR$/src/test/java/gameManagement/validation/InputValidatorTest.java" />
-    </list>
+    <list default="true" id="b190aae7-b6e2-4d4f-abea-0ed8117d57a7" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -580,7 +561,7 @@
       <updated>1511174992746</updated>
       <workItem from="1511174995880" duration="14073000" />
       <workItem from="1511194854164" duration="6438000" />
-      <workItem from="1511201640898" duration="3596000" />
+      <workItem from="1511201640898" duration="3675000" />
     </task>
     <servers />
   </component>
@@ -599,7 +580,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24107000" />
+    <option name="totallyTimeSpent" value="24186000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1056" extended-state="6" />
