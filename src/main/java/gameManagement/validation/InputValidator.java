@@ -31,13 +31,11 @@ public class InputValidator {
         }
 
         if(numbertoMark<0||numbertoMark>board.getPlayBoard().size()){
-            System.out.println("from validateMove");
             throw new IndexOutOfBoundsException("The provided number is outside the board ! ");
         }else {
             board.markTile(numbertoMark,playerSign);
         }
         if(numbertoMark<0) throw new ArrayIndexOutOfBoundsException();
-
     }
 
    public void checkIfTileTaken(int numbertoMark,String playerSign,Board board) throws IllegalArgumentException {

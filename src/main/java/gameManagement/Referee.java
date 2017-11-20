@@ -18,7 +18,7 @@ public class Referee {
 
     public boolean checkIfWonHorizontally(Player currentPlayer) {
         int counter = 0;
-        for (int i = 0; i < board.getColumn(); i++) {
+        for (int i = 0; i < board.getPlayBoard().size(); i++) {
         if(currentPlayer.getPlayerSign().equals(board.getPlayBoard().get(i).getMark())) counter++;
         else counter =0;
             if(counter==tilesToWin){

@@ -13,7 +13,6 @@ public class Printer {
     public static void main(String[] args) {
 
         new Printer().runTheMenu();
-
     }
 
     public void runTheMenu() {
