@@ -1,11 +1,11 @@
-package GameManagement.MoveManagement;
+package gameManagement.moveManagement;
 
-import Players.Player;
+import players.Player;
 
 public class Move {
 
-    int index;
-    Player playerThatMadeTheMove;
+    private int index;
+    private Player playerThatMadeTheMove;
 
     public Move(int index, Player playerThatMadeTheMove) {
         this.index = index;

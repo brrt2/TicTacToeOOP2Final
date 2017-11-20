@@ -1,13 +1,15 @@
-package GameManagement;
+package gameManagement.tiles;
 
 public class Tile {
 
-    String mark;
-    int number;
+    private String mark;
+    private int number;
+    private TileState tileState;
 
     public Tile(int number) {
         mark = String.valueOf(number);
         this.number = number;
+        tileState = TileState.EMPTY;
     }
 
     public String getMark() {
@@ -16,11 +18,19 @@ public class Tile {
 
     @Override
     public String toString() {
-        if(mark.length()==1)return "| "+mark + "  |";
-        else return "| "+ mark + " |";
+        if (tileState == TileState.EMPTY) return "| " + mark + " |";
+        else return tileState.toString();
     }
 
     public int getNumber() {
         return number;
+    }
+
+    public void setMark(String mark) {
+        this.mark = mark;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
     }
 }

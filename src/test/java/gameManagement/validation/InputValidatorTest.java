@@ -1,30 +1,33 @@
-package GameManagement.Validation;
+package gameManagement.validation;
 
-import GameManagement.Board;
+import gameManagement.Board;
+import gameManagement.tiles.TileState;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import org.testng.internal.annotations.ExpectedExceptionsAnnotation;
+import players.Player;
+
+import java.util.function.Predicate;
 
 import static org.testng.Assert.*;
 
 public class InputValidatorTest {
 
-    InputValidator iv= new InputValidator();
+    InputValidator iv = new InputValidator();
 
-    @DataProvider(name="nameValidatorFalse")
+    @DataProvider(name = "nameValidatorFalse")
     public Object[][] getData() {
-        return new Object[][]{{"fdfs_ffsdf fds"},{"$"},{"("},{"%"},{"fd@ffds^fdfd"},{"fdsfs 34"},{"gfdg- 4"},{"-32"},
-                {"fsdf/fdsf"},{"aBcD%eFgH"},{"f-4-x fdfsdf"}};
+        return new Object[][]{{"fdfs_ffsdf fds"}, {"$"}, {"("}, {"%"}, {"fd@ffds^fdfd"}, {"fdsfs 34"}, {"gfdg- 4"}, {"-32"},
+                {"fsdf/fdsf"}, {"aBcD%eFgH"}, {"f-4-x fdfsdf"}};
     }
 
-    @DataProvider(name="nameValidatorTrue")
+    @DataProvider(name = "nameValidatorTrue")
     public Object[][] getData2() {
-        return new Object[][]{{"bartek"},{"tomek"},{"adam"},{"kamil"},{"bartek dominika"},{"ryszard adam"}};
+        return new Object[][]{{"bartek"}, {"tomek"}, {"adam"}, {"kamil"}, {"bartek dominika"}, {"ryszard adam"}};
     }
 
-    @DataProvider(name="moveValidator")
+    @DataProvider(name = "moveValidator")
     public Object[][] getData3() {
-        return new Object[][]{{-5},{-234},{3405678},{-17},{200000},{-500}};
+        return new Object[][]{{-5}, {-234}, {3405678}, {-17}, {200000}, {-500}};
     }
 
 
@@ -40,28 +43,31 @@ public class InputValidatorTest {
 
     @Test
     public void testValidateAdjacentSignsToWin() throws Exception {
-    assertTrue(iv.validateAdjacentSignsToWin(3,3,3));
-    assertFalse(iv.validateAdjacentSignsToWin(-2,3,3));
 
+        Predicate<Integer> pr = i -> i > 0 && (i<3&&i<3);
+        assertTrue(iv.validateAdjacentSignsToWin(pr, 2, 3,3));
+        assertFalse(iv.validateAdjacentSignsToWin(pr, 5, 3,3));
     }
 
     @Test
     public void testValidateBoardDimensions() throws Exception {
-        assertTrue(iv.validateBoardDimensions(16));
-        assertFalse(iv.validateBoardDimensions(999999));
+        Predicate<Integer> pr1 = i -> i > 0 && i<1000;
+        assertTrue(iv.validateBoardDimensions(pr1,16));
+        assertFalse(iv.validateBoardDimensions(pr1,999999));
     }
 
     @Test(expectedExceptions=IndexOutOfBoundsException.class,dataProvider = "moveValidator")
     public void testValidateMove(int number) throws Exception {
+        Player player = new Player("bartek","x", TileState.EMPTY);
         Board board = new Board(3,3);
-        iv.validateMove(number,"x",board);
+        iv.validateMove(number,player,board);
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void testCheckIfTileTaken() throws Exception {
-        Board board = new Board(3,3);
-        board.markTile(5,"x");
-        iv.checkIfTileTaken(5,"o",board);
+        Board board = new Board(3, 3);
+        board.markTile(5, "x");
+        iv.checkIfTileTaken(5, "o", board);
     }
 
 }

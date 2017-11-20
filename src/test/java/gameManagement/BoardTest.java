@@ -1,5 +1,6 @@
-package GameManagement;
+package gameManagement;
 
+import gameManagement.tiles.Tile;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 

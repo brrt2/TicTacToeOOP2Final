@@ -1,6 +1,6 @@
-package GameManagement.Validation;
+package gameManagement.validation;
 
-import Players.Player;
+import players.Player;
 
 public class Score {
 

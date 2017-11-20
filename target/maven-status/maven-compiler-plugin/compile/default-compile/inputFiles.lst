@@ -1,0 +1,12 @@
+/home/bartoszpieczara/IdeaProjects/TicTacToeOOP2/src/main/java/gameManagement/validation/Score.java
+/home/bartoszpieczara/IdeaProjects/TicTacToeOOP2/src/main/java/gameManagement/Board.java
+/home/bartoszpieczara/IdeaProjects/TicTacToeOOP2/src/main/java/gameManagement/moveManagement/MoveHistory.java
+/home/bartoszpieczara/IdeaProjects/TicTacToeOOP2/src/main/java/gameManagement/validation/InputValidator.java
+/home/bartoszpieczara/IdeaProjects/TicTacToeOOP2/src/main/java/userInteraction/Printer.java
+/home/bartoszpieczara/IdeaProjects/TicTacToeOOP2/src/main/java/gameManagement/Referee.java
+/home/bartoszpieczara/IdeaProjects/TicTacToeOOP2/src/main/java/gameManagement/tiles/TileState.java
+/home/bartoszpieczara/IdeaProjects/TicTacToeOOP2/src/main/java/gameManagement/tiles/Tile.java
+/home/bartoszpieczara/IdeaProjects/TicTacToeOOP2/src/main/java/gameManagement/moveManagement/Move.java
+/home/bartoszpieczara/IdeaProjects/TicTacToeOOP2/src/main/java/gameManagement/moveManagement/MoveFactory.java
+/home/bartoszpieczara/IdeaProjects/TicTacToeOOP2/src/main/java/players/Player.java
+/home/bartoszpieczara/IdeaProjects/TicTacToeOOP2/src/main/java/gameManagement/Game.java

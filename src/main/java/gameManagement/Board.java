@@ -1,4 +1,6 @@
-package GameManagement;
+package gameManagement;
+
+import gameManagement.tiles.Tile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,30 +10,29 @@ public class Board {
     private int row;
     private int column;
     private List<Tile> playBoard;
-    private int moveCounter=0;
+    private int moveCounter = 0;
 
 
     public Board(int row, int column) {
-        playBoard = new ArrayList<Tile>(row*column);
-        this.row=row;
-        this.column=column;
+        playBoard = new ArrayList<Tile>(row * column);
+        this.row = row;
+        this.column = column;
         populateTheBoard();
     }
 
-    public void populateTheBoard(){
-        for(int i = 0; i< row*column; i++){
-            playBoard.add(new Tile(i+1));
+    public void populateTheBoard() {
+        for (int i = 0; i < row * column; i++) {
+            playBoard.add(new Tile(i + 1));
         }
     }
 
     public void markTile(int number, String toMark) {
-
-        playBoard.get(number-1).mark=toMark;
+        playBoard.get(number - 1).setMark(toMark);
         moveCounter++;
     }
 
-    public void clearBoard(){
-        playBoard=new ArrayList<Tile>(row*column);
+    public void clearBoard() {
+        playBoard = new ArrayList<Tile>(row * column);
         populateTheBoard();
     }
 
@@ -47,7 +48,7 @@ public class Board {
         for (Tile tile : playBoard) {
             sb.append(tile);
             count++;
-            if(count == column) {
+            if (count == column) {
                 sb.append(" \n");
                 count = 0;
             }

@@ -1,12 +1,11 @@
-package GameManagement.MoveManagement;
+package gameManagement.moveManagement;
 
-import GameManagement.MoveManagement.Move;
-import Players.Player;
+import players.Player;
 
 public class MoveFactory {
 
-    public static Move createMove(int tileNumber, Player currentPlayer){
-        return new Move(tileNumber,currentPlayer);
+    public static Move createMove(int tileNumber, Player currentPlayer) {
+        return new Move(tileNumber, currentPlayer);
     }
 
 }

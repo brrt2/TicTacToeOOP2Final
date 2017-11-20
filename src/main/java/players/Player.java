@@ -1,13 +1,16 @@
-package Players;
+package players;
+
+import gameManagement.tiles.TileState;
 
 public class Player {
 
     private String name;
     private String playerSign;
+    private TileState tileState;
 
-    public Player(String name,String playerSign) {
+    public Player(String name, String playerSign, TileState tileState) {
         this.name = name;
-        this.playerSign=playerSign;
+        this.playerSign = playerSign;
     }
 
     public String getPlayerSign() {
@@ -20,6 +23,6 @@ public class Player {
 
     @Override
     public String toString() {
-        return  name;
+        return name;
     }
 }
