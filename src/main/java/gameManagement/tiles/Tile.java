@@ -18,7 +18,8 @@ public class Tile {
 
     @Override
     public String toString() {
-        if (takenTileSign == TakenTileSign.EMPTY) return "| " + mark + " |";
+        if (takenTileSign == TakenTileSign.EMPTY&mark.length()==1) return "| " + mark + "  |";
+        else if (takenTileSign == TakenTileSign.EMPTY) return "| " + mark + " |";
         else return takenTileSign.toString();
     }
 
