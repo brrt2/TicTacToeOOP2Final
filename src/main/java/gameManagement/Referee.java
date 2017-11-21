@@ -35,6 +35,7 @@ public class Referee {
         return false;
     }
 
+
     public boolean checkDiagonal(Player currentPlayer, int number) {
         int counter = 0;
         for (int i = number - 1; i >= 0; i -= board.getColumn() + 1) {
@@ -53,7 +54,6 @@ public class Referee {
         }
         return false;
     }
-
 
 public boolean checkDiagonal3(Player currentPlayer,int index) {
     int counter = 0;
@@ -102,13 +102,6 @@ public boolean checkDiagonal3(Player currentPlayer,int index) {
         }
         return false;
     }
-
-
-
-
-
-
-
 
     public boolean checkDiagonal2(Player currentPlayer, int number) {
        int counter = 0;

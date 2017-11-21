@@ -21,6 +21,7 @@ public class Printer {
     private int height = 0;
     private int width = 0;
     private int adjacentSigns = 0;
+
     
     public static void main(String[] args) {
 
@@ -34,21 +35,34 @@ public class Printer {
         Predicate<Integer> pr1 = i -> i > 0 && i < 1000;
         obtainUsername1("Please provide the name of the first player", keepTurning);
         keepTurning = false;
-        obtainUsername2("Please provide the name of the second player", keepTurning);
-        keepTurning = false;
         obtainBoardHeight(pr1,"Please provide the board height",keepTurning);
         keepTurning = false;
         obtainBoardWidth(pr1,"Please provide the board width",keepTurning);
+        keepTurning = false;
+        String str = obtainInformationOnWhoStarts("Who goes first X/O ?",keepTurning);
         keepTurning = false;
         int h = height;
         int w = width;
         Predicate<Integer> pr = i -> i > 0 && (i <= h && i <= w);
         obtainNumberOfAdjacentSigns(pr,keepTurning);
-        configureGame();
-
+        configureGame(str);
     }
 
-    public void configureGame(){
+    public String obtainInformationOnWhoStarts(String msg, boolean keepTurning){
+        String str=null;
+        while (keepTurning == false) {
+            System.out.println(msg);
+             str = scan.nextLine();
+            if (inputValidator.validateWhoGoesFirstSign(str) == false) {
+                System.out.println("Wrong value ! Please type x or o ");
+            } else {
+                keepTurning = true;
+            }
+        }
+        return str;
+    }
+
+    public void configureGame(String str){
         Player first = new Player(name, TakenTileSign.NOUGHT);
         Player second = new Player(name2, TakenTileSign.CROSS);
         Board board = new Board(height, width);
@@ -72,6 +86,8 @@ public class Printer {
                 keepTurning = true;
             }
         }
+        keepTurning = false;
+        obtainUsername2("Please provide the name of the second player", keepTurning);
     }
 
     public void obtainUsername2(String message, boolean keepTurning) {
@@ -84,6 +100,7 @@ public class Printer {
                 keepTurning = true;
             }
         }
+
     }
 
     public void obtainNumberOfAdjacentSigns(Predicate<Integer> pr, boolean keepTurning) {

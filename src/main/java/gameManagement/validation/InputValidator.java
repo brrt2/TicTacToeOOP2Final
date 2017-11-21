@@ -18,6 +18,15 @@ public class InputValidator {
         else return false;
     }
 
+    public boolean validateWhoGoesFirstSign(String str){
+
+
+        return false;
+    }
+
+
+
+
     public boolean validateBoardDimensions(Predicate<Integer> pr,int dimension) {
         if(pr.test(dimension))return true;
         else return false;
