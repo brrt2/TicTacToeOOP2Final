@@ -78,7 +78,7 @@ public class Printer {
         while (keepTurning == false) {
             System.out.println(message);
             name2 = scan.nextLine();
-            if (inputValidator.validatePlayerName(name) == false) {
+            if (inputValidator.validatePlayerName(name2) == false) {
                 System.out.println("Wrong name !");
             } else {
                 keepTurning = true;

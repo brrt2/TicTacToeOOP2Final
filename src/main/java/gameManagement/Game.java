@@ -30,7 +30,7 @@ public class Game {
         if (referee.checkIfWonHorizontally(turn.getCurrentPlayer())) printIfWon();
         try {
             if (referee.checkIfWonVertically(turn.getCurrentPlayer(), number))printIfWon();
-            if (referee.checkDiagonal(turn.getCurrentPlayer(), number)) printIfWon();
+            if (referee.checkDiagonal4(turn.getCurrentPlayer(), number)) printIfWon();
             if (referee.checkDiagonal3(turn.getCurrentPlayer(), number))printIfWon();
             if (referee.checkIfDraw()){
                 gameState=GameState.DRAW;
@@ -74,7 +74,7 @@ public class Game {
         System.out.println(turn.getCurrentPlayer() + " whose sign is : " + turn.getCurrentPlayer().getTakenTileSign() + " has won this round!");
         referee.getScore().getCurrentScore();
         if (referee.checkIfWonMatch(turn.getCurrentPlayer()) == false) askIfWantsToContinue();
-        else askIfWantsToContinueWonMatchOrDraw("Do you want to play another match ? ");
+        else askIfWantsToContinueWonMatchOrDraw("Do you want to play another match Y/N ? ");
     }
 
 
@@ -87,7 +87,7 @@ public class Game {
             board.clearBoard();
         } else if (choice == 'N') gameState=GameState.WIN;
         else {
-            System.out.println("None of the possible values selected, the game will be terminted");
+            System.out.println("None of the possible values selected, the game will be terminated");
             System.out.println("Thank you for playing");
             System.exit(0);
         }
@@ -104,7 +104,7 @@ public class Game {
             //play();
         } else if (choice == 'N') gameState=GameState.WIN;
         else {
-            System.out.println("None of the proposed values has been selected, the game will be terminted");
+            System.out.println("None of the proposed values has been selected, the game will be terminated");
             System.out.println("Thank you for playing");
             System.exit(0);
         }
