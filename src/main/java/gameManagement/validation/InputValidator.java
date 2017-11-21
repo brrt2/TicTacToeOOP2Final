@@ -13,23 +13,16 @@ public class InputValidator {
         return name.matches(expression);
     }
 
-    public boolean validateAdjacentSignsToWin(Predicate<Integer> pr,int adjacentSigns, int height, int width) {
-        if(pr.test(adjacentSigns))return true;
-        else return false;
+    public boolean validateAdjacentSignsToWin(int adjacentSigns, int height, int width) {
+        return adjacentSigns>0&&(adjacentSigns<=height&&adjacentSigns<=width);
     }
 
     public boolean validateWhoGoesFirstSign(String str){
-
-
-        return false;
+        return str.toLowerCase().equals("x")||str.toLowerCase().equals("o");
     }
 
-
-
-
-    public boolean validateBoardDimensions(Predicate<Integer> pr,int dimension) {
-        if(pr.test(dimension))return true;
-        else return false;
+    public boolean validateBoardDimensions(int dimension) {
+        return dimension>0&&dimension<1000;
     }
 
     public void validateMove(int numbertoMark, Player player, Board board) throws IllegalArgumentException, ArrayIndexOutOfBoundsException {

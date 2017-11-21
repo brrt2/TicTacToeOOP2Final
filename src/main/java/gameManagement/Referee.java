@@ -14,7 +14,6 @@ public class Referee {
     private int tilesToWin;
     private Score score;
 
-
     public Referee(Board board, int tilesToWin) {
         this.board = board;
         this.tilesToWin = tilesToWin;
@@ -34,7 +33,6 @@ public class Referee {
         }
         return false;
     }
-
 
     public boolean checkDiagonal(Player currentPlayer, int number) {
         int counter = 0;
@@ -123,10 +121,10 @@ public boolean checkDiagonal3(Player currentPlayer,int index) {
         return false;
     }
 
-
     public boolean checkIfDraw() {
         if (board.getMoveCounter() == board.getPlayBoard().size()) {
             board.setMoveCounter(0);
+            score.increaseScoreDraw();
             return true;
         }
         return false;
@@ -153,12 +151,18 @@ public boolean checkDiagonal3(Player currentPlayer,int index) {
     }
 
     public boolean checkIfWonMatch(Player currentPlayer) {
-        if (currentPlayer.getTakenTileSign().equals(TakenTileSign.CROSS) && score.getCrossPlayerPoints() == 3) {
-            System.out.println("Player" + currentPlayer + " has won the entire match ! ");
-            return true;
-        } else if (currentPlayer.getTakenTileSign().equals(TakenTileSign.NOUGHT) && score.getNoughtPlayerPoints() == 3) {
-            System.out.println("Player" + currentPlayer + " has won the entire match ! ");
-            return true;
+
+        if(score.getRoundNumber()==3){
+            if(currentPlayer.getTakenTileSign().equals(TakenTileSign.CROSS)&&score.getCrossPlayerPoints()>score.getNoughtPlayerPoints()){
+                System.out.println("Player" + currentPlayer + " has won the entire match ! ");
+                return true;
+            }else if(currentPlayer.getTakenTileSign().equals(TakenTileSign.NOUGHT)&&score.getCrossPlayerPoints()<score.getNoughtPlayerPoints()){
+                System.out.println("Player" + currentPlayer + " has won the entire match ! ");
+                return true;
+            }else if(score.getNoughtPlayerPoints()==score.getCrossPlayerPoints()) {
+                System.out.println("The match ended in a draw !");
+                return true;
+            }
         }
         return false;
     }

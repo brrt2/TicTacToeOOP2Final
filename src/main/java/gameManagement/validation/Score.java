@@ -7,6 +7,7 @@ public class Score {
 
     private int crossPlayerPoints = 0;
     private int noughtPlayerPoints = 0;
+    private int roundNumber;
 
 
     public int getCrossPlayerPoints() {
@@ -26,11 +27,18 @@ public class Score {
     }
 
     public void increaseScore(Player currentPlayer) {
+        roundNumber++;
         if (currentPlayer.getTakenTileSign().equals(TakenTileSign.CROSS)) {
-            crossPlayerPoints++;
+            crossPlayerPoints+=3;
         } else if (currentPlayer.getTakenTileSign().equals(TakenTileSign.NOUGHT)) {
-            noughtPlayerPoints++;
+            noughtPlayerPoints+=3;
         }
+    }
+
+    public void increaseScoreDraw(){
+        roundNumber++;
+        crossPlayerPoints++;
+        noughtPlayerPoints++;
     }
 
     public void getCurrentScore() {
@@ -43,4 +51,11 @@ public class Score {
         noughtPlayerPoints = 0;
     }
 
+    public int getRoundNumber() {
+        return roundNumber;
+    }
+
+    public void setRoundNumber(int roundNumber) {
+        this.roundNumber = roundNumber;
+    }
 }

@@ -45,15 +45,15 @@ public class InputValidatorTest {
     public void testValidateAdjacentSignsToWin() throws Exception {
 
         Predicate<Integer> pr = i -> i > 0 && (i<3&&i<3);
-        assertTrue(iv.validateAdjacentSignsToWin(pr, 2, 3,3));
-        assertFalse(iv.validateAdjacentSignsToWin(pr, 5, 3,3));
+        assertTrue(iv.validateAdjacentSignsToWin( 2, 3,3));
+        assertFalse(iv.validateAdjacentSignsToWin( 5, 3,3));
     }
 
     @Test
     public void testValidateBoardDimensions() throws Exception {
         Predicate<Integer> pr1 = i -> i > 0 && i<1000;
-        assertTrue(iv.validateBoardDimensions(pr1,16));
-        assertFalse(iv.validateBoardDimensions(pr1,999999));
+        assertTrue(iv.validateBoardDimensions(16));
+        assertFalse(iv.validateBoardDimensions(999999));
     }
 
     @Test(expectedExceptions=IndexOutOfBoundsException.class,dataProvider = "moveValidator")
