@@ -2,7 +2,8 @@ package userInteraction;
 
 import gameManagement.Board;
 import gameManagement.Game;
-import gameManagement.tiles.TileState;
+import gameManagement.Turn;
+import gameManagement.tiles.TakenTileSign;
 import gameManagement.validation.InputValidator;
 import players.Player;
 
@@ -13,8 +14,8 @@ import java.util.function.Predicate;
 public class Printer {
 
     private InputValidator inputValidator = new InputValidator();
-    private String name = null;
-    private String name2 = null;
+    private String name = "firstDefault";
+    private String name2 = "secondDefault";
     private Scanner scan = new Scanner(System.in);
     private int height = 0;
     private int width = 0;
@@ -27,14 +28,13 @@ public class Printer {
     }
 
     public void runTheMenu() {
-
         Predicate<Integer> validBoardDimensions = i -> i > 0 && i < 1000;
         boolean keepTurning = false;
         System.out.println("Welcome to the OOP Tic Tac Toe");
         Predicate<Integer> pr1 = i -> i > 0 && i < 1000;
-        obtainUsername("Please provide the name of the first player", keepTurning, name);
+        obtainUsername1("Please provide the name of the first player", keepTurning);
         keepTurning = false;
-        obtainUsername("Please provide the name of the second player", keepTurning, name2);
+        obtainUsername2("Please provide the name of the second player", keepTurning);
         keepTurning = false;
         obtainBoardHeight(pr1,"Please provide the board height",keepTurning);
         keepTurning = false;
@@ -42,13 +42,14 @@ public class Printer {
         keepTurning = false;
         int h = height;
         int w = width;
-        Predicate<Integer> pr = i -> i > 0 && (i < h && i < w);
+        Predicate<Integer> pr = i -> i > 0 && (i <= h && i <= w);
         obtainNumberOfAdjacentSigns(pr,keepTurning);
-        Player first = new Player(name, "o", TileState.NOUGHT);
-        Player second = new Player(name2, "x", TileState.CROSS);
+        Player first = new Player(name, TakenTileSign.NOUGHT);
+        Player second = new Player(name2, TakenTileSign.CROSS);
         Board board = new Board(height, width);
-        Game game = new Game(first, second, board, adjacentSigns);
-        game.setCurrentPlayer(first);
+        Turn turn = new Turn(first,second);
+        Game game = new Game(turn,board, adjacentSigns);
+        game.getTurn().setCurrentPlayer(first);
 
         do {
             game.play();
@@ -56,10 +57,22 @@ public class Printer {
         } while (!game.isWin());
     }
 
-    public void obtainUsername(String message, boolean keepTurning, String name) {
+    public void obtainUsername1(String message, boolean keepTurning) {
         while (keepTurning == false) {
             System.out.println(message);
             name = scan.nextLine();
+            if (inputValidator.validatePlayerName(name) == false) {
+                System.out.println("Wrong name !");
+            } else {
+                keepTurning = true;
+            }
+        }
+    }
+
+    public void obtainUsername2(String message, boolean keepTurning) {
+        while (keepTurning == false) {
+            System.out.println(message);
+            name2 = scan.nextLine();
             if (inputValidator.validatePlayerName(name) == false) {
                 System.out.println("Wrong name !");
             } else {

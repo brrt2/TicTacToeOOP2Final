@@ -1,5 +1,6 @@
 package gameManagement;
 
+import gameManagement.tiles.TakenTileSign;
 import gameManagement.tiles.Tile;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -8,19 +9,20 @@ import static org.testng.Assert.*;
 
 public class BoardTest {
 
-
-    Board board = new Board(4,4);
+    Board board = new Board(10,10);
 
 
     @DataProvider(name="markTile")
     public Object[][] getData() {
-        return new Object[][]{{1,"x"},{2,"x"},{3,"x"},{4,"x"},{5,"x"},{6,"x"},{7,"x"},{8,"x"},{9,"x"},{10,"x"},{11,"x"},
-                {12,"x"},{13,"x"},{14,"x"},{15,"x"},{16,"x"}};
+        return new Object[][]{{1},{2},{43},{4},{32},{6},{7},{8},{80},{72},{11},
+                {49,},{13},{53},{15},{16},{22},{62},{73},{86},{92}};
     }
 
     @DataProvider(name="populateBoard")
     public Object [][] getData1(){
-        return new Object[][]{{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}};
+        return new Object[][]{{1},{2},{3},{26},{5},{48},{7},{8},{53},{10},{11},{35},{13},{14},{15},{16},{17},{23},{21},{58}
+                ,{69},{70},{36},{92},{95},{89}
+                    };
     }
 
 
@@ -31,16 +33,16 @@ public class BoardTest {
     }
 
     @Test(dataProvider = "markTile")
-    public void testMarkTile(int number, String s) throws Exception {
+    public void testMarkTile(int number) throws Exception {
         board.populateTheBoard();
-        board.markTile(number,s);
-        assertEquals(board.getPlayBoard().get(number-1).getMark(),"x");
+        board.markTile(number,TakenTileSign.CROSS);
+        assertEquals(board.getPlayBoard().get(number-1).getTakenTileSign(),TakenTileSign.CROSS);
     }
 
     @Test(dataProvider = "markTile")
-    public void testClearBoard(int number,String s) throws Exception {
+    public void testClearBoard(int number) throws Exception {
         board.populateTheBoard();
-        board.markTile(number,s);
+        board.markTile(number,TakenTileSign.CROSS);
         board.clearBoard();
         assertFalse(board.getPlayBoard().get(number-1).getMark().equals("x"));
     }

@@ -1,7 +1,7 @@
 package gameManagement.validation;
 
 import gameManagement.Board;
-import gameManagement.tiles.TileState;
+import gameManagement.tiles.TakenTileSign;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import players.Player;
@@ -58,7 +58,7 @@ public class InputValidatorTest {
 
     @Test(expectedExceptions=IndexOutOfBoundsException.class,dataProvider = "moveValidator")
     public void testValidateMove(int number) throws Exception {
-        Player player = new Player("bartek","x", TileState.EMPTY);
+        Player player = new Player("bartek",TakenTileSign.EMPTY);
         Board board = new Board(3,3);
         iv.validateMove(number,player,board);
     }
@@ -66,8 +66,8 @@ public class InputValidatorTest {
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void testCheckIfTileTaken() throws Exception {
         Board board = new Board(3, 3);
-        board.markTile(5, "x");
-        iv.checkIfTileTaken(5, "o", board);
+        board.markTile(5, TakenTileSign.CROSS);
+        iv.checkIfTileTaken(5, TakenTileSign.NOUGHT, board);
     }
 
 }

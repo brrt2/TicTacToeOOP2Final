@@ -1,6 +1,7 @@
 package gameManagement.validation;
 
 import gameManagement.Board;
+import gameManagement.tiles.TakenTileSign;
 import players.Player;
 
 import java.util.function.Predicate;
@@ -30,13 +31,13 @@ public class InputValidator {
         if (numbertoMark < 0 || numbertoMark > board.getPlayBoard().size()) {
             throw new IndexOutOfBoundsException("The provided number is outside the board ! ");
         } else {
-            board.markTile(numbertoMark, player.getPlayerSign());
+            board.markTile(numbertoMark, player.getTakenTileSign());
         }
         if (numbertoMark < 0) throw new ArrayIndexOutOfBoundsException();
     }
 
-    public void checkIfTileTaken(int numbertoMark, String playerSign, Board board) throws IllegalArgumentException {
-        if (board.getPlayBoard().get(numbertoMark - 1).getMark().equals("x") || board.getPlayBoard().get(numbertoMark - 1).getMark().equals("o")) {
+    public void checkIfTileTaken(int numbertoMark, TakenTileSign takenTileSign, Board board) throws IllegalArgumentException {
+        if (board.getPlayBoard().get(numbertoMark - 1).getTakenTileSign().equals(TakenTileSign.CROSS) || board.getPlayBoard().get(numbertoMark - 1).getTakenTileSign().equals(TakenTileSign.NOUGHT)) {
             throw new IllegalArgumentException("The selected tile is already taken !");
         }
     }

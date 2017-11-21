@@ -1,11 +1,12 @@
 package gameManagement.validation;
 
+import gameManagement.tiles.TakenTileSign;
 import players.Player;
 
 public class Score {
 
-    private int crossPlayerPoints=0;
-    private int noughtPlayerPoints=0;
+    private int crossPlayerPoints = 0;
+    private int noughtPlayerPoints = 0;
 
 
     public int getCrossPlayerPoints() {
@@ -24,23 +25,22 @@ public class Score {
         this.noughtPlayerPoints = noughtPlayerPoints;
     }
 
-    public void increaseScore(Player currentPlayer){
-        if(currentPlayer.getPlayerSign().equals("x")){
+    public void increaseScore(Player currentPlayer) {
+        if (currentPlayer.getTakenTileSign().equals(TakenTileSign.CROSS)) {
             crossPlayerPoints++;
-        }
-        else if(currentPlayer.getPlayerSign().equals("o")){
+        } else if (currentPlayer.getTakenTileSign().equals(TakenTileSign.NOUGHT)) {
             noughtPlayerPoints++;
         }
     }
 
-    public void getCurrentScore(){
-        System.out.println("Player X has : " +crossPlayerPoints);
+    public void getCurrentScore() {
+        System.out.println("Player X has : " + crossPlayerPoints);
         System.out.println("Player O has : " + noughtPlayerPoints);
     }
 
     public void resetScore() {
-        crossPlayerPoints=0;
-        noughtPlayerPoints=0;
+        crossPlayerPoints = 0;
+        noughtPlayerPoints = 0;
     }
 
 }

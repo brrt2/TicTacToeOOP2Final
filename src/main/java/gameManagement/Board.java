@@ -1,5 +1,6 @@
 package gameManagement;
 
+import gameManagement.tiles.TakenTileSign;
 import gameManagement.tiles.Tile;
 
 import java.util.ArrayList;
@@ -26,8 +27,8 @@ public class Board {
         }
     }
 
-    public void markTile(int number, String toMark) {
-        playBoard.get(number - 1).setMark(toMark);
+    public void markTile(int number, TakenTileSign takenTileSign) {
+        playBoard.get(number - 1).setTakenTileSign(takenTileSign);
         moveCounter++;
     }
 

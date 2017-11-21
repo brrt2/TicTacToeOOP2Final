@@ -4,12 +4,12 @@ public class Tile {
 
     private String mark;
     private int number;
-    private TileState tileState;
+    private TakenTileSign takenTileSign;
 
     public Tile(int number) {
         mark = String.valueOf(number);
         this.number = number;
-        tileState = TileState.EMPTY;
+        takenTileSign = TakenTileSign.EMPTY;
     }
 
     public String getMark() {
@@ -18,8 +18,8 @@ public class Tile {
 
     @Override
     public String toString() {
-        if (tileState == TileState.EMPTY) return "| " + mark + " |";
-        else return tileState.toString();
+        if (takenTileSign == TakenTileSign.EMPTY) return "| " + mark + " |";
+        else return takenTileSign.toString();
     }
 
     public int getNumber() {
@@ -32,5 +32,13 @@ public class Tile {
 
     public void setNumber(int number) {
         this.number = number;
+    }
+
+    public void setTakenTileSign(TakenTileSign takenTileSign) {
+        this.takenTileSign = takenTileSign;
+    }
+
+    public TakenTileSign getTakenTileSign() {
+        return takenTileSign;
     }
 }

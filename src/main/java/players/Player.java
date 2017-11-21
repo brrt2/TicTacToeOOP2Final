@@ -1,24 +1,27 @@
 package players;
 
-import gameManagement.tiles.TileState;
+import gameManagement.tiles.TakenTileSign;
 
 public class Player {
 
     private String name;
-    private String playerSign;
-    private TileState tileState;
+    private TakenTileSign takenTileSign;
 
-    public Player(String name, String playerSign, TileState tileState) {
+    public Player(String name,TakenTileSign takenTileSign) {
         this.name = name;
-        this.playerSign = playerSign;
-    }
-
-    public String getPlayerSign() {
-        return playerSign;
+        this.takenTileSign=takenTileSign;
     }
 
     public String getName() {
         return name;
+    }
+
+    public TakenTileSign getTakenTileSign() {
+        return takenTileSign;
+    }
+
+    public void setTakenTileSign(TakenTileSign takenTileSign) {
+        this.takenTileSign = takenTileSign;
     }
 
     @Override

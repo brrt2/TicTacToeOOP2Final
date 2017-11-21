@@ -1,5 +1,6 @@
 package gameManagement;
 
+import gameManagement.tiles.TakenTileSign;
 import gameManagement.validation.Score;
 import players.Player;
 
@@ -19,7 +20,7 @@ public class Referee {
     public boolean checkIfWonHorizontally(Player currentPlayer) {
         int counter = 0;
         for (int i = 0; i < board.getPlayBoard().size(); i++) {
-            if (currentPlayer.getPlayerSign().equals(board.getPlayBoard().get(i).getMark())) counter++;
+            if (currentPlayer.getTakenTileSign().equals(board.getPlayBoard().get(i).getTakenTileSign())) counter++;
             else counter = 0;
             if (counter == tilesToWin) {
                 score.increaseScore(currentPlayer);
@@ -31,17 +32,16 @@ public class Referee {
     }
 
     public boolean checkDiagonal(Player currentPlayer, int number) {
-
         int counter = 0;
         for (int i = number - 1; i >= 0; i -= board.getColumn() + 1) {
-            if (currentPlayer.getPlayerSign().equals(board.getPlayBoard().get(i).getMark()))
+            if (currentPlayer.getTakenTileSign().equals(board.getPlayBoard().get(i).getTakenTileSign()))
                 counter++;
-            else if(counter >= 2) {
+            else if (counter >= 2) {
                 counter += 0;
             } else counter = 0;
         }
         for (int i = number - 1; i < board.getPlayBoard().size(); i += board.getColumn() + 1) {
-            if (currentPlayer.getPlayerSign().equals(board.getPlayBoard().get(i).getMark())) counter++;
+            if (currentPlayer.getTakenTileSign().equals(board.getPlayBoard().get(i).getTakenTileSign())) counter++;
             else counter = 0;
             if (counter - 1 == tilesToWin) {
                 score.increaseScore(currentPlayer);
@@ -53,10 +53,9 @@ public class Referee {
     }
 
     public boolean checkDiagonal2(Player currentPlayer, int number) {
-
         int counter = 0;
         for (int i = number - 1; i > 0; i -= board.getColumn() - 1) {
-            if (currentPlayer.getPlayerSign().equals(board.getPlayBoard().get(i).getMark()))
+            if (currentPlayer.getTakenTileSign().equals(board.getPlayBoard().get(i).getTakenTileSign()))
                 counter++;
             else if (counter >= 2) {
                 counter += 0;
@@ -64,7 +63,7 @@ public class Referee {
 
         }
         for (int i = number - 1; i < board.getPlayBoard().size() - 1; i += board.getColumn() - 1) {
-            if (currentPlayer.getPlayerSign().equals(board.getPlayBoard().get(i).getMark())) counter++;
+            if (currentPlayer.getTakenTileSign().equals(board.getPlayBoard().get(i).getTakenTileSign())) counter++;
             else counter = 0;
             if (counter - 1 == tilesToWin) {
                 score.increaseScore(currentPlayer);
@@ -86,13 +85,13 @@ public class Referee {
     public boolean checkIfWonVertically(Player currentPlayer, int number) {
         int counter = 0;
         for (int i = number - 1; i >= 0; i -= board.getColumn()) {
-            if (currentPlayer.getPlayerSign().equals(board.getPlayBoard().get(i).getMark())) counter++;
-            else if (counter >= 2){
+            if (currentPlayer.getTakenTileSign().equals(board.getPlayBoard().get(i).getTakenTileSign())) counter++;
+            else if (counter >= 2) {
                 counter += 0;
             } else counter = 0;
         }
         for (int i = number - 1; i < board.getPlayBoard().size(); i += board.getColumn()) {
-            if (currentPlayer.getPlayerSign().equals(board.getPlayBoard().get(i).getMark())) counter++;
+            if (currentPlayer.getTakenTileSign().equals(board.getPlayBoard().get(i).getTakenTileSign())) counter++;
             else counter = 0;
             if (counter - 1 == tilesToWin) {
                 score.increaseScore(currentPlayer);
@@ -104,10 +103,10 @@ public class Referee {
     }
 
     public boolean checkIfWonMatch(Player currentPlayer) {
-        if (currentPlayer.getPlayerSign().equals("x") && score.getCrossPlayerPoints() == 3) {
+        if (currentPlayer.getTakenTileSign().equals(TakenTileSign.CROSS) && score.getCrossPlayerPoints() == 3) {
             System.out.println("Player" + currentPlayer + " has won the entire match ! ");
             return true;
-        } else if (currentPlayer.getPlayerSign().equals("o") && score.getNoughtPlayerPoints() == 3) {
+        } else if (currentPlayer.getTakenTileSign().equals(TakenTileSign.NOUGHT) && score.getNoughtPlayerPoints() == 3) {
             System.out.println("Player" + currentPlayer + " has won the entire match ! ");
             return true;
         }

@@ -1,12 +1,12 @@
 package gameManagement.tiles;
 
-public enum TileState {
+public enum TakenTileSign {
 
     EMPTY("e"),CROSS("x"),NOUGHT("o");
 
     String mark;
 
-    TileState(String mark) {
+    TakenTileSign(String mark) {
         this.mark = mark;
     }
 
