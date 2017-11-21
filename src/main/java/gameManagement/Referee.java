@@ -1,8 +1,12 @@
 package gameManagement;
 
 import gameManagement.tiles.TakenTileSign;
+import gameManagement.tiles.Tile;
 import gameManagement.validation.Score;
 import players.Player;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Referee {
 
@@ -36,9 +40,7 @@ public class Referee {
         for (int i = number - 1; i >= 0; i -= board.getColumn() + 1) {
             if (currentPlayer.getTakenTileSign().equals(board.getPlayBoard().get(i).getTakenTileSign()))
                 counter++;
-            else if (counter >= 2) {
-                counter += 0;
-            } else counter = 0;
+            else if (counter > 2) break;
         }
         for (int i = number - 1; i < board.getPlayBoard().size(); i += board.getColumn() + 1) {
             if (currentPlayer.getTakenTileSign().equals(board.getPlayBoard().get(i).getTakenTileSign())) counter++;
@@ -52,20 +54,47 @@ public class Referee {
         return false;
     }
 
-    public boolean checkDiagonal2(Player currentPlayer, int number) {
-        int counter = 0;
-        for (int i = number - 1; i > 0; i -= board.getColumn() - 1) {
-            if (currentPlayer.getTakenTileSign().equals(board.getPlayBoard().get(i).getTakenTileSign()))
-                counter++;
-            else if (counter >= 2) {
-                counter += 0;
-            } else counter = 0;
 
+public boolean checkDiagonal3(Player currentPlayer,int position) {
+    int counter = 0;
+    ArrayList<Tile> signs = new ArrayList<>();
+    while (position - board.getColumn() - 1 > 0) {
+        position = position - board.getColumn() - 1;
+        if (position % board.getColumn() == 1) {
+            break;
         }
-        for (int i = number - 1; i < board.getPlayBoard().size() - 1; i += board.getColumn() - 1) {
-            if (currentPlayer.getTakenTileSign().equals(board.getPlayBoard().get(i).getTakenTileSign())) counter++;
-            else counter = 0;
-            if (counter - 1 == tilesToWin) {
+    }
+    while (position <= board.getPlayBoard().size()) {
+        signs.add(board.getPlayBoard().get(position - 1));
+        position += (board.getColumn() + 1);
+    }
+    for (int i = 0; i < signs.size(); i++) {
+        if (currentPlayer.getTakenTileSign().equals(signs.get(i).getTakenTileSign())) counter++;
+        if (counter == tilesToWin) {
+            score.increaseScore(currentPlayer);
+            board.setMoveCounter(0);
+            return true;
+        }
+    }
+    return false;
+}
+
+    public boolean checkDiagonal4(Player currentPlayer,int position) {
+        int counter = 0;
+        ArrayList<Tile> signs = new ArrayList<>();
+        while (position - board.getColumn() - 1 > 0) {
+            position = position - board.getColumn() - 1;
+            if (position % board.getColumn() == 1) {
+                break;
+            }
+        }
+        while (position <= board.getPlayBoard().size()) {
+            signs.add(board.getPlayBoard().get(position - 1));
+            position += (board.getColumn() + 1);
+        }
+        for (int i = 0; i < signs.size(); i++) {
+            if (currentPlayer.getTakenTileSign().equals(signs.get(i).getTakenTileSign())) counter++;
+            if (counter == tilesToWin) {
                 score.increaseScore(currentPlayer);
                 board.setMoveCounter(0);
                 return true;
@@ -73,6 +102,34 @@ public class Referee {
         }
         return false;
     }
+
+
+
+
+
+
+
+
+    public boolean checkDiagonal2(Player currentPlayer, int number) {
+       int counter = 0;
+       for (int i = number - 1; i > 0; i -= board.getColumn() - 1) {
+           if (currentPlayer.getTakenTileSign().equals(board.getPlayBoard().get(i).getTakenTileSign()))
+               counter++;
+           else if (counter>2) break;
+
+        }
+        for (int i = number - 1; i < board.getPlayBoard().size() - 1; i += board.getColumn() - 1) {
+           if (currentPlayer.getTakenTileSign().equals(board.getPlayBoard().get(i).getTakenTileSign())) counter++;
+            else counter = 0;
+            if (counter - 1 == tilesToWin) {
+                score.increaseScore(currentPlayer);
+                board.setMoveCounter(0);
+                return true;
+            }
+       }
+        return false;
+    }
+
 
     public boolean checkIfDraw() {
         if (board.getMoveCounter() == board.getPlayBoard().size()) {

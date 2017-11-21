@@ -2,7 +2,7 @@ package gameManagement.tiles;
 
 public enum TakenTileSign {
 
-    EMPTY("e"),CROSS("x"),NOUGHT("o");
+    EMPTY("e"),CROSS("x "),NOUGHT("o ");
 
     String mark;
 

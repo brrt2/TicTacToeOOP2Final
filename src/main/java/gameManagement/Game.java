@@ -4,26 +4,20 @@ import gameManagement.moveManagement.Move;
 import gameManagement.moveManagement.MoveFactory;
 import gameManagement.moveManagement.MoveHistory;
 import gameManagement.validation.InputValidator;
-import players.Player;
-
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.util.function.Predicate;
 
 public class Game {
 
-    private boolean isWin = false;
+    private GameState gameState;
     private Board board;
     private InputValidator mv;
-    private Move move;
     private Referee referee;
-    private int height;
-    private int width;
     private int tilesToWin;
     private Turn turn;
 
     public Game(Turn turn, Board board, int adjacentSigns) {
-
+        gameState=GameState.ACTIVE;
         this.board = board;
         tilesToWin = adjacentSigns;
         referee = new Referee(board, tilesToWin);
@@ -32,20 +26,35 @@ public class Game {
     }
 
     public void play() {
+        int number = obtainTheTileNumber();
+        if (referee.checkIfWonHorizontally(turn.getCurrentPlayer())) printIfWon();
+        try {
+            if (referee.checkIfWonVertically(turn.getCurrentPlayer(), number))printIfWon();
+            if (referee.checkDiagonal(turn.getCurrentPlayer(), number)) printIfWon();
+            if (referee.checkDiagonal3(turn.getCurrentPlayer(), number))printIfWon();
+            if (referee.checkIfDraw()){
+                gameState=GameState.DRAW;
+                askIfWantsToContinueWonMatchOrDraw("It is a draw ! Do you want to continue ? ");
+            }
+        } catch (IndexOutOfBoundsException e) {
+            //System.out.println("");
+            // scan.next();
+        }
+        turn.switchCurrentPlayer();
+    }
 
-        int number = -1;
+    public int obtainTheTileNumber(){
+        int number =-1;
         Scanner scan = new Scanner(System.in);
         System.out.println(board);
         System.out.println("Now is the turn of : " + turn.getCurrentPlayer().getName() + " whose sign is : " + turn.getCurrentPlayer().getTakenTileSign());
-
         System.out.println("Please provide the  number of the tile you want to mark ");
         try {
-            number = scan.nextInt();
+           number = scan.nextInt();
 
         } catch (InputMismatchException e) {
             System.out.println("Wrong value type !");
         }
-
         Move move = MoveFactory.createMove(number, turn.getCurrentPlayer());
         MoveHistory.addToArchive(move);
 
@@ -56,53 +65,27 @@ public class Game {
             System.out.println("Wrong number - it has to be positive, fit within the board and point to an empty tile. You have lost your move.");
             System.out.println();
         }
-
-        if (referee.checkIfWonHorizontally(turn.getCurrentPlayer())) {
-            isWin = true;
-            System.out.println(turn.getCurrentPlayer() + " whose sign is : " + turn.getCurrentPlayer().getTakenTileSign() + " has won this round  hor!");
-            referee.getScore().getCurrentScore();
-            if (referee.checkIfWonMatch(turn.getCurrentPlayer()) == false) askIfWantsToContinue();
-            else askIfWantsToContinueWonEntireMatch("Do you want to play another match ? ");
-        }
-        try {
-            if (referee.checkIfWonVertically(turn.getCurrentPlayer(), number)) {
-                isWin = true;
-                System.out.println(turn.getCurrentPlayer() + " whose sign is : " + turn.getCurrentPlayer().getTakenTileSign() + " has won this round ver !");
-                referee.getScore().getCurrentScore();
-                if (referee.checkIfWonMatch(turn.getCurrentPlayer()) == false) askIfWantsToContinue();
-                else askIfWantsToContinueWonEntireMatch("Do you want to play another match ? ");
-            }
-
-            if (referee.checkDiagonal(turn.getCurrentPlayer(), number)) {
-                isWin = true;
-                System.out.println(turn.getCurrentPlayer() + " whose sign is : " + turn.getCurrentPlayer().getTakenTileSign() + " has won this round diag1 !");
-                referee.getScore().getCurrentScore();
-                if (referee.checkIfWonMatch(turn.getCurrentPlayer()) == false) askIfWantsToContinue();
-                else askIfWantsToContinueWonEntireMatch("Do you want to play another match ? ");
-            }
-            if (referee.checkDiagonal2(turn.getCurrentPlayer(), number)) {
-                isWin = true;
-                System.out.println(turn.getCurrentPlayer() + " whose sign is : " + turn.getCurrentPlayer().getTakenTileSign() + " has won this round diag2 !");
-                referee.getScore().getCurrentScore();
-                if (referee.checkIfWonMatch(turn.getCurrentPlayer()) == false) askIfWantsToContinue();
-                else askIfWantsToContinueWonEntireMatch("Do you want to play another match ? ");
-            }
-            if (referee.checkIfDraw()) askIfWantsToContinueWonEntireMatch("It is a draw ! Do you want to continue ? ");
-        } catch (IndexOutOfBoundsException e) {
-            //System.out.println("");
-            // scan.next();
-        }
-        turn.switchCurrentPlayer();
+        return number;
     }
+
+
+    public void printIfWon(){
+        gameState=GameState.WIN;
+        System.out.println(turn.getCurrentPlayer() + " whose sign is : " + turn.getCurrentPlayer().getTakenTileSign() + " has won this round!");
+        referee.getScore().getCurrentScore();
+        if (referee.checkIfWonMatch(turn.getCurrentPlayer()) == false) askIfWantsToContinue();
+        else askIfWantsToContinueWonMatchOrDraw("Do you want to play another match ? ");
+    }
+
 
     public void askIfWantsToContinue() {
         System.out.println("Do you wish to continue Y/N ?");
         Scanner scan = new Scanner(System.in);
         char choice = scan.nextLine().toUpperCase().charAt(0);
         if (choice == 'Y') {
-            isWin = false;
+            gameState=GameState.ACTIVE;
             board.clearBoard();
-        } else if (choice == 'N') isWin = true;
+        } else if (choice == 'N') gameState=GameState.WIN;
         else {
             System.out.println("None of the possible values selected, the game will be terminted");
             System.out.println("Thank you for playing");
@@ -110,15 +93,16 @@ public class Game {
         }
     }
 
-    public void askIfWantsToContinueWonEntireMatch(String string) {
+    public void askIfWantsToContinueWonMatchOrDraw(String string) {
         System.out.println(string);
         Scanner scan = new Scanner(System.in);
         char choice = scan.nextLine().toUpperCase().charAt(0);
         if (choice == 'Y') {
+            gameState=GameState.ACTIVE;
             board.clearBoard();
             referee.getScore().resetScore();
-            play();
-        } else if (choice == 'N') isWin = true;
+            //play();
+        } else if (choice == 'N') gameState=GameState.WIN;
         else {
             System.out.println("None of the proposed values has been selected, the game will be terminted");
             System.out.println("Thank you for playing");
@@ -130,7 +114,8 @@ public class Game {
         return turn;
     }
 
-    public boolean isWin() {
-        return isWin;
+    public GameState getGameState() {
+        return gameState;
     }
+
 }

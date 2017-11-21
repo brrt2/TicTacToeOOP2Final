@@ -2,6 +2,7 @@ package userInteraction;
 
 import gameManagement.Board;
 import gameManagement.Game;
+import gameManagement.GameState;
 import gameManagement.Turn;
 import gameManagement.tiles.TakenTileSign;
 import gameManagement.validation.InputValidator;
@@ -20,8 +21,7 @@ public class Printer {
     private int height = 0;
     private int width = 0;
     private int adjacentSigns = 0;
-
-
+    
     public static void main(String[] args) {
 
         new Printer().runTheMenu();
@@ -44,18 +44,23 @@ public class Printer {
         int w = width;
         Predicate<Integer> pr = i -> i > 0 && (i <= h && i <= w);
         obtainNumberOfAdjacentSigns(pr,keepTurning);
+        configureGame();
+
+    }
+
+    public void configureGame(){
         Player first = new Player(name, TakenTileSign.NOUGHT);
         Player second = new Player(name2, TakenTileSign.CROSS);
         Board board = new Board(height, width);
         Turn turn = new Turn(first,second);
         Game game = new Game(turn,board, adjacentSigns);
         game.getTurn().setCurrentPlayer(first);
-
         do {
             game.play();
 
-        } while (!game.isWin());
+        } while (game.getGameState()!= GameState.WIN&&game.getGameState()!= GameState.DRAW);
     }
+
 
     public void obtainUsername1(String message, boolean keepTurning) {
         while (keepTurning == false) {
