@@ -15,17 +15,12 @@ import java.util.function.Predicate;
 public class Printer {
 
     private InputValidator inputValidator = new InputValidator();
-    private String name = "firstDefault";
-    private String name2 = "secondDefault";
+    private String name = "DefaultFirstPlayer";
+    private String name2 = "DefaultSecondPlayer";
     private Scanner scan = new Scanner(System.in);
     private int height = 0;
     private int width = 0;
     private int adjacentSigns = 0;
-
-    public static void main(String[] args) {
-
-        new Printer().runTheMenu();
-    }
 
     public void runTheMenu() {
         boolean keepTurning = false;
@@ -72,7 +67,7 @@ public class Printer {
         //System.out.println("Please select the target - System.err / System.out ? ");
         //String target =scan.next();
         // method
-        obtainUsername1("Please provide the name of the first player", keepTurning);
+        obtainUsername1("Please provide the name of the first player (o) ", keepTurning);
     }
 
     public void obtainUsername1(String message, boolean keepTurning) {
@@ -86,7 +81,7 @@ public class Printer {
             }
         }
         keepTurning = false;
-        obtainUsername2("Please provide the name of the second player", keepTurning);
+        obtainUsername2("Please provide the name of the second player (x) ", keepTurning);
     }
 
     public void obtainUsername2(String message, boolean keepTurning) {

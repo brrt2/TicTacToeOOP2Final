@@ -30,8 +30,8 @@ public class Game {
         if (referee.checkIfWonHorizontally(turn.getCurrentPlayer())) printIfWon();
         try {
             if (referee.checkIfWonVertically(turn.getCurrentPlayer(), number))printIfWon();
-            if (referee.checkDiagonal4(turn.getCurrentPlayer(), number)) printIfWon();
-            if (referee.checkDiagonal3(turn.getCurrentPlayer(), number))printIfWon();
+            if (referee.checkDiagonalRL(turn.getCurrentPlayer(), number)) printIfWon();
+            if (referee.checkDiagonalLeftToRight(turn.getCurrentPlayer(), number))printIfWon();
             if (referee.checkIfDraw()){
                 gameState=GameState.DRAW;
                 askIfWantsToContinueWonMatchOrDraw("It is a draw ! Do you want to continue ? ");

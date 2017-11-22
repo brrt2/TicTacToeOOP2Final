@@ -17,7 +17,7 @@
                         <archive>
                             <manifest>
                                 <addClasspath>true</addClasspath>
-                                <mainClass>userInteraction.Printer</mainClass>
+                                <mainClass>gameManagement.Main</mainClass>
                             </manifest>
                         </archive>
                     </configuration>
