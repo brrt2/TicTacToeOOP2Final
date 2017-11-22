@@ -66,43 +66,45 @@ public class Referee {
             tilesOnDiagonal.add(board.getPlayBoard().get(index - 1));
             index += (board.getColumn() + 1);
         }
-        for (int i = 0; i < tilesOnDiagonal.size(); i++) {
-            if (currentPlayer.getTakenTileSign().equals(tilesOnDiagonal.get(i).getTakenTileSign())) counter++;
-            if (counter == tilesToWin) {
-                score.increaseScore(currentPlayer);
-                board.setMoveCounter(0);
-                return true;
-            }
-        }
-        return false;
+//        for (int i = 0; i < tilesOnDiagonal.size(); i++) {
+//            if (currentPlayer.getTakenTileSign().equals(tilesOnDiagonal.get(i).getTakenTileSign())) counter++;
+//            if (counter == tilesToWin) {
+//                score.increaseScore(currentPlayer);
+//                board.setMoveCounter(0);
+//                return true;
+//            }
+//        }
+//        return false;
+
+        return iterate(tilesOnDiagonal,currentPlayer);
     }
 
-    public boolean checkDiagonalRightToLeft(Player currentPlayer, int index) {
-        int counter = 0;
-        ArrayList<Tile> tilesOnDiagonal2 = new ArrayList<>();
-        while (index - board.getColumn() - 1 >= 0) {
-            index = index - board.getColumn() + 1;
-            if (index % board.getColumn() == 0) {
-                break;
-            }
-        }
-        while (index <= board.getPlayBoard().size()) {
-            tilesOnDiagonal2.add(board.getPlayBoard().get(index - 1));
-            index += (board.getColumn() + 1);
-            if (index % board.getColumn() == 1) {
-                break;
-            }
-        }
-        for (int i = 0; i < tilesOnDiagonal2.size(); i++) {
-            if (currentPlayer.getTakenTileSign().equals(tilesOnDiagonal2.get(i).getTakenTileSign())) counter++;
-            if (counter == tilesToWin) {
-                score.increaseScore(currentPlayer);
-                board.setMoveCounter(0);
-                return true;
-            }
-        }
-        return false;
-    }
+//    public boolean checkDiagonalRightToLeft(Player currentPlayer, int index) {
+//        int counter = 0;
+//        ArrayList<Tile> tilesOnDiagonal2 = new ArrayList<>();
+//        while (index - board.getColumn() - 1 >= 0) {
+//            index = index - board.getColumn() + 1;
+//            if (index % board.getColumn() == 0) {
+//                break;
+//            }
+//        }
+//        while (index <= board.getPlayBoard().size()) {
+//            tilesOnDiagonal2.add(board.getPlayBoard().get(index - 1));
+//            index += (board.getColumn() + 1);
+//            if (index % board.getColumn() == 1) {
+//                break;
+//            }
+//        }
+//        for (int i = 0; i < tilesOnDiagonal2.size(); i++) {
+//            if (currentPlayer.getTakenTileSign().equals(tilesOnDiagonal2.get(i).getTakenTileSign())) counter++;
+//            if (counter == tilesToWin) {
+//                score.increaseScore(currentPlayer);
+//                board.setMoveCounter(0);
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 
     public boolean checkDiagonalRL(Player currentPlayer, int index) {
         int counter = 0;
@@ -120,6 +122,24 @@ public class Referee {
             }
             index += (board.getColumn() - 1);
         }
+        return iterate(tiles,currentPlayer);
+//        if(iterate(tiles,currentPlayer)) return true;
+//        else return false;
+
+//
+//        for (int i = 0; i < tiles.size(); i++) {
+//            if (currentPlayer.getTakenTileSign().equals(tiles.get(i).getTakenTileSign())) counter++;
+//            if (counter == tilesToWin) {
+//                score.increaseScore(currentPlayer);
+//                board.setMoveCounter(0);
+//                return true;
+//            }
+//        }
+//        return false;
+    }
+
+    public boolean iterate(List<Tile> tiles,Player currentPlayer){
+        int counter =0;
         for (int i = 0; i < tiles.size(); i++) {
             if (currentPlayer.getTakenTileSign().equals(tiles.get(i).getTakenTileSign())) counter++;
             if (counter == tilesToWin) {
@@ -132,26 +152,25 @@ public class Referee {
 
     }
 
-
-    public boolean checkDiagonal2(Player currentPlayer, int number) {
-        int counter = 0;
-        for (int i = number - 1; i > 0; i -= board.getColumn() - 1) {
-            if (currentPlayer.getTakenTileSign().equals(board.getPlayBoard().get(i).getTakenTileSign()))
-                counter++;
-            else if (counter > 2) break;
-
-        }
-        for (int i = number - 1; i < board.getPlayBoard().size() - 1; i += board.getColumn() - 1) {
-            if (currentPlayer.getTakenTileSign().equals(board.getPlayBoard().get(i).getTakenTileSign())) counter++;
-            else counter = 0;
-            if (counter - 1 == tilesToWin) {
-                score.increaseScore(currentPlayer);
-                board.setMoveCounter(0);
-                return true;
-            }
-        }
-        return false;
-    }
+//    public boolean checkDiagonal2(Player currentPlayer, int number) {
+//        int counter = 0;
+//        for (int i = number - 1; i > 0; i -= board.getColumn() - 1) {
+//            if (currentPlayer.getTakenTileSign().equals(board.getPlayBoard().get(i).getTakenTileSign()))
+//                counter++;
+//            else if (counter > 2) break;
+//
+//        }
+//        for (int i = number - 1; i < board.getPlayBoard().size() - 1; i += board.getColumn() - 1) {
+//            if (currentPlayer.getTakenTileSign().equals(board.getPlayBoard().get(i).getTakenTileSign())) counter++;
+//            else counter = 0;
+//            if (counter - 1 == tilesToWin) {
+//                score.increaseScore(currentPlayer);
+//                board.setMoveCounter(0);
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 
     public boolean checkIfDraw() {
         if (board.getMoveCounter() == board.getPlayBoard().size()) {

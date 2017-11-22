@@ -2,6 +2,7 @@ package gameManagement;
 
 import gameManagement.tiles.TakenTileSign;
 import gameManagement.validation.Score;
+import org.testng.annotations.BeforeMethod;
 import players.Player;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -10,10 +11,16 @@ import static org.testng.Assert.*;
 
 public class RefereeTest {
 
+//    Board board;
+//    Referee referee;
+    Player player1  = new Player("bartek", TakenTileSign.CROSS);
 
-    Player player1 = new Player("bartek", TakenTileSign.CROSS);
+//    @BeforeMethod
+//    public void setUp(){
+//
+//    }
 
-    @DataProvider(name = "dp")
+    @DataProvider(name = "horizontalCheck")
     public Object[][] getData() {
 
         return new Object[][]{
@@ -51,7 +58,43 @@ public class RefereeTest {
         };
     }
 
-    @Test(dataProvider = "dp")
+
+    @DataProvider(name = "diagonalCheckLtR")
+    public Object[][] getData2() {
+
+        return new Object[][]{
+                {3,3,3,new int[]{1,5,9}},
+                {4,4,3,new int[]{1,6,11}},
+                {4,4,3,new int[]{5,10,15}},
+                {5,5,3,new int[]{1,7,13}},
+                {5,5,3,new int[]{2,8,14}},
+                {5,5,3,new int[]{3,9,15}},
+                {5,5,3,new int[]{6,12,18}},
+                {5,5,3,new int[]{11,17,23}},
+                {5,5,4,new int[]{1,7,13,19}},
+                {5,5,3,new int[]{6,12,18,24}},
+                {6,6,3,new int[]{1,8,15}},
+                {6,6,3,new int[]{3,10,17}},
+                {6,6,3,new int[]{7,14,21}},
+                {7,7,3,new int[]{1,9,17}},
+                {7,7,3,new int[]{2,10,18}},
+                {7,7,3,new int[]{3,11,19}},
+                {3,7,3,new int[]{5,13,21}},
+                {8,6,4,new int[]{3,10,17,24}},
+                {8,6,3,new int[]{1,8,15,22}},
+                {7,4,3,new int[]{6,11,16}},
+                {7,4,3,new int[]{5,10,15}},
+                {5,3,3,new int[]{7,11,15}},
+                {5,3,3,new int[]{4,8,12}},
+
+        };
+    }
+
+
+
+
+
+    @Test(dataProvider = "horizontalCheck")
     public void testCheckIfWonHorizontally(int row,int column,int tilesToWin, int[]toMark) throws Exception {
 
         Board board1 = new Board(row, column);
@@ -63,15 +106,17 @@ public class RefereeTest {
         assertTrue(referee.checkIfWonHorizontally(player1));
     }
 
-//    @Test
-//    public void testCheckDiagonalLeftToRight() throws Exception {
-//
-//        board1.markTile(1, TakenTileSign.CROSS);
-//        board1.markTile(5, TakenTileSign.CROSS);
-//        board1.markTile(9, TakenTileSign.CROSS);
-//
-//        assertTrue(referee.checkDiagonalLeftToRight(player1, 9));
-//    }
+    @Test(dataProvider = "diagonalCheckLtR")
+    public void testCheckDiagonalLeftToRight(int row,int column,int tilesToWin, int[]toMark) throws Exception {
+        Board board = new Board(row, column);
+        Referee referee = new Referee(board, tilesToWin);
+        for(int i=0; i<toMark.length;i++) {
+            board.markTile(toMark[i], player1.getTakenTileSign());
+        }
+        assertTrue(referee.checkDiagonalLeftToRight(player1, toMark[toMark.length-1]));
+    }
+
+
 //
 //    @Test
 //    public void testCheckDiagonalRightToLeft() throws Exception {
