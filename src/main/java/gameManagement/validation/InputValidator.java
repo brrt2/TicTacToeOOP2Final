@@ -14,7 +14,7 @@ public class InputValidator {
     }
 
     public boolean validateAdjacentSignsToWin(int adjacentSigns, int height, int width) {
-        return adjacentSigns>0&&(adjacentSigns<=height&&adjacentSigns<=width);
+        return adjacentSigns>2&&(adjacentSigns<=height&&adjacentSigns<=width);
     }
 
     public boolean validateWhoGoesFirstSign(String str){
@@ -22,7 +22,7 @@ public class InputValidator {
     }
 
     public boolean validateBoardDimensions(int dimension) {
-        return dimension>0&&dimension<1000;
+        return dimension>2&&dimension<1000;
     }
 
     public void validateMove(int numbertoMark, Player player, Board board) throws IllegalArgumentException, ArrayIndexOutOfBoundsException {

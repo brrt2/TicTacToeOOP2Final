@@ -86,12 +86,30 @@ public class RefereeTest {
                 {7,4,3,new int[]{5,10,15}},
                 {5,3,3,new int[]{7,11,15}},
                 {5,3,3,new int[]{4,8,12}},
-
         };
     }
 
+    @DataProvider(name = "diagonalCheckRtL")
+    public Object[][] getData3() {
+        return new Object[][]{
 
+                {3,3,3,new int[]{3,5,7}},
+                {4,4,3,new int[]{4,7,10}},
+                {4,4,3,new int[]{8,11,14}},
+                {4,4,3,new int[]{3,6,9}},
+                {5,5,3,new int[]{3,7,11}},
+                {5,5,3,new int[]{4,8,12}},
+                {6,6,3,new int[]{4,9,14}},
+                {6,6,3,new int[]{5,10,15}},
+                {6,6,3,new int[]{6,11,16}},
+                {6,6,3,new int[]{12,17,22}},
+                {3,7,3,new int[]{7,13,19}},
+                {3,7,3,new int[]{6,12,18}},
+                {3,7,3,new int[]{3,9,15}},
+                {3,7,3,new int[]{4,10,16}},
 
+        };
+    }
 
 
     @Test(dataProvider = "horizontalCheck")
@@ -116,19 +134,17 @@ public class RefereeTest {
         assertTrue(referee.checkDiagonalLeftToRight(player1, toMark[toMark.length-1]));
     }
 
+    @Test(dataProvider = "diagonalCheckRtL")
+    public void testCheckDiagonalRightToLeft(int row,int column,int tilesToWin, int[]toMark) throws Exception {
 
-//
-//    @Test
-//    public void testCheckDiagonalRightToLeft() throws Exception {
-//
-//        board1.markTile(3, TakenTileSign.CROSS);
-//        board1.markTile(5, TakenTileSign.CROSS);
-//        board1.markTile(7, TakenTileSign.CROSS);
-//
-//        assertTrue(referee.checkDiagonal2(player1, 5));
-//
-//    }
-//
+        Board board = new Board(row, column);
+        Referee referee = new Referee(board, tilesToWin);
+        for(int i=0; i<toMark.length;i++) {
+            board.markTile(toMark[i], player1.getTakenTileSign());
+        }
+        assertTrue(referee.checkDiagonalRL(player1, toMark[toMark.length-1]));
+    }
+
 //    @Test
 //    public void testCheckIfDraw() throws Exception {
 //
