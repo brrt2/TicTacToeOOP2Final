@@ -47,13 +47,28 @@ public class Language {
             properties.load(is);
             askForFirstUserName = properties.getProperty("askForFirstUserName");
             askForSecondUserName = properties.getProperty("askForSecondUserName");
-            
-
-
-
-
-
-
+            askForBoardHeight = properties.getProperty("askForBoardHeight");
+            askForBoardWidth = properties.getProperty("askForBoardWidth");
+            askForNumberofAdjacentSigns = properties.getProperty("askForNumberofAdjacentSigns");
+            askWhoGoesFirst=properties.getProperty("askWhoGoesFirst");
+            whoGoesFirstError = properties.getProperty("whoGoesFirstError");
+            incorrectValue = properties.getProperty("incorrectValue");
+            wrongName = properties.getProperty("wrongName");
+            positiveLowerOrEqualError = properties.getProperty("positiveLowerOrEqualError");
+            boardDimensionError = properties.getProperty("boardDimensionError");
+            askIfWantsToContinueAfterDraw = properties.getProperty("askIfWantsToContinueAfterDraw");
+            askIfWantsToContinue = properties.getProperty("askIfWantsToContinue");
+            lostMoveMessage = properties.getProperty("lostMoveMessage");
+            askToProvideTileNumber = properties.getProperty("askToProvideTileNumber");
+            nowIsTurnOf = properties.getProperty("nowIsTurnOf");
+            signOfPlayer = properties.getProperty("signOfPlayer");
+            wrongValueType = properties.getProperty("wrongValueType");
+            hasWonThisRound = properties.getProperty("hasWonThisRound");
+            askIfwantsToPlayAnotherMatch = properties.getProperty("askIfwantsToPlayAnotherMatch");
+            noneOfTheValuesSelected = properties.getProperty("noneOfTheValuesSelected");
+            thankYouForPlaying = properties.getProperty("thankYouForPlaying");
+            numberOutsideTheBoard = properties.getProperty("numberOutsideTheBoard");
+            tileTaken = properties.getProperty("tileTaken");
 
 
         } catch (IOException ex) {

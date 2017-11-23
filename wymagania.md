@@ -33,4 +33,4 @@ before game starts it asks who goes first, O or X...............................
 We are bi-lingual: P Polish and English are fine. In future we want to add more languages: 
 messages are to be read from a file for chosen language. 
 Choosing the language depends on configuration variable..................................................................................missing
-Predicates(changed to conditions in return)...............................................................................................................................done
+Predicates(changed to conditions in return).................................................................................................done
