@@ -4,15 +4,30 @@ import gameManagement.Board;
 import gameManagement.Game;
 import gameManagement.GameState;
 import gameManagement.Turn;
+import gameManagement.locale.Language;
 import gameManagement.tiles.TakenTileSign;
 import gameManagement.validation.InputValidator;
 import players.Player;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.InputMismatchException;
+import java.util.Properties;
 import java.util.Scanner;
 import java.util.function.Predicate;
 
 public class Printer {
+
+    String fileName="english.properties";
+
+    //    String lang="en";
+//    String country ="US";
+//    Locale l = new Locale(lang,country);
+//    ResourceBundle r = ResourceBundle.getBundle("src.main.java.resources.Bundle",l);
+//    String str=r.getString("wish");
+
+
+
 
     private InputValidator inputValidator = new InputValidator();
     private String name = "DefaultFirstPlayer";
@@ -21,6 +36,7 @@ public class Printer {
     private int height = 0;
     private int width = 0;
     private int adjacentSigns = 0;
+    Language language;
 
     public void runTheMenu() {
         boolean keepTurning = false;
@@ -57,17 +73,20 @@ public class Printer {
         } while (game.getGameState()!= GameState.WIN&&game.getGameState()!= GameState.DRAW);
     }
 
-    public void selectLanguage(String language){
 
+    public void setLanguage(String symbol,boolean keepTurning){
+        language=new Language(symbol);
+        obtainUsername1(language.getAskForFirstUserName(), keepTurning);
     }
+
 
     public void printIntroduction(boolean keepTurning){
         System.out.println("Welcome to the OOP Tic Tac Toe");
-        // language selection
-        //System.out.println("Please select the target - System.err / System.out ? ");
-        //String target =scan.next();
-        // method
-        obtainUsername1("Please provide the name of the first player (o) ", keepTurning);
+        System.out.println("Please select your language E - English | P-Polish");
+        String lang = String.valueOf(scan.next()).toLowerCase();
+        scan.nextLine();
+        setLanguage(lang,keepTurning);
+
     }
 
     public void obtainUsername1(String message, boolean keepTurning) {
@@ -81,7 +100,7 @@ public class Printer {
             }
         }
         keepTurning = false;
-        obtainUsername2("Please provide the name of the second player (x) ", keepTurning);
+        obtainUsername2(language.getAskForSecondUserName(), keepTurning);
     }
 
     public void obtainUsername2(String message, boolean keepTurning) {
