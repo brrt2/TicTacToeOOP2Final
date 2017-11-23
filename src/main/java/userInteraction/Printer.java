@@ -25,7 +25,7 @@ public class Printer {
 //    Locale l = new Locale(lang,country);
 //    ResourceBundle r = ResourceBundle.getBundle("src.main.java.resources.Bundle",l);
 //    String str=r.getString("wish");
-
+    Output output;
     private InputValidator inputValidator = new InputValidator();
     private String name = "DefaultFirstPlayer";
     private String name2 = "DefaultSecondPlayer";
@@ -34,6 +34,7 @@ public class Printer {
     private int width = 0;
     private int adjacentSigns = 0;
     private Language language;
+    boolean keepTurning;
 
     public void runTheMenu() {
         boolean keepTurning = false;
@@ -73,25 +74,37 @@ public class Printer {
 
     public void setLanguage(String symbol,boolean keepTurning){
         language=new Language(symbol);
-        obtainUsername1(language.getAskForFirstUserName(), keepTurning);
+        obtainUsername1(language.getAskForFirstUserName());
     }
 
+    public void configureTarget(String target){
+        if(target.equals("e")) output=new SystemErrOutput();
+        else if(target.equals("o")) output= new SystemOutOutput();
+        configureLanguage();
+    }
 
-    public void printIntroduction(boolean keepTurning){
-        System.out.println("Welcome to the OOP Tic Tac Toe game | Witaj w grze Kolko i Krzyzyk ");
-        System.out.println("Please select your language e - English | p-Polish | Wybierz jezyk e-angielski | p-polski ");
+    public void configureLanguage(){
+        System.out.println("Please select your language e - English | p- Polish | Wybierz jezyk e-angielski | p-polski ");
         String lang = String.valueOf(scan.next()).toLowerCase();
         scan.nextLine();
         setLanguage(lang,keepTurning);
+    }
+
+    public void printIntroduction(boolean keepTurning){
+        System.out.println("Welcome to the OOP Tic Tac Toe game | Witaj w grze Kolko i Krzyzyk ");
+        System.out.println("Please select the output target System.err- e / System.out - o ");
+        String target=String.valueOf(scan.next()).toLowerCase();
+        configureTarget(target);
 
     }
 
-    public void obtainUsername1(String message, boolean keepTurning) {
+    public void obtainUsername1(String message) {
+        keepTurning=false;
         while (keepTurning == false) {
-            System.out.println(message);
+            output.displayMessage(message);
             name = scan.nextLine();
             if (inputValidator.validatePlayerName(name) == false) {
-                System.out.println("Wrong name !");
+                output.displayMessage(language.getWrongName());
             } else {
                 keepTurning = true;
             }
@@ -102,16 +115,16 @@ public class Printer {
 
     public void obtainUsername2(String message, boolean keepTurning) {
         while (keepTurning == false) {
-            System.out.println(message);
+            output.displayMessage(message);
             name2 = scan.nextLine();
             if (inputValidator.validatePlayerName(name2) == false) {
-                System.out.println("Wrong name !");
+                output.displayMessage(language.getWrongName());
             } else {
                 keepTurning = true;
             }
         }
         keepTurning = false;
-        obtainBoardHeight("Please provide the board height",keepTurning);
+        obtainBoardHeight(language.getAskForBoardHeight(),keepTurning);
     }
 
     public void obtainNumberOfAdjacentSigns(boolean keepTurning) {
@@ -135,14 +148,14 @@ public class Printer {
         configureGame(whoStarts);
     }
 
-    public void obtainBoardHeight(String msg,boolean keepTurning) {
+    public void obtainBoardHeight(String message,boolean keepTurning) {
 
         while (keepTurning == false) {
-            System.out.println(msg);
+            output.displayMessage(message);
             try {
                 height = scan.nextInt();
             } catch (InputMismatchException e) {
-                System.out.println("Incorrect value !");
+                output.displayMessage(language.getIncorrectValue());
                 scan.next();
             }
             if (inputValidator.validateBoardDimensions(height) == false) {

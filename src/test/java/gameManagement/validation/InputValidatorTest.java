@@ -41,13 +41,13 @@ public class InputValidatorTest {
         assertTrue(iv.validatePlayerName(s));
     }
 
-    @Test
-    public void testValidateAdjacentSignsToWin() throws Exception {
-
-        Predicate<Integer> pr = i -> i > 0 && (i<3&&i<3);
-        assertTrue(iv.validateAdjacentSignsToWin( 2, 3,3));
-        assertFalse(iv.validateAdjacentSignsToWin( 5, 3,3));
-    }
+//    @Test
+//    public void testValidateAdjacentSignsToWin() throws Exception {
+//
+//        Predicate<Integer> pr = i -> i > 0 && (i<3&&i<3);
+//        assertTrue(iv.validateAdjacentSignsToWin( 2, 3,3));
+//        assertFalse(iv.validateAdjacentSignsToWin( 5, 3,3));
+//    }
 
     @Test
     public void testValidateBoardDimensions() throws Exception {

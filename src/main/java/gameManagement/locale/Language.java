@@ -91,4 +91,96 @@ public class Language {
     public String getAskForSecondUserName() {
         return askForSecondUserName;
     }
+
+    public String getAskForBoardHeight() {
+        return askForBoardHeight;
+    }
+
+    public String getAskForBoardWidth() {
+        return askForBoardWidth;
+    }
+
+    public String getAskForNumberofAdjacentSigns() {
+        return askForNumberofAdjacentSigns;
+    }
+
+    public String getAskWhoGoesFirst() {
+        return askWhoGoesFirst;
+    }
+
+    public String getWhoGoesFirstError() {
+        return whoGoesFirstError;
+    }
+
+    public String getIncorrectValue() {
+        return incorrectValue;
+    }
+
+    public String getWrongName() {
+        return wrongName;
+    }
+
+    public String getPositiveLowerOrEqualError() {
+        return positiveLowerOrEqualError;
+    }
+
+    public String getBoardDimensionError() {
+        return boardDimensionError;
+    }
+
+    public String getAskIfWantsToContinueAfterDraw() {
+        return askIfWantsToContinueAfterDraw;
+    }
+
+    public String getAskIfWantsToContinue() {
+        return askIfWantsToContinue;
+    }
+
+    public String getLostMoveMessage() {
+        return lostMoveMessage;
+    }
+
+    public String getAskToProvideTileNumber() {
+        return askToProvideTileNumber;
+    }
+
+    public String getNowIsTurnOf() {
+        return nowIsTurnOf;
+    }
+
+    public String getSignOfPlayer() {
+        return signOfPlayer;
+    }
+
+    public String getWrongValueType() {
+        return wrongValueType;
+    }
+
+    public String getHasWonThisRound() {
+        return hasWonThisRound;
+    }
+
+    public String getAskIfwantsToPlayAnotherMatch() {
+        return askIfwantsToPlayAnotherMatch;
+    }
+
+    public String getNoneOfTheValuesSelected() {
+        return noneOfTheValuesSelected;
+    }
+
+    public String getThankYouForPlaying() {
+        return thankYouForPlaying;
+    }
+
+    public String getNumberOutsideTheBoard() {
+        return numberOutsideTheBoard;
+    }
+
+    public String getTileTaken() {
+        return tileTaken;
+    }
+
+    public String getAskUserForBoardHeight() {
+        return askUserForBoardHeight;
+    }
 }
