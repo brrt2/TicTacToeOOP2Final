@@ -26,9 +26,6 @@ public class Printer {
 //    ResourceBundle r = ResourceBundle.getBundle("src.main.java.resources.Bundle",l);
 //    String str=r.getString("wish");
 
-
-
-
     private InputValidator inputValidator = new InputValidator();
     private String name = "DefaultFirstPlayer";
     private String name2 = "DefaultSecondPlayer";
@@ -36,7 +33,7 @@ public class Printer {
     private int height = 0;
     private int width = 0;
     private int adjacentSigns = 0;
-    Language language;
+    private Language language;
 
     public void runTheMenu() {
         boolean keepTurning = false;
@@ -81,8 +78,8 @@ public class Printer {
 
 
     public void printIntroduction(boolean keepTurning){
-        System.out.println("Welcome to the OOP Tic Tac Toe");
-        System.out.println("Please select your language E - English | P-Polish");
+        System.out.println("Welcome to the OOP Tic Tac Toe game | Witaj w grze Kolko i Krzyzyk ");
+        System.out.println("Please select your language e - English | p-Polish | Wybierz jezyk e-angielski | p-polski ");
         String lang = String.valueOf(scan.next()).toLowerCase();
         scan.nextLine();
         setLanguage(lang,keepTurning);
@@ -149,7 +146,7 @@ public class Printer {
                 scan.next();
             }
             if (inputValidator.validateBoardDimensions(height) == false) {
-                System.out.println("Please provide a number higher than 0 and lower than 1000!");
+                System.out.println("Please provide a number higher than 2 and lower than 1000!");
             } else {
                 keepTurning = true;
             }
@@ -170,7 +167,7 @@ public class Printer {
                 scan.next();
             }
             if (inputValidator.validateBoardDimensions(width) == false) {
-                System.out.println("Please provide a number higher than 0 and lower than 1000!");
+                System.out.println("Please provide a number higher than 2 and lower than 1000!");
             } else {
                 keepTurning = true;
             }

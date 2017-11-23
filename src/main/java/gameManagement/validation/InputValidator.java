@@ -14,7 +14,7 @@ public class InputValidator {
     }
 
     public boolean validateAdjacentSignsToWin(int adjacentSigns, int height, int width) {
-        return adjacentSigns>2&&(adjacentSigns<=height&&adjacentSigns<=width);
+        return adjacentSigns >2 && (adjacentSigns <= height && adjacentSigns <= width);
     }
 
     public boolean validateWhoGoesFirstSign(String str){

@@ -87,7 +87,7 @@ public class Game {
             board.clearBoard();
         } else if (choice == 'N') gameState=GameState.WIN;
         else {
-            System.out.println("None of the possible values selected, the game will be terminated");
+            System.out.println("None of the proposed values selected, the game will be terminated");
             System.out.println("Thank you for playing");
             System.exit(0);
         }
