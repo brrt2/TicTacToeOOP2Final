@@ -41,10 +41,7 @@ public class Score {
         noughtPlayerPoints++;
     }
 
-    public void getCurrentScore() {
-        System.out.println("Player X has : " + crossPlayerPoints);
-        System.out.println("Player O has : " + noughtPlayerPoints);
-    }
+
 
     public void resetScore() {
         crossPlayerPoints = 0;

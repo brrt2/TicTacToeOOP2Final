@@ -43,13 +43,13 @@ public class Printer {
 
     public String obtainInformationOnWhoStarts(boolean keepTurning){
         String s1=null;
-        System.out.println("Who goes first ? ");
+        output.displayMessage(language.getAskWhoGoesFirst());
         while (keepTurning == false) {
 
              s1 = scan.nextLine();
 
             if (inputValidator.validateWhoGoesFirstSign(s1) == false) {
-                System.out.println("Please type x or o");
+                output.displayMessage(language.getAskWhoGoesFirst());
             } else {
                 keepTurning = true;
             }
@@ -62,7 +62,7 @@ public class Printer {
         Player second = new Player(name2, TakenTileSign.CROSS);
         Board board = new Board(height, width);
         Turn turn = new Turn(first,second);
-        Game game = new Game(turn,board, adjacentSigns);
+        Game game = new Game(turn,board, adjacentSigns,output,language);
         if(str.equals("x")) game.getTurn().setCurrentPlayer(second);
         else if(str.equals("o")) game.getTurn().setCurrentPlayer(first);
         do {
@@ -130,15 +130,15 @@ public class Printer {
     public void obtainNumberOfAdjacentSigns(boolean keepTurning) {
 
         while (keepTurning == false) {
-            System.out.println("Please provide the number of adjacent signs necessary to win ");
+            output.displayMessage(language.getAskForNumberofAdjacentSigns());
             try {
                 adjacentSigns = scan.nextInt();
             } catch (InputMismatchException e) {
-                System.out.println("Incorrect value");
+                output.displayMessage(language.getIncorrectValue());
                 scan.next();
             }
             if (inputValidator.validateAdjacentSignsToWin(adjacentSigns, height, width) == false) {
-                System.out.println("Please provide a positive number lower or equal to board height and width !");
+                output.displayMessage(language.getPositiveLowerOrEqualError());
             } else {
                 keepTurning = true;
             }
@@ -159,28 +159,28 @@ public class Printer {
                 scan.next();
             }
             if (inputValidator.validateBoardDimensions(height) == false) {
-                System.out.println("Please provide a number higher than 2 and lower than 1000!");
+                output.displayMessage(language.getBoardDimensionError());
             } else {
                 keepTurning = true;
             }
         }
         keepTurning = false;
-        obtainBoardWidth("Please provide the board width",keepTurning);
+        obtainBoardWidth(language.getAskForBoardWidth(),keepTurning);
 
     }
 
     public void obtainBoardWidth(String msg,boolean keepTurning) {
 
         while (keepTurning == false) {
-            System.out.println(msg);
+            output.displayMessage(language.getAskForBoardWidth());
             try {
                 width = scan.nextInt();
             } catch (InputMismatchException e) {
-                System.out.println("Incorrect value !");
+                output.displayMessage(language.getIncorrectValue());
                 scan.next();
             }
             if (inputValidator.validateBoardDimensions(width) == false) {
-                System.out.println("Please provide a number higher than 2 and lower than 1000!");
+                output.displayMessage(language.getBoardDimensionError());
             } else {
                 keepTurning = true;
             }

@@ -30,6 +30,8 @@ public class Language {
     private String thankYouForPlaying;
     private String numberOutsideTheBoard;
     private String tileTaken;
+    private String playerXhas;
+    private String playerOhas;
 
 
     private String askUserForBoardHeight;
@@ -69,6 +71,8 @@ public class Language {
             thankYouForPlaying = properties.getProperty("thankYouForPlaying");
             numberOutsideTheBoard = properties.getProperty("numberOutsideTheBoard");
             tileTaken = properties.getProperty("tileTaken");
+            playerXhas=properties.getProperty("playerXhas");
+            playerOhas=properties.getProperty("playerOhas");
 
 
         } catch (IOException ex) {
@@ -182,5 +186,13 @@ public class Language {
 
     public String getAskUserForBoardHeight() {
         return askUserForBoardHeight;
+    }
+
+    public String getPlayerXhas() {
+        return playerXhas;
+    }
+
+    public String getPlayerOhas() {
+        return playerOhas;
     }
 }
