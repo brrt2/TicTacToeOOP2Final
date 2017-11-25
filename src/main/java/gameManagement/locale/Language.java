@@ -34,13 +34,13 @@ public class Language {
     private String playerOhas;
 
 
-    private String askUserForBoardHeight;
 
-
-    public Language(String languageSymbol) {
+    public Language(String languageSymbol) throws IllegalArgumentException {
         String fileName = null;
         if (languageSymbol.equals("e")) fileName = "english.properties";
-        else fileName = "polish.properties";
+        else if (languageSymbol.equals("p")) fileName = "polish.properties";
+        else if (languageSymbol.equals("e")) fileName = "spanish.properties";
+        else throw new IllegalArgumentException("Wrong value selected !");
         Properties properties = new Properties();
         InputStream is = null;
         try {
@@ -182,10 +182,6 @@ public class Language {
 
     public String getTileTaken() {
         return tileTaken;
-    }
-
-    public String getAskUserForBoardHeight() {
-        return askUserForBoardHeight;
     }
 
     public String getPlayerXhas() {

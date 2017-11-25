@@ -1,5 +1,6 @@
 package gameManagement;
 
+import gameManagement.boardTools.TilesToWin;
 import gameManagement.locale.Language;
 import gameManagement.moveManagement.Move;
 import gameManagement.moveManagement.MoveFactory;
@@ -16,13 +17,13 @@ public class Game {
     private Board board;
     private InputValidator mv;
     private Referee referee;
-    private int tilesToWin;
+    private TilesToWin tilesToWin;
     private Turn turn;
     private Output output;
     private Language language;
 
 
-    public Game(Turn turn, Board board, int adjacentSigns,Output output,Language language) {
+    public Game(Turn turn, Board board, TilesToWin adjacentSigns,Output output,Language language) {
         gameState=GameState.ACTIVE;
         this.board = board;
         tilesToWin = adjacentSigns;

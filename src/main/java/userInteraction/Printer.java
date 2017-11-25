@@ -1,38 +1,27 @@
 package userInteraction;
 
-import gameManagement.Board;
-import gameManagement.Game;
-import gameManagement.GameState;
-import gameManagement.Turn;
+import gameManagement.*;
+import gameManagement.boardTools.Height;
+import gameManagement.boardTools.TilesToWin;
+import gameManagement.boardTools.Width;
 import gameManagement.locale.Language;
 import gameManagement.tiles.TakenTileSign;
 import gameManagement.validation.InputValidator;
 import players.Player;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.InputMismatchException;
-import java.util.Properties;
 import java.util.Scanner;
-import java.util.function.Predicate;
 
 public class Printer {
 
-    String fileName="english.properties";
-
-    //    String lang="en";
-//    String country ="US";
-//    Locale l = new Locale(lang,country);
-//    ResourceBundle r = ResourceBundle.getBundle("src.main.java.resources.Bundle",l);
-//    String str=r.getString("wish");
-    Output output;
+    private Output output;
     private InputValidator inputValidator = new InputValidator();
     private String name = "DefaultFirstPlayer";
     private String name2 = "DefaultSecondPlayer";
     private Scanner scan = new Scanner(System.in);
-    private int height = 0;
-    private int width = 0;
-    private int adjacentSigns = 0;
+    private Height height;
+    private Width width;
+    private TilesToWin tilesToWin;
     private Language language;
     boolean keepTurning;
 
@@ -41,40 +30,11 @@ public class Printer {
         printIntroduction(keepTurning);
     }
 
-    public String obtainInformationOnWhoStarts(boolean keepTurning){
-        String s1=null;
-        output.displayMessage(language.getAskWhoGoesFirst());
-        while (keepTurning == false) {
-
-             s1 = scan.nextLine();
-
-            if (inputValidator.validateWhoGoesFirstSign(s1) == false) {
-                output.displayMessage(language.getAskWhoGoesFirst());
-            } else {
-                keepTurning = true;
-            }
-        }
-        return s1;
-    }
-
-    public void configureGame(String str){
-        Player first = new Player(name, TakenTileSign.NOUGHT);
-        Player second = new Player(name2, TakenTileSign.CROSS);
-        Board board = new Board(height, width);
-        Turn turn = new Turn(first,second);
-        Game game = new Game(turn,board, adjacentSigns,output,language);
-        if(str.equals("x")) game.getTurn().setCurrentPlayer(second);
-        else if(str.equals("o")) game.getTurn().setCurrentPlayer(first);
-        do {
-            game.play();
-
-        } while (game.getGameState()!= GameState.WIN&&game.getGameState()!= GameState.DRAW);
-    }
-
-
-    public void setLanguage(String symbol,boolean keepTurning){
-        language=new Language(symbol);
-        obtainUsername1(language.getAskForFirstUserName());
+    public void printIntroduction(boolean keepTurning){
+        System.out.println("Welcome to the OOP Tic Tac Toe game | Witaj w grze Kolko i Krzyzyk ");
+        System.out.println("Please select the output target System.err- e / System.out - o ");
+        String target=String.valueOf(scan.next()).toLowerCase();
+        configureTarget(target);
     }
 
     public void configureTarget(String target){
@@ -84,18 +44,18 @@ public class Printer {
     }
 
     public void configureLanguage(){
-        System.out.println("Please select your language e - English | p- Polish | Wybierz jezyk e-angielski | p-polski ");
+        System.out.println("Please select your language e - English | p- Polish | Wybierz jezyk e-angielski | p-polski" +
+                "| Seleccione su idioma e-Ingles | p=polaco | e-espanol ");
+
+
         String lang = String.valueOf(scan.next()).toLowerCase();
         scan.nextLine();
         setLanguage(lang,keepTurning);
     }
 
-    public void printIntroduction(boolean keepTurning){
-        System.out.println("Welcome to the OOP Tic Tac Toe game | Witaj w grze Kolko i Krzyzyk ");
-        System.out.println("Please select the output target System.err- e / System.out - o ");
-        String target=String.valueOf(scan.next()).toLowerCase();
-        configureTarget(target);
-
+    public void setLanguage(String symbol,boolean keepTurning){
+        language=new Language(symbol);
+        obtainUsername1(language.getAskForFirstUserName());
     }
 
     public void obtainUsername1(String message) {
@@ -127,38 +87,18 @@ public class Printer {
         obtainBoardHeight(language.getAskForBoardHeight(),keepTurning);
     }
 
-    public void obtainNumberOfAdjacentSigns(boolean keepTurning) {
-
-        while (keepTurning == false) {
-            output.displayMessage(language.getAskForNumberofAdjacentSigns());
-            try {
-                adjacentSigns = scan.nextInt();
-            } catch (InputMismatchException e) {
-                output.displayMessage(language.getIncorrectValue());
-                scan.next();
-            }
-            if (inputValidator.validateAdjacentSignsToWin(adjacentSigns, height, width) == false) {
-                output.displayMessage(language.getPositiveLowerOrEqualError());
-            } else {
-                keepTurning = true;
-            }
-        }
-        keepTurning = false;
-        String whoStarts = obtainInformationOnWhoStarts(keepTurning);
-        configureGame(whoStarts);
-    }
-
     public void obtainBoardHeight(String message,boolean keepTurning) {
 
         while (keepTurning == false) {
             output.displayMessage(message);
             try {
-                height = scan.nextInt();
+                int h = scan.nextInt();
+                height= new Height(h);
             } catch (InputMismatchException e) {
                 output.displayMessage(language.getIncorrectValue());
                 scan.next();
             }
-            if (inputValidator.validateBoardDimensions(height) == false) {
+            if (inputValidator.validateBoardDimensions(height.getValue()) == false) {
                 output.displayMessage(language.getBoardDimensionError());
             } else {
                 keepTurning = true;
@@ -174,12 +114,13 @@ public class Printer {
         while (keepTurning == false) {
             output.displayMessage(language.getAskForBoardWidth());
             try {
-                width = scan.nextInt();
+                int w = scan.nextInt();
+                width = new Width(w);
             } catch (InputMismatchException e) {
                 output.displayMessage(language.getIncorrectValue());
                 scan.next();
             }
-            if (inputValidator.validateBoardDimensions(width) == false) {
+            if (inputValidator.validateBoardDimensions(width.getValue()) == false) {
                 output.displayMessage(language.getBoardDimensionError());
             } else {
                 keepTurning = true;
@@ -187,5 +128,48 @@ public class Printer {
         }
         keepTurning = false;
         obtainNumberOfAdjacentSigns(keepTurning);
+    }
+
+    public void obtainNumberOfAdjacentSigns(boolean keepTurning) {
+
+        while (keepTurning == false) {
+            output.displayMessage(language.getAskForNumberofAdjacentSigns());
+            try {
+                int adjacentSigns = scan.nextInt();
+                tilesToWin= new TilesToWin(adjacentSigns);
+            } catch (InputMismatchException e) {
+                output.displayMessage(language.getIncorrectValue());
+                scan.next();
+            }
+            if (inputValidator.validateAdjacentSignsToWin(tilesToWin.getValue(), height.getValue(), width.getValue()) == false) {
+                output.displayMessage(language.getPositiveLowerOrEqualError());
+            } else {
+                keepTurning = true;
+            }
+        }
+        keepTurning = false;
+        String whoStarts = obtainInformationOnWhoStarts(keepTurning);
+        configureGame(whoStarts,name,name2,height,width,tilesToWin,output,language);
+    }
+
+    public String obtainInformationOnWhoStarts(boolean keepTurning){
+        String s1=null;
+        output.displayMessage(language.getAskWhoGoesFirst());
+        while (keepTurning == false) {
+
+             s1 = scan.nextLine();
+
+            if (inputValidator.validateWhoGoesFirstSign(s1) == false) {
+                output.displayMessage(language.getAskWhoGoesFirst());
+            } else {
+                keepTurning = true;
+            }
+        }
+        return s1;
+    }
+
+    public void configureGame(String str, String name, String name2,Height height, Width width,TilesToWin tilesTowin, Output output,Language language){
+        Configurator configurator = new Configurator();
+        configurator.configureGame(str,name,name2,height,width,tilesTowin,output,language);
     }
 }
