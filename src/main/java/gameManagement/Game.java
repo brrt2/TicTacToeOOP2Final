@@ -21,6 +21,7 @@ public class Game {
     private Turn turn;
     private Output output;
     private Language language;
+    private Move move;
 
 
     public Game(Turn turn, Board board, TilesToWin adjacentSigns,Output output,Language language) {
@@ -59,19 +60,17 @@ public class Game {
     }
 
     public int obtainTheTileNumber(){
-        int number =-1;
         System.out.println(board);
         System.out.println();
         printMessage();
         Scanner scan = new Scanner(System.in);
         try {
 
-           number = scan.nextInt();
-
+          int number = scan.nextInt();
+           move = MoveFactory.createMove(number, turn.getCurrentPlayer());
         } catch (InputMismatchException e) {
             output.displayMessage(language.getIncorrectValue());
         }
-        Move move = MoveFactory.createMove(number, turn.getCurrentPlayer());
         MoveHistory.addToArchive(move);
 
         try {
@@ -81,7 +80,7 @@ public class Game {
             output.displayMessage(language.getLostMoveMessage());
             System.out.println();
         }
-        return number;
+        return move.getIndex();
     }
 
     public void printIfWon(){
