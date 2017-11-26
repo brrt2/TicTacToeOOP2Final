@@ -197,12 +197,12 @@ public class Printer {
     }
 
     public void obtainInformationHowManyMatches() {
-       // int numberOfMatches=0;
+        int number=0;
         while (keepTurning == false) {
             output.displayMessage(language.getAskHowManyMatches());
             try {
-                int number = scan.nextInt();
-                numberOfMatches = new NumberOfMatches(number);
+                number = scan.nextInt();
+
             } catch (InputMismatchException e) {
                 output.displayMessage(language.getIncorrectValue());
                 scan.next();
@@ -213,6 +213,7 @@ public class Printer {
                 keepTurning = true;
             }
         }
+        numberOfMatches = new NumberOfMatches(number);
         obtainInformationHowManyPointsForWin();
         }
 

@@ -24,9 +24,8 @@ public class Game {
     private Move move;
 
 
-    public Game(Turn turn, Board board, TilesToWin adjacentSigns, Output output, Language language, NumberOfMatches numberOfMatches,
-                PointsForWin pointsForWin) {
-       createReferee(numberOfMatches,pointsForWin);
+    public Game(Turn turn, Board board, TilesToWin adjacentSigns, Output output, Language language, NumberOfMatches numberOfMatches, PointsForWin pointsForWin) {
+       createReferee(board, adjacentSigns, numberOfMatches,pointsForWin);
        setGameStateToActive();
        createValidator();
         this.board = board;
@@ -36,8 +35,8 @@ public class Game {
         this.language=language;
     }
 
-    private void createReferee(NumberOfMatches numberOfMatches, PointsForWin pointsForWin){
-        referee = new Referee(board, tilesToWin,numberOfMatches,pointsForWin);
+    private void createReferee(Board board1,TilesToWin tilesToWin, NumberOfMatches numberOfMatches, PointsForWin pointsForWin){
+        referee = new Referee(board1, tilesToWin,numberOfMatches,pointsForWin);
     }
 
     private void setGameStateToActive(){
@@ -49,7 +48,7 @@ public class Game {
     }
 
     public void play() {
-        int number = obtainTheTileNumber();
+       int number= obtainTheTileNumber();
         if (referee.checkIfWonHorizontally(turn.getCurrentPlayer())) printIfWon();
         try {
             if (referee.checkIfWonVertically(turn.getCurrentPlayer(), number))printIfWon();
