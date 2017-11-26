@@ -176,6 +176,7 @@ public class Printer {
                 keepTurning = true;
             }
         }
+        scan.nextLine();
         whoStarts = obtainInformationOnWhoStarts();
         obtainInformationHowManyMatches();
     }
@@ -183,12 +184,11 @@ public class Printer {
     public String obtainInformationOnWhoStarts(){
         String s1=null;
         keepTurning = false;
-
         while (!keepTurning) {
             output.displayMessage(language.getAskWhoGoesFirst());
              s1 = scan.nextLine();
             if (!inputValidator.validateWhoGoesFirstSign(s1)) {
-                output.displayMessage(language.getAskWhoGoesFirst());
+                output.displayMessage(language.getIncorrectValue());
             } else {
                 keepTurning = true;
             }
@@ -197,24 +197,24 @@ public class Printer {
     }
 
     public void obtainInformationHowManyMatches() {
-        keepTurning=false;
-        while (!keepTurning) {
+        int numberOfMatches=0;
+        while (keepTurning == false) {
             output.displayMessage(language.getAskHowManyMatches());
             try {
-                int matchesNumber = scan.nextInt();
-                numberOfMatches = new NumberOfMatches(matchesNumber);
+                numberOfMatches = scan.nextInt();
             } catch (InputMismatchException e) {
                 output.displayMessage(language.getIncorrectValue());
-                scan.nextLine();
+                scan.next();
             }
-            if (!inputValidator.validateHowManyMatches(numberOfMatches)) {
+            if (inputValidator.validateHowManyMatches(numberOfMatches)) {
                 output.displayMessage(language.getIncorrectValue());
             } else {
                 keepTurning = true;
             }
         }
         obtainInformationHowManyPointsForWin();
-    }
+        }
+
 
     public void obtainInformationHowManyPointsForWin() {
         int pointsForWin1;
@@ -234,6 +234,7 @@ public class Printer {
                 keepTurning = true;
             }
         }
+        obtainInformationOnDataStructure();
     }
 
     public void obtainInformationOnDataStructure() {

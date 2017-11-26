@@ -39,12 +39,11 @@ public class Language {
     private String askIfChangeDataStructure;
 
 
-    public Language(String languageSymbol) throws IllegalArgumentException {
+    public Language(String languageSymbol)  {
         String fileName = null;
         if (languageSymbol.equals("e")) fileName = "english.properties";
         else if (languageSymbol.equals("p")) fileName = "polish.properties";
         else if (languageSymbol.equals("s")) fileName = "spanish.properties";
-        else throw new IllegalArgumentException("Wrong value selected !");
         Properties properties = new Properties();
         InputStream is = null;
         try {

@@ -15,8 +15,8 @@ public class InputValidator {
         return name.matches(expression);
     }
 
-    public boolean validateHowManyMatches(NumberOfMatches numberOfMatches) {
-        return numberOfMatches.getValue()>0&&numberOfMatches.getValue()<100;
+    public boolean validateHowManyMatches(int numberOfMatches) {
+        return numberOfMatches>0&&numberOfMatches<100;
     }
 
     public boolean validateHowManyPointsForWin(PointsForWin pointsForWin) {
