@@ -32,14 +32,18 @@ public class Language {
     private String tileTaken;
     private String playerXhas;
     private String playerOhas;
-
+    private String selectOutputTarget;
+    private String askHowManyMatches;
+    private String askHowManyPointsForWin;
+    private String askIfWantsToSwapXandO;
+    private String askIfChangeDataStructure;
 
 
     public Language(String languageSymbol) throws IllegalArgumentException {
         String fileName = null;
         if (languageSymbol.equals("e")) fileName = "english.properties";
         else if (languageSymbol.equals("p")) fileName = "polish.properties";
-        else if (languageSymbol.equals("e")) fileName = "spanish.properties";
+        else if (languageSymbol.equals("s")) fileName = "spanish.properties";
         else throw new IllegalArgumentException("Wrong value selected !");
         Properties properties = new Properties();
         InputStream is = null;
@@ -73,7 +77,11 @@ public class Language {
             tileTaken = properties.getProperty("tileTaken");
             playerXhas=properties.getProperty("playerXhas");
             playerOhas=properties.getProperty("playerOhas");
-
+            selectOutputTarget= properties.getProperty("selectOutputTarget");
+            askHowManyMatches = properties.getProperty("askHowManyMatches");
+            askHowManyPointsForWin = properties.getProperty("askHowManyPointsForWin");
+            askIfWantsToSwapXandO=properties.getProperty("askIfWantsToSwapXandO");
+            askIfChangeDataStructure = properties.getProperty("askIfChangeDataStructure");
 
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -190,5 +198,23 @@ public class Language {
 
     public String getPlayerOhas() {
         return playerOhas;
+    }
+
+    public String getSelectOutputTarget() { return selectOutputTarget; }
+
+    public String getAskHowManyMatches() {
+        return askHowManyMatches;
+    }
+
+    public String getAskHowManyPointsForWin() {
+        return askHowManyPointsForWin;
+    }
+
+    public String getAskIfWantsToSwapXandO() {
+        return askIfWantsToSwapXandO;
+    }
+
+    public String getAskIfChangeDataStructure() {
+        return askIfChangeDataStructure;
     }
 }

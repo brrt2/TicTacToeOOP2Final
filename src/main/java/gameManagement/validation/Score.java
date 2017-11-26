@@ -35,6 +35,12 @@ public class Score {
         }
     }
 
+    public void swapScores(){
+        int temp=crossPlayerPoints;
+        crossPlayerPoints=noughtPlayerPoints;
+        noughtPlayerPoints=temp;
+    }
+
     public void increaseScoreDraw(){
         roundNumber++;
         crossPlayerPoints++;
