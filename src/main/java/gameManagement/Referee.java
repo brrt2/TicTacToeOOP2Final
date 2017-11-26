@@ -15,10 +15,14 @@ public class Referee {
     private TilesToWin tilesToWin;
     private Score score;
 
-    public Referee(Board board, TilesToWin tilesToWin) {
+    public Referee(Board board, TilesToWin tilesToWin, NumberOfMatches numberOfMatches, PointsForWin pointsForWin) {
         this.board = board;
         this.tilesToWin = tilesToWin;
-        score = new Score();
+        createScore(numberOfMatches,pointsForWin);
+    }
+
+    public void createScore(NumberOfMatches numberOfMatches, PointsForWin pointsForWin){
+        score = new Score(numberOfMatches,pointsForWin);
     }
 
     public boolean checkIfWonHorizontally(Player currentPlayer) {
@@ -51,8 +55,6 @@ public class Referee {
 
         return iterate(tilesOnDiagonal,currentPlayer);
     }
-
-
 
     public boolean checkDiagonalRL(Player currentPlayer, int index) {
         int counter = 0;
@@ -119,7 +121,7 @@ public class Referee {
 
     public boolean checkIfWonMatch(Player currentPlayer) {
 
-        if (score.getRoundNumber() == 3) {
+        if (score.getRoundNumber() == score.getNumberOfMatches().getValue()) {
             if (currentPlayer.getTakenTileSign().equals(TakenTileSign.CROSS) && score.getCrossPlayerPoints() > score.getNoughtPlayerPoints()) {
                 System.out.println("Player" + currentPlayer + " has won the entire match ! ");
                 return true;

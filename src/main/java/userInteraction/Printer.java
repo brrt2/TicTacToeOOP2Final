@@ -197,11 +197,12 @@ public class Printer {
     }
 
     public void obtainInformationHowManyMatches() {
-        int numberOfMatches=0;
+       // int numberOfMatches=0;
         while (keepTurning == false) {
             output.displayMessage(language.getAskHowManyMatches());
             try {
-                numberOfMatches = scan.nextInt();
+                int number = scan.nextInt();
+                numberOfMatches = new NumberOfMatches(number);
             } catch (InputMismatchException e) {
                 output.displayMessage(language.getIncorrectValue());
                 scan.next();
@@ -259,6 +260,6 @@ public class Printer {
 
     public void configureGame(String str, String name, String name2,Height height, Width width,TilesToWin tilesTowin, Output output,Language language){
         Configurator configurator = new Configurator();
-        configurator.configureGame(str,name,name2,height,width,tilesTowin,output,language);
+        configurator.configureGame(str,name,name2,height,width,tilesTowin,output,language,numberOfMatches,pointsForWin,selectedDataStructure);
     }
 }

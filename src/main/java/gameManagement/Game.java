@@ -24,15 +24,28 @@ public class Game {
     private Move move;
 
 
-    public Game(Turn turn, Board board, TilesToWin adjacentSigns,Output output,Language language) {
-        gameState=GameState.ACTIVE;
+    public Game(Turn turn, Board board, TilesToWin adjacentSigns, Output output, Language language, NumberOfMatches numberOfMatches,
+                PointsForWin pointsForWin) {
+       createReferee(numberOfMatches,pointsForWin);
+       setGameStateToActive();
+       createValidator();
         this.board = board;
-        tilesToWin = adjacentSigns;
-        referee = new Referee(board, tilesToWin);
-        mv = new InputValidator();
+        this.tilesToWin = adjacentSigns;
         this.turn=turn;
         this.output=output;
         this.language=language;
+    }
+
+    private void createReferee(NumberOfMatches numberOfMatches, PointsForWin pointsForWin){
+        referee = new Referee(board, tilesToWin,numberOfMatches,pointsForWin);
+    }
+
+    private void setGameStateToActive(){
+        gameState=GameState.ACTIVE;
+    }
+
+    private void createValidator(){
+        mv = new InputValidator();
     }
 
     public void play() {

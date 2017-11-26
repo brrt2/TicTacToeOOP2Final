@@ -1,5 +1,6 @@
 package gameManagement;
 
+import com.sun.xml.internal.ws.server.sei.MessageFiller;
 import gameManagement.boardTools.Height;
 import gameManagement.boardTools.Width;
 import gameManagement.tiles.TakenTileSign;
@@ -8,18 +9,19 @@ import gameManagement.tiles.Tile;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Board {
+public class Board  {
 
-    private Height row;
-    private Width column;
+    private final Height row;
+    private final Width column;
     private List<Tile> playBoard;
     private int moveCounter = 0;
 
 
-    public Board(Height row, Width column) {
-        playBoard = new ArrayList<Tile>(row.getValue() * column.getValue());
-        this.row = row;
-        this.column = column;
+    private Board(Builder builder) {
+
+        row = builder.row;
+        column=builder.column;
+        playBoard=builder.playBoard;
         populateTheBoard();
     }
 
@@ -70,4 +72,31 @@ public class Board {
     public void setMoveCounter(int moveCounter) {
         this.moveCounter = moveCounter;
     }
+
+    public static class Builder {
+
+        private Height row;
+        private Width column;
+        private List<Tile> playBoard;
+
+        public Builder height(Height height){
+            this.row=height;
+            return this;
+        }
+
+        public Builder column(Width width){
+            this.column=width;
+            return this;
+        }
+
+        public Builder playBoard (List<Tile> list){
+            this.playBoard=list;
+            return this;
+        }
+
+        public Board build() {
+            return new Board(this);
+        }
+    }
+
 }

@@ -45,11 +45,11 @@ public class Language {
         else if (languageSymbol.equals("p")) fileName = "polish.properties";
         else if (languageSymbol.equals("s")) fileName = "spanish.properties";
         Properties properties = new Properties();
-        InputStream is = null;
+        InputStream config = null;
         try {
-            is = ClassLoader.getSystemResourceAsStream(fileName);
-            // is = new FileInputStream("src/main/resources/" + fileName + ".properties");
-            properties.load(is);
+            config = ClassLoader.getSystemResourceAsStream(fileName);
+            // config = new FileInputStream("src/main/resources/" + fileName + ".properties");
+            properties.load(config);
             askForFirstUserName = properties.getProperty("askForFirstUserName");
             askForSecondUserName = properties.getProperty("askForSecondUserName");
             askForBoardHeight = properties.getProperty("askForBoardHeight");
@@ -85,9 +85,9 @@ public class Language {
         } catch (IOException ex) {
             ex.printStackTrace();
         } finally {
-            if (is != null) {
+            if (config != null) {
                 try {
-                    is.close();
+                    config.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -117,10 +117,6 @@ public class Language {
 
     public String getAskWhoGoesFirst() {
         return askWhoGoesFirst;
-    }
-
-    public String getWhoGoesFirstError() {
-        return whoGoesFirstError;
     }
 
     public String getIncorrectValue() {
@@ -163,10 +159,6 @@ public class Language {
         return signOfPlayer;
     }
 
-    public String getWrongValueType() {
-        return wrongValueType;
-    }
-
     public String getHasWonThisRound() {
         return hasWonThisRound;
     }
@@ -183,14 +175,6 @@ public class Language {
         return thankYouForPlaying;
     }
 
-    public String getNumberOutsideTheBoard() {
-        return numberOutsideTheBoard;
-    }
-
-    public String getTileTaken() {
-        return tileTaken;
-    }
-
     public String getPlayerXhas() {
         return playerXhas;
     }
@@ -199,18 +183,8 @@ public class Language {
         return playerOhas;
     }
 
-    public String getSelectOutputTarget() { return selectOutputTarget; }
-
     public String getAskHowManyMatches() {
         return askHowManyMatches;
-    }
-
-    public String getAskHowManyPointsForWin() {
-        return askHowManyPointsForWin;
-    }
-
-    public String getAskIfWantsToSwapXandO() {
-        return askIfWantsToSwapXandO;
     }
 
     public String getAskIfChangeDataStructure() {

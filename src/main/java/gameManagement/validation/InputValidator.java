@@ -6,8 +6,6 @@ import gameManagement.PointsForWin;
 import gameManagement.tiles.TakenTileSign;
 import players.Player;
 
-import java.util.function.Predicate;
-
 public class InputValidator {
 
     public boolean validatePlayerName(String name) {
@@ -15,8 +13,8 @@ public class InputValidator {
         return name.matches(expression);
     }
 
-    public boolean validateHowManyMatches(int numberOfMatches) {
-        return numberOfMatches>0&&numberOfMatches<100;
+    public boolean validateHowManyMatches(NumberOfMatches numberOfMatches) {
+        return numberOfMatches.getValue()>0&&numberOfMatches.getValue()<100;
     }
 
     public boolean validateHowManyPointsForWin(PointsForWin pointsForWin) {

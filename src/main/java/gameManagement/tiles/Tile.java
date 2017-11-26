@@ -27,10 +27,6 @@ public class Tile {
         return number;
     }
 
-    public void setMark(String mark) {
-        this.mark = mark;
-    }
-
     public void setNumber(int number) {
         this.number = number;
     }

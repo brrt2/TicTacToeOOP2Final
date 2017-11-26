@@ -1,5 +1,7 @@
 package gameManagement.validation;
 
+import gameManagement.NumberOfMatches;
+import gameManagement.PointsForWin;
 import gameManagement.tiles.TakenTileSign;
 import players.Player;
 
@@ -8,30 +10,28 @@ public class Score {
     private int crossPlayerPoints = 0;
     private int noughtPlayerPoints = 0;
     private int roundNumber;
+    private NumberOfMatches numberOfMatches;
+    private PointsForWin pointsForWin;
 
+    public Score(NumberOfMatches numberOfMatches, PointsForWin pointsForWin) {
+        this.numberOfMatches = numberOfMatches;
+        this.pointsForWin=pointsForWin;
+    }
 
     public int getCrossPlayerPoints() {
         return crossPlayerPoints;
-    }
-
-    public void setCrossPlayerPoints(int crossPlayerPoints) {
-        this.crossPlayerPoints = crossPlayerPoints;
     }
 
     public int getNoughtPlayerPoints() {
         return noughtPlayerPoints;
     }
 
-    public void setNoughtPlayerPoints(int noughtPlayerPoints) {
-        this.noughtPlayerPoints = noughtPlayerPoints;
-    }
-
     public void increaseScore(Player currentPlayer) {
         roundNumber++;
         if (currentPlayer.getTakenTileSign().equals(TakenTileSign.CROSS)) {
-            crossPlayerPoints+=3;
+            crossPlayerPoints+=pointsForWin.getValue();
         } else if (currentPlayer.getTakenTileSign().equals(TakenTileSign.NOUGHT)) {
-            noughtPlayerPoints+=3;
+            noughtPlayerPoints+=pointsForWin.getValue();
         }
     }
 
@@ -47,8 +47,6 @@ public class Score {
         noughtPlayerPoints++;
     }
 
-
-
     public void resetScore() {
         crossPlayerPoints = 0;
         noughtPlayerPoints = 0;
@@ -58,7 +56,9 @@ public class Score {
         return roundNumber;
     }
 
-    public void setRoundNumber(int roundNumber) {
-        this.roundNumber = roundNumber;
+
+    public NumberOfMatches getNumberOfMatches() {
+        return numberOfMatches;
     }
+
 }
