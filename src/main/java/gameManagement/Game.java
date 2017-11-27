@@ -1,21 +1,17 @@
 package gameManagement;
 
-import gameManagement.boardTools.Height;
 import gameManagement.boardTools.TilesToWin;
-import gameManagement.boardTools.Width;
 import gameManagement.locale.Language;
 import gameManagement.moveManagement.Move;
 import gameManagement.moveManagement.MoveFactory;
 import gameManagement.moveManagement.MoveHistory;
-import gameManagement.tiles.Tile;
 import gameManagement.validation.InputValidator;
 import userInteraction.Output;
-
+import java.util.ArrayList;
 import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Scanner;
 
-public class Game {
+public class Game implements Subject{
 
     private GameState gameState;
     private InputValidator mv;
@@ -24,6 +20,7 @@ public class Game {
     private Output output;
     private Language language;
     private Move move;
+    private ArrayList<Observer> observers;
 
 
     public Game(Turn turn, Board board, TilesToWin adjacentSigns, Output output, Language language, NumberOfMatches numberOfMatches, PointsForWin pointsForWin) {
@@ -33,6 +30,7 @@ public class Game {
         this.turn=turn;
         this.output=output;
         this.language=language;
+        observers = new ArrayList<>();
     }
 
     private void createReferee(Board board1,TilesToWin tilesToWin, NumberOfMatches numberOfMatches, PointsForWin pointsForWin){
@@ -45,6 +43,25 @@ public class Game {
 
     private void createValidator(){
         mv = new InputValidator();
+    }
+
+    @Override
+    public void register(Observer o) {
+        observers.add(o);
+    }
+
+    @Override
+    public void unregister(Observer o) {
+
+    }
+
+    @Override
+    public void notifyObserver() {
+
+        for(Observer observer : observers){
+            observer.update(move);
+        }
+
     }
 
      void play() {
@@ -93,10 +110,13 @@ public class Game {
         try {
             mv.checkIfTileTaken(move.getIndex(), turn.getCurrentPlayer().getTakenTileSign(), referee.getBoard());
             mv.validateMove(move.getIndex(), turn.getCurrentPlayer(), referee.getBoard());
+            notifyObserver();
         } catch (IllegalArgumentException | IndexOutOfBoundsException e) {
             output.displayMessage(language.getLostMoveMessage());
             System.out.println();
         }
+
+
         return move.getIndex();
     }
 

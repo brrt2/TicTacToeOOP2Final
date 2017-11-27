@@ -15,4 +15,8 @@ public class Move {
     public int getIndex() {
         return index;
     }
+
+    public Player getPlayerThatMadeTheMove() {
+        return playerThatMadeTheMove;
+    }
 }

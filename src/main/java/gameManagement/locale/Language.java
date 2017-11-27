@@ -38,17 +38,19 @@ public class Language {
     private String askIfWantsToSwapXandO;
     private String askIfChangeDataStructure;
 
+    private String fileName = null;
 
-    public Language(String languageSymbol)  {
-        String fileName = null;
-        if (languageSymbol.equals("e")) fileName = "english.properties";
-        else if (languageSymbol.equals("p")) fileName = "polish.properties";
-        else if (languageSymbol.equals("s")) fileName = "spanish.properties";
+
+    public Language(String fileName)  {
+        this.fileName=fileName;
+        configureLanguage();
+    }
+
+    private void configureLanguage(){
         Properties properties = new Properties();
-        InputStream config = null;
+        InputStream config =null;
         try {
             config = ClassLoader.getSystemResourceAsStream(fileName);
-            // config = new FileInputStream("src/main/resources/" + fileName + ".properties");
             properties.load(config);
             askForFirstUserName = properties.getProperty("askForFirstUserName");
             askForSecondUserName = properties.getProperty("askForSecondUserName");
@@ -83,17 +85,12 @@ public class Language {
             askIfChangeDataStructure = properties.getProperty("askIfChangeDataStructure");
 
         } catch (IOException ex) {
-            ex.printStackTrace();
-        } finally {
-            if (config != null) {
-                try {
-                    config.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+            System.out.println("An IOException has occurred");
         }
+
     }
+
+
 
     public String getAskForFirstUserName() {
         return askForFirstUserName;

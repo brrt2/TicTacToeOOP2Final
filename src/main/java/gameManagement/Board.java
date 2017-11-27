@@ -3,13 +3,14 @@ package gameManagement;
 import com.sun.xml.internal.ws.server.sei.MessageFiller;
 import gameManagement.boardTools.Height;
 import gameManagement.boardTools.Width;
+import gameManagement.moveManagement.Move;
 import gameManagement.tiles.TakenTileSign;
 import gameManagement.tiles.Tile;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Board  {
+public class Board implements Observer {
 
     private final Height row;
     private final Width column;
@@ -18,11 +19,17 @@ public class Board  {
 
 
     private Board(Builder builder) {
-
         row = builder.row;
         column=builder.column;
         playBoard=builder.playBoard;
         populateTheBoard();
+    }
+
+    @Override
+    public void update(Move move) {
+        playBoard.get(move.getIndex() - 1).setTakenTileSign(move.getPlayerThatMadeTheMove().getTakenTileSign());
+        moveCounter++;
+
     }
 
     public void populateTheBoard() {
@@ -61,6 +68,10 @@ public class Board  {
         return sb.toString();
     }
 
+    public int getRow() {
+        return row.getValue();
+    }
+
     public int getColumn() {
         return column.getValue();
     }
@@ -72,6 +83,7 @@ public class Board  {
     public void setMoveCounter(int moveCounter) {
         this.moveCounter = moveCounter;
     }
+
 
     public static class Builder {
 
@@ -98,5 +110,6 @@ public class Board  {
             return new Board(this);
         }
     }
+
 
 }

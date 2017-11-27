@@ -5,6 +5,7 @@ import gameManagement.boardTools.Height;
 import gameManagement.boardTools.TilesToWin;
 import gameManagement.boardTools.Width;
 import gameManagement.locale.Language;
+import gameManagement.locale.LanguageFactory;
 import gameManagement.tiles.TakenTileSign;
 import gameManagement.validation.InputValidator;
 import players.Player;
@@ -79,10 +80,14 @@ public class Printer {
        setLanguage(lang);
     }
 
-
-
     private void setLanguage(String symbol){
-        language=new Language(symbol);
+        String fileName=null;
+
+        if (symbol.equals("e")) fileName = "english.properties";
+        else if (symbol.equals("p")) fileName = "polish.properties";
+        else if (symbol.equals("s")) fileName = "spanish.properties";
+        language= LanguageFactory.createLanguage(fileName);
+
         obtainUsername1(language.getAskForFirstUserName());
     }
 
