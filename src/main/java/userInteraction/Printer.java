@@ -87,8 +87,8 @@ public class Printer {
         else if (symbol.equals("p")) fileName = "polish.properties";
         else if (symbol.equals("s")) fileName = "spanish.properties";
         language= LanguageFactory.createLanguage(fileName);
-
         obtainUsername1(language.getAskForFirstUserName());
+
     }
 
     public void obtainUsername1(String message) {
@@ -183,6 +183,7 @@ public class Printer {
         }
         scan.nextLine();
         whoStarts = obtainInformationOnWhoStarts();
+
         obtainInformationHowManyMatches();
     }
 
@@ -203,22 +204,23 @@ public class Printer {
 
     public void obtainInformationHowManyMatches() {
         int number=0;
+        keepTurning = false;
         while (keepTurning == false) {
             output.displayMessage(language.getAskHowManyMatches());
             try {
                 number = scan.nextInt();
-
+                numberOfMatches = new NumberOfMatches(number);
             } catch (InputMismatchException e) {
                 output.displayMessage(language.getIncorrectValue());
                 scan.next();
             }
-            if (inputValidator.validateHowManyMatches(numberOfMatches)) {
-                output.displayMessage(language.getIncorrectValue());
-            } else {
-                keepTurning = true;
-            }
+//            if (inputValidator.validateHowManyMatches(numberOfMatches)) {
+//                output.displayMessage(language.getIncorrectValue());
+//            } else {
+//                keepTurning = true;
+//            }
+            keepTurning = true;
         }
-        numberOfMatches = new NumberOfMatches(number);
         obtainInformationHowManyPointsForWin();
         }
 
@@ -227,7 +229,7 @@ public class Printer {
         int pointsForWin1;
         keepTurning=false;
         while (!keepTurning) {
-            output.displayMessage(language.getAskHowManyMatches());
+            output.displayMessage(language.getAskHowManyPointsForWin());
             try {
                 pointsForWin1 = scan.nextInt();
                 pointsForWin = new PointsForWin(pointsForWin1);

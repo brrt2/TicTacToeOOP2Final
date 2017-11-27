@@ -40,7 +40,6 @@ public class Language {
 
     private String fileName = null;
 
-
     public Language(String fileName)  {
         this.fileName=fileName;
         configureLanguage();
@@ -89,8 +88,6 @@ public class Language {
         }
 
     }
-
-
 
     public String getAskForFirstUserName() {
         return askForFirstUserName;
@@ -186,5 +183,37 @@ public class Language {
 
     public String getAskIfChangeDataStructure() {
         return askIfChangeDataStructure;
+    }
+
+    public String getWhoGoesFirstError() {
+        return whoGoesFirstError;
+    }
+
+    public String getWrongValueType() {
+        return wrongValueType;
+    }
+
+    public String getNumberOutsideTheBoard() {
+        return numberOutsideTheBoard;
+    }
+
+    public String getTileTaken() {
+        return tileTaken;
+    }
+
+    public String getSelectOutputTarget() {
+        return selectOutputTarget;
+    }
+
+    public String getAskHowManyPointsForWin() {
+        return askHowManyPointsForWin;
+    }
+
+    public String getAskIfWantsToSwapXandO() {
+        return askIfWantsToSwapXandO;
+    }
+
+    public String getFileName() {
+        return fileName;
     }
 }

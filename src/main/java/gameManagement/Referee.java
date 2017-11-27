@@ -160,7 +160,4 @@ public class Referee implements Observer{
         return board;
     }
 
-    public List<Tile> getPlayBoard() {
-        return playBoard;
-    }
 }

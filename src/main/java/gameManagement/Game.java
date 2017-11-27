@@ -93,19 +93,21 @@ public class Game implements Subject{
     }
 
     private int obtainTheTileNumber(){
-        //System.out.println(board);
         System.out.println(referee.getBoard());
         System.out.println();
         printMessage();
         Scanner scan = new Scanner(System.in);
         try {
 
-          int number = scan.nextInt();
-           move = MoveFactory.createMove(number, turn.getCurrentPlayer());
+          String number = scan.next();
+          if(number.equals("swap")) referee.getScore().swapScores();
+          else if(number.equals("exit")) System.exit(0);
+          int number1 = Integer.parseInt(number);
+
+           move = MoveFactory.createMove(number1, turn.getCurrentPlayer());
         } catch (InputMismatchException e) {
             output.displayMessage(language.getIncorrectValue());
         }
-
         addToArchive();
         try {
             mv.checkIfTileTaken(move.getIndex(), turn.getCurrentPlayer().getTakenTileSign(), referee.getBoard());
