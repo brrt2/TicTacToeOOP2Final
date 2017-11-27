@@ -105,7 +105,7 @@ public class Game implements Subject{
           int number1 = Integer.parseInt(number);
 
            move = MoveFactory.createMove(number1, turn.getCurrentPlayer());
-        } catch (InputMismatchException e) {
+        } catch (NumberFormatException | InputMismatchException e) {
             output.displayMessage(language.getIncorrectValue());
         }
         addToArchive();
