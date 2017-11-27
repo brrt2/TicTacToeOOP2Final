@@ -140,4 +140,8 @@ public class Referee {
     public Score getScore() {
         return score;
     }
+
+    public Board getBoard() {
+        return board;
+    }
 }

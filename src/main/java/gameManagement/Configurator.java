@@ -15,6 +15,7 @@ public class Configurator {
 
     public void configureGame (String str, String name, String name2, Height height, Width width, TilesToWin tilesTowin, Output output,
                                Language language, NumberOfMatches numberOfMatches,PointsForWin pointsForWin,String selectedStructure){
+
         Player first = new Player(name, TakenTileSign.NOUGHT);
         Player second = new Player(name2, TakenTileSign.CROSS);
 
@@ -29,14 +30,16 @@ public class Configurator {
                 .build();
 
         Turn turn = new Turn(first,second);
+
         Game game = new Game(turn,board, tilesTowin,output,language,numberOfMatches,pointsForWin);
+
         if(str.equals("x")) game.getTurn().setCurrentPlayer(second);
         else if(str.equals("o")) game.getTurn().setCurrentPlayer(first);
+
         do {
             game.play();
 
         } while (game.getGameState()!= GameState.WIN&&game.getGameState()!= GameState.DRAW);
     }
-
 
 }

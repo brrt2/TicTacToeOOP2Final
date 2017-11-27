@@ -240,7 +240,6 @@ public class Printer {
     }
 
     public void obtainInformationOnDataStructure() {
-
         keepTurning=false;
         while (!keepTurning) {
             output.displayMessage(language.getAskIfChangeDataStructure());
@@ -250,17 +249,17 @@ public class Printer {
                 output.displayMessage(language.getIncorrectValue());
                 scan.next();
             }
-            if (!inputValidator.validateHowManyPointsForWin(pointsForWin)) {
+            if (!inputValidator.validateDataStructureSelection(selectedDataStructure)) {
                 output.displayMessage(language.getIncorrectValue());
             } else {
                 keepTurning = true;
             }
         }
-        configureGame(whoStarts,name,name2,height,width,tilesToWin,output,language);
+        configureGame();
     }
 
-    public void configureGame(String str, String name, String name2,Height height, Width width,TilesToWin tilesTowin, Output output,Language language){
+    public void configureGame(){
         Configurator configurator = new Configurator();
-        configurator.configureGame(str,name,name2,height,width,tilesTowin,output,language,numberOfMatches,pointsForWin,selectedDataStructure);
+        configurator.configureGame(whoStarts,name,name2,height,width,tilesToWin,output,language,numberOfMatches,pointsForWin,selectedDataStructure);
     }
 }

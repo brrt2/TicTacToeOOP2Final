@@ -51,7 +51,7 @@ public class InputValidator {
 
     public void validateMove(int numbertoMark, Player player, Board board) throws IllegalArgumentException, ArrayIndexOutOfBoundsException {
 
-        String str = String.valueOf(numbertoMark);
+        //String str = String.valueOf(numbertoMark);
         if (numbertoMark < 0 || numbertoMark > board.getPlayBoard().size()) {
             throw new IndexOutOfBoundsException("The provided number is outside the board ! ");
         } else {

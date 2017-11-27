@@ -1,23 +1,25 @@
 package gameManagement;
 
+import gameManagement.boardTools.Height;
 import gameManagement.boardTools.TilesToWin;
+import gameManagement.boardTools.Width;
 import gameManagement.locale.Language;
 import gameManagement.moveManagement.Move;
 import gameManagement.moveManagement.MoveFactory;
 import gameManagement.moveManagement.MoveHistory;
+import gameManagement.tiles.Tile;
 import gameManagement.validation.InputValidator;
 import userInteraction.Output;
 
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Game {
 
     private GameState gameState;
-    private Board board;
     private InputValidator mv;
     private Referee referee;
-    private TilesToWin tilesToWin;
     private Turn turn;
     private Output output;
     private Language language;
@@ -28,8 +30,6 @@ public class Game {
        createReferee(board, adjacentSigns, numberOfMatches,pointsForWin);
        setGameStateToActive();
        createValidator();
-        this.board = board;
-        this.tilesToWin = adjacentSigns;
         this.turn=turn;
         this.output=output;
         this.language=language;
@@ -47,10 +47,11 @@ public class Game {
         mv = new InputValidator();
     }
 
-    public void play() {
+     void play() {
        int number= obtainTheTileNumber();
-        if (referee.checkIfWonHorizontally(turn.getCurrentPlayer())) printIfWon();
+
         try {
+            if (referee.checkIfWonHorizontally(turn.getCurrentPlayer())) printIfWon();
             if (referee.checkIfWonVertically(turn.getCurrentPlayer(), number))printIfWon();
             if (referee.checkDiagonalRL(turn.getCurrentPlayer(), number)) printIfWon();
             if (referee.checkDiagonalLeftToRight(turn.getCurrentPlayer(), number))printIfWon();
@@ -59,20 +60,24 @@ public class Game {
                 askIfWantsToContinueWonMatchOrDraw(language.getAskIfWantsToContinueAfterDraw());
             }
         } catch (IndexOutOfBoundsException e) {
-            //System.out.println("");
-            // scan.next();
+            output.displayMessage("An issue with win checking in the Game class");
         }
         turn.switchCurrentPlayer();
     }
 
 
-    public void printMessage(){
+    private void printMessage(){
         output.displayMessage(language.getNowIsTurnOf()+turn.getCurrentPlayer().getName()+ " " +language.getSignOfPlayer()+turn.getCurrentPlayer().getTakenTileSign()+ " " +language.getAskToProvideTileNumber());
 
     }
 
-    public int obtainTheTileNumber(){
-        System.out.println(board);
+    private void addToArchive(){
+        MoveHistory.addToArchive(move);
+    }
+
+    private int obtainTheTileNumber(){
+        //System.out.println(board);
+        System.out.println(referee.getBoard());
         System.out.println();
         printMessage();
         Scanner scan = new Scanner(System.in);
@@ -83,11 +88,11 @@ public class Game {
         } catch (InputMismatchException e) {
             output.displayMessage(language.getIncorrectValue());
         }
-        MoveHistory.addToArchive(move);
 
+        addToArchive();
         try {
-            mv.checkIfTileTaken(move.getIndex(), turn.getCurrentPlayer().getTakenTileSign(), board);
-            mv.validateMove(move.getIndex(), turn.getCurrentPlayer(), board);
+            mv.checkIfTileTaken(move.getIndex(), turn.getCurrentPlayer().getTakenTileSign(), referee.getBoard());
+            mv.validateMove(move.getIndex(), turn.getCurrentPlayer(), referee.getBoard());
         } catch (IllegalArgumentException | IndexOutOfBoundsException e) {
             output.displayMessage(language.getLostMoveMessage());
             System.out.println();
@@ -95,54 +100,53 @@ public class Game {
         return move.getIndex();
     }
 
-    public void printIfWon(){
+    private void printIfWon(){
         gameState=GameState.WIN;
         output.displayMessage(turn.getCurrentPlayer().getName()+ language.getSignOfPlayer()+turn.getCurrentPlayer().getTakenTileSign()+language.getHasWonThisRound());
         output.displayMessage(language.getPlayerOhas()+referee.getScore().getNoughtPlayerPoints());
         output.displayMessage(language.getPlayerXhas()+referee.getScore().getCrossPlayerPoints());
-        if (referee.checkIfWonMatch(turn.getCurrentPlayer()) == false) askIfWantsToContinue();
+        if (!referee.checkIfWonMatch(turn.getCurrentPlayer())) askIfWantsToContinue();
         else askIfWantsToContinueWonMatchOrDraw(language.getAskIfwantsToPlayAnotherMatch());
     }
 
-    public void askIfWantsToContinue() {
+    private void askIfWantsToContinue() {
         output.displayMessage(language.getAskIfWantsToContinue());
         Scanner scan = new Scanner(System.in);
         char choice = scan.nextLine().toUpperCase().charAt(0);
         if (choice == 'Y') {
             gameState=GameState.ACTIVE;
-            board.clearBoard();
+            referee.getBoard().clearBoard();
         } else if (choice == 'N') gameState=GameState.WIN;
         else {
             terminateGame();
         }
     }
 
-    public void askIfWantsToContinueWonMatchOrDraw(String string) {
+    private void askIfWantsToContinueWonMatchOrDraw(String string) {
         output.displayMessage(string);
         Scanner scan = new Scanner(System.in);
         char choice = scan.nextLine().toUpperCase().charAt(0);
         if (choice == 'Y') {
             gameState=GameState.ACTIVE;
-            board.clearBoard();
+            referee.getBoard().clearBoard();
             referee.getScore().resetScore();
-            //play();
         } else if (choice == 'N') gameState=GameState.WIN;
         else {
             terminateGame();
         }
     }
 
-    public void terminateGame(){
+    private void terminateGame(){
         output.displayMessage(language.getNoneOfTheValuesSelected());
         output.displayMessage(language.getThankYouForPlaying());
         System.exit(0);
     }
 
-    public Turn getTurn() {
+    Turn getTurn() {
         return turn;
     }
 
-    public GameState getGameState() {
+    GameState getGameState() {
         return gameState;
     }
 
