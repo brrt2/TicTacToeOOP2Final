@@ -11,11 +11,12 @@ import userInteraction.Output;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Configurator {
 
     public void configureGame (String str, String name, String name2, Height height, Width width, TilesToWin tilesTowin, Output output,
-                               Language language, NumberOfMatches numberOfMatches,PointsForWin pointsForWin,String selectedStructure){
+                               Language language, NumberOfMatches numberOfMatches,PointsForWin pointsForWin,String selectedStructure, Scanner scan){
 
         Player first = new Player(name, TakenTileSign.NOUGHT);
         Player second = new Player(name2, TakenTileSign.CROSS);
@@ -33,7 +34,7 @@ public class Configurator {
         Turn turn = new Turn(first,second);
         Score score = new Score(numberOfMatches,pointsForWin);
         Referee referee = new Referee(board,tilesTowin,score);
-        Game game = new Game(turn,output,language,referee);
+        Game game = new Game(turn,output,language,referee,scan);
 
         if(str.equals("x")) game.getTurn().setCurrentPlayer(second);
         else if(str.equals("o")) game.getTurn().setCurrentPlayer(first);

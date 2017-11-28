@@ -33,15 +33,16 @@ public class Printer {
         printIntroduction();
     }
 
-    private void printIntroduction(){
-        System.out.println("Welcome to the OOP Tic Tac Toe game | Witaj w grze Kolko i Krzyzyk| Bienvenido");
+    public void printIntroduction(){
+        System.out.println("Welcome to the  Tic Tac Toe game | Witaj w grze Kolko i Krzyzyk| Bienvenido al juego de Tres en Linea ");
         configureTarget();
     }
 
     private void configureTarget(){
         String target=null;
         while (!keepTurning) {
-            System.out.println("Please select the ouptput target Sys.err - e | Sys.out - o");
+            System.out.println("Please select the ouptput target Sys.err - e | Sys.out - o | Wybierz strumien wyjscia Sys.err - e | Sys.out - o " +
+                    "Seleccione el canal de salida Sys.err - e | Sys.out - o");
             target = scan.nextLine();
             if (!inputValidator.validateTargetConfig(target)) {
                 System.out.println("Wrong value ! ");
@@ -63,8 +64,7 @@ public class Printer {
         String lang=null;
         keepTurning=false;
         while (!keepTurning) {
-            System.out.println("Please select your language e - English | p - Polish | s - Spanish  Wybierz jezyk e-angielski | p-polski | s -hiszpanski" +
-                    "| Seleccione su idioma e- ingles | p - polaco | s - español ");
+            System.out.println("Press e for English | Wcisnij p aby wybrac jezyk polski | Pulse s para seleccionar la lengua española");
             try {
                 lang = scan.nextLine();
             } catch (InputMismatchException e) {
@@ -87,14 +87,14 @@ public class Printer {
         else if (symbol.equals("p")) fileName = "polish.properties";
         else if (symbol.equals("s")) fileName = "spanish.properties";
         language= LanguageFactory.createLanguage(fileName);
-        obtainUsername1(language.getAskForFirstUserName());
+        obtainUsername1();
 
     }
 
-    private void obtainUsername1(String message) {
+    private void obtainUsername1() {
         keepTurning=false;
         while (!keepTurning) {
-            output.displayMessage(message);
+            output.displayMessage(language.getAskForFirstUserName());
             name = scan.nextLine();
             if (!inputValidator.validatePlayerName(name)) {
                 output.displayMessage(language.getWrongName());
@@ -128,7 +128,7 @@ public class Printer {
         while (!keepTurning) {
             output.displayMessage(message);
             try {
-                boardHeight = String.valueOf(scan.next());
+                boardHeight = String.valueOf(scan.nextLine());
                 parsedInput3 = Integer.parseInt(boardHeight);
 
             } catch (InputMismatchException | NumberFormatException e) {
@@ -153,7 +153,7 @@ public class Printer {
         while (!keepTurning) {
             output.displayMessage(language.getAskForBoardWidth());
             try {
-                boardWidth = String.valueOf(scan.next());
+                boardWidth = String.valueOf(scan.nextLine());
                 parsedInput2 = Integer.parseInt(boardWidth);
             } catch (InputMismatchException | NumberFormatException e) {
                 output.displayMessage(language.getIncorrectValue());
@@ -177,9 +177,10 @@ public class Printer {
         while (!keepTurning) {
             output.displayMessage(language.getAskForNumberofAdjacentSigns());
             try {
-                adjacentSigns = String.valueOf(scan.next());
+                adjacentSigns = String.valueOf(scan.nextLine());
                 parsedInput2 = Integer.parseInt(adjacentSigns);
-            } catch (InputMismatchException | NumberFormatException exception) {
+
+            } catch (InputMismatchException | NumberFormatException e) {
                 output.displayMessage(language.getIncorrectValue());
                 scan.next();
             }
@@ -196,13 +197,12 @@ public class Printer {
     }
 
     private String obtainInformationOnWhoStarts(){
-        Scanner scan = new Scanner(System.in);
         String s1=null;
         keepTurning = false;
         while (!keepTurning) {
 
             output.displayMessage(language.getAskWhoGoesFirst());
-             s1 = String.valueOf(scan.nextLine());
+           s1 = String.valueOf(scan.nextLine());
 
             if (!inputValidator.validateWhoGoesFirstSign(s1)) {
                output.displayMessage(language.getIncorrectValue());
@@ -221,7 +221,7 @@ public class Printer {
             output.displayMessage(language.getAskHowManyMatches());
             try {
 
-                numberofMatches1 = scan.next();
+                numberofMatches1 = scan.nextLine();
                 parsedInput = Integer.parseInt(numberofMatches1);
 
             } catch (InputMismatchException e) {
@@ -246,7 +246,7 @@ public class Printer {
         while (!keepTurning) {
             output.displayMessage(language.getAskHowManyPointsForWin());
             try {
-                inputFromUser = scan.next();
+                inputFromUser = scan.nextLine();
                 parsedInput = Integer.parseInt(inputFromUser);
             } catch (InputMismatchException | NumberFormatException e) {
                 output.displayMessage(language.getIncorrectValue());
@@ -267,7 +267,7 @@ public class Printer {
         while (!keepTurning) {
             output.displayMessage(language.getAskIfChangeDataStructure());
             try {
-                selectedDataStructure = String.valueOf(scan.next());
+                selectedDataStructure = String.valueOf(scan.nextLine());
             } catch (InputMismatchException | NumberFormatException e) {
                 output.displayMessage(language.getIncorrectValue());
                 scan.next();
@@ -283,6 +283,6 @@ public class Printer {
 
     private void configureGame(){
         Configurator configurator = new Configurator();
-        configurator.configureGame(whoStarts,name,name2,height,width,tilesToWin,output,language,numberOfMatches,pointsForWin,selectedDataStructure);
+        configurator.configureGame(whoStarts,name,name2,height,width,tilesToWin,output,language,numberOfMatches,pointsForWin,selectedDataStructure,scan);
     }
 }

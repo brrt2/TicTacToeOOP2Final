@@ -18,14 +18,16 @@ public class Game {
     private Output output;
     private Language language;
     private Move move;
+    Scanner scan;
 
 
-    public Game(Turn turn, Output output, Language language,Referee referee) {
+    public Game(Turn turn, Output output, Language language,Referee referee,Scanner scan) {
         gameState=GameState.ACTIVE;
         this.referee=referee;
         this.turn=turn;
         this.output=output;
         this.language=language;
+        this.scan=scan;
     }
 
      void play() {
@@ -59,7 +61,6 @@ public class Game {
         System.out.println(referee.getBoard());
         System.out.println();
         printMessage();
-        Scanner scan = new Scanner(System.in);
         try {
           String number = String.valueOf(scan.nextLine());
           if(number.equals("swap")){
@@ -100,7 +101,6 @@ public class Game {
 
     private void askIfWantsToContinue() {
         output.displayMessage(language.getAskIfWantsToContinue());
-        Scanner scan = new Scanner(System.in);
         char choice = scan.nextLine().toUpperCase().charAt(0);
         if (choice == 'Y') {
             gameState=GameState.ACTIVE;
@@ -113,7 +113,6 @@ public class Game {
 
     private void askIfWantsToContinueWonMatchOrDraw(String string) {
         output.displayMessage(string);
-        Scanner scan = new Scanner(System.in);
         char choice = scan.nextLine().toUpperCase().charAt(0);
         if (choice == 'Y') {
             gameState=GameState.ACTIVE;
