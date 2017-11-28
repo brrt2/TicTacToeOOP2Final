@@ -1,6 +1,8 @@
 package gameManagement.validation;
 
 import gameManagement.Board;
+import gameManagement.NumberOfMatches;
+import gameManagement.PointsForWin;
 import gameManagement.boardTools.Height;
 import gameManagement.boardTools.Width;
 import gameManagement.tiles.TakenTileSign;
@@ -47,6 +49,30 @@ public class InputValidatorTest {
     }
 
     @Test
+    public void validateHowManyMatches() {
+        NumberOfMatches numberOfMatches = new NumberOfMatches(-3);
+        NumberOfMatches numberOfMatches1 = new NumberOfMatches(5);
+        assertFalse(iv.validateHowManyMatches(numberOfMatches));
+        assertTrue(iv.validateHowManyMatches(numberOfMatches1));
+    }
+
+    @Test
+    public void validateHowManyPointsForWin(){
+        PointsForWin pointsForWin = new PointsForWin(4);
+        PointsForWin pointsForWin1 = new PointsForWin(9999);
+        assertTrue(iv.validateHowManyPointsForWin(pointsForWin));
+        assertFalse(iv.validateHowManyPointsForWin(pointsForWin1));
+    }
+
+    @Test
+    public void validateDataStructureSelection() {
+        assertTrue(iv.validateDataStructureSelection("a"));
+        assertFalse(iv.validateDataStructureSelection("p"));
+    }
+
+
+
+    @Test
     public void testValidateAdjacentSignsToWin() throws Exception {
         assertTrue(iv.validateAdjacentSignsToWin( 3, 3,3));
         assertFalse(iv.validateAdjacentSignsToWin( 5, 3,3));
@@ -90,7 +116,11 @@ public class InputValidatorTest {
 
 
         board.markTile(5, TakenTileSign.CROSS);
-        iv.checkIfTileTaken(5, TakenTileSign.NOUGHT, board);
+        iv.checkIfTileTaken(5, board);
     }
+
+
+
+
 
 }

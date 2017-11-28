@@ -2,7 +2,6 @@ package gameManagement;
 
 public enum GameState {
 
-    WIN,DRAW,ACTIVE;
-
+    WIN,DRAW,ACTIVE
 
 }

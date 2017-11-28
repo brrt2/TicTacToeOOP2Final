@@ -27,10 +27,6 @@ public class Tile {
         return number;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
-    }
-
     public void setTakenTileSign(TakenTileSign takenTileSign) {
         this.takenTileSign = takenTileSign;
     }

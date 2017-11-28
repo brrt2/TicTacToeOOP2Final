@@ -1,16 +1,14 @@
 package gameManagement;
 
-import com.sun.xml.internal.ws.server.sei.MessageFiller;
 import gameManagement.boardTools.Height;
 import gameManagement.boardTools.Width;
-import gameManagement.moveManagement.Move;
 import gameManagement.tiles.TakenTileSign;
 import gameManagement.tiles.Tile;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Board implements Observer {
+public class Board {
 
     private final Height row;
     private final Width column;
@@ -25,14 +23,7 @@ public class Board implements Observer {
         populateTheBoard();
     }
 
-    @Override
-    public void update(Move move) {
-        playBoard.get(move.getIndex() - 1).setTakenTileSign(move.getPlayerThatMadeTheMove().getTakenTileSign());
-        moveCounter++;
-
-    }
-
-    public void populateTheBoard() {
+    void populateTheBoard() {
         for (int i = 0; i < row.getValue() * column.getValue(); i++) {
             playBoard.add(new Tile(i + 1));
         }
@@ -43,8 +34,8 @@ public class Board implements Observer {
         moveCounter++;
     }
 
-    public void clearBoard() {
-        playBoard = new ArrayList<Tile>(row.getValue() * column.getValue());
+    void clearBoard() {
+        playBoard = new ArrayList<>(row.getValue() * column.getValue());
         populateTheBoard();
     }
 
@@ -68,22 +59,18 @@ public class Board implements Observer {
         return sb.toString();
     }
 
-    public int getRow() {
-        return row.getValue();
-    }
 
-    public int getColumn() {
+    int getColumn() {
         return column.getValue();
     }
 
-    public int getMoveCounter() {
+    int getMoveCounter() {
         return moveCounter;
     }
 
-    public void setMoveCounter(int moveCounter) {
+    void setMoveCounter(int moveCounter) {
         this.moveCounter = moveCounter;
     }
-
 
     public static class Builder {
 

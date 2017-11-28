@@ -39,7 +39,7 @@ public class LanguageTest {
 
     @Test
     public void testGetAskWhoGoesFirst() throws Exception {
-        assertEquals(language.getAskWhoGoesFirst(),"Who goes first x/o ? ");
+        assertEquals(language.getAskWhoGoesFirst(),"Who goes first x/o ?");
     }
 
     @Test
@@ -89,34 +89,44 @@ public class LanguageTest {
 
     @Test
     public void testGetNoneOfTheValuesSelected() throws Exception {
+        assertEquals(language.getNoneOfTheValuesSelected(),"None of the possible values selected, the game will be terminated");
     }
 
     @Test
     public void testGetThankYouForPlaying() throws Exception {
+        assertEquals(language.getThankYouForPlaying(),"Thank you for playing");
     }
 
     @Test
     public void testGetPlayerXhas() throws Exception {
+        assertEquals(language.getPlayerXhas(),"Player X has :");
     }
 
     @Test
     public void testGetPlayerOhas() throws Exception {
+        assertEquals(language.getPlayerOhas(),"Player O has : ");
     }
 
     @Test
     public void testGetAskHowManyMatches() throws Exception {
+        assertEquals(language.getAskHowManyMatches(),"How many matches do you want to play ? ");
     }
 
     @Test
     public void testGetAskIfChangeDataStructure() throws Exception {
+        assertEquals(language.getAskIfChangeDataStructure(),"What data structure would you like to use a - ArrayList | l - LinkedList ? ");
     }
 
     @Test
     public void testGetAskHowManyPointsForWin() throws Exception {
+        assertEquals(language.getAskHowManyPointsForWin(),"How many points should a round winner get ? ");
+
     }
 
     @Test
     public void testGetValuesSwapped() throws Exception {
+        assertEquals(language.getValuesSwapped(),"The players' points have been swapped");
     }
+
 
 }

@@ -12,10 +12,8 @@ public class Language {
     private String askForBoardWidth;
     private String askForNumberofAdjacentSigns;
     private String askWhoGoesFirst;
-    private String whoGoesFirstError;
     private String incorrectValue;
     private String wrongName;
-    private String positiveLowerOrEqualError;
     private String boardDimensionError;
     private String askIfWantsToContinueAfterDraw;
     private String askIfWantsToContinue;
@@ -23,19 +21,14 @@ public class Language {
     private String askToProvideTileNumber;
     private String nowIsTurnOf;
     private String signOfPlayer;
-    private String wrongValueType;
     private String hasWonThisRound;
     private String askIfwantsToPlayAnotherMatch;
     private String noneOfTheValuesSelected;
     private String thankYouForPlaying;
-    private String numberOutsideTheBoard;
-    private String tileTaken;
     private String playerXhas;
     private String playerOhas;
-    private String selectOutputTarget;
     private String askHowManyMatches;
     private String askHowManyPointsForWin;
-    private String askIfWantsToSwapXandO;
     private String askIfChangeDataStructure;
     private String valuesSwapped;
     private String fileName = null;
@@ -47,7 +40,7 @@ public class Language {
 
     private void configureLanguage(){
         Properties properties = new Properties();
-        InputStream config =null;
+        InputStream config;
         try {
             config = ClassLoader.getSystemResourceAsStream(fileName);
             properties.load(config);
@@ -57,10 +50,8 @@ public class Language {
             askForBoardWidth = properties.getProperty("askForBoardWidth");
             askForNumberofAdjacentSigns = properties.getProperty("askForNumberofAdjacentSigns");
             askWhoGoesFirst=properties.getProperty("askWhoGoesFirst");
-            whoGoesFirstError = properties.getProperty("whoGoesFirstError");
             incorrectValue = properties.getProperty("incorrectValue");
             wrongName = properties.getProperty("wrongName");
-            positiveLowerOrEqualError = properties.getProperty("positiveLowerOrEqualError");
             boardDimensionError = properties.getProperty("boardDimensionError");
             askIfWantsToContinueAfterDraw = properties.getProperty("askIfWantsToContinueAfterDraw");
             askIfWantsToContinue = properties.getProperty("askIfWantsToContinue");
@@ -68,19 +59,14 @@ public class Language {
             askToProvideTileNumber = properties.getProperty("askToProvideTileNumber");
             nowIsTurnOf = properties.getProperty("nowIsTurnOf");
             signOfPlayer = properties.getProperty("signOfPlayer");
-            wrongValueType = properties.getProperty("wrongValueType");
             hasWonThisRound = properties.getProperty("hasWonThisRound");
             askIfwantsToPlayAnotherMatch = properties.getProperty("askIfwantsToPlayAnotherMatch");
             noneOfTheValuesSelected = properties.getProperty("noneOfTheValuesSelected");
             thankYouForPlaying = properties.getProperty("thankYouForPlaying");
-            numberOutsideTheBoard = properties.getProperty("numberOutsideTheBoard");
-            tileTaken = properties.getProperty("tileTaken");
             playerXhas=properties.getProperty("playerXhas");
             playerOhas=properties.getProperty("playerOhas");
-            selectOutputTarget= properties.getProperty("selectOutputTarget");
             askHowManyMatches = properties.getProperty("askHowManyMatches");
             askHowManyPointsForWin = properties.getProperty("askHowManyPointsForWin");
-            askIfWantsToSwapXandO=properties.getProperty("askIfWantsToSwapXandO");
             askIfChangeDataStructure = properties.getProperty("askIfChangeDataStructure");
             valuesSwapped=properties.getProperty("valuesSwapped");
 

@@ -4,6 +4,7 @@ import gameManagement.boardTools.*;
 import gameManagement.locale.Language;
 import gameManagement.tiles.TakenTileSign;
 import gameManagement.tiles.Tile;
+import gameManagement.validation.Score;
 import players.Player;
 import userInteraction.Output;
 
@@ -30,9 +31,9 @@ public class Configurator {
                 .build();
 
         Turn turn = new Turn(first,second);
-        Referee referee = new Referee(board,tilesTowin,numberOfMatches,pointsForWin);
-        Game game = new Game(turn,board, tilesTowin,output,language,numberOfMatches,pointsForWin);
-
+        Score score = new Score(numberOfMatches,pointsForWin);
+        Referee referee = new Referee(board,tilesTowin,score);
+        Game game = new Game(turn,output,language,referee);
 
         if(str.equals("x")) game.getTurn().setCurrentPlayer(second);
         else if(str.equals("o")) game.getTurn().setCurrentPlayer(first);

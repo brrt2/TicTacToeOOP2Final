@@ -1,55 +1,35 @@
 package gameManagement;
 
-import com.sun.deploy.util.StringUtils;
-import gameManagement.boardTools.TilesToWin;
 import gameManagement.locale.Language;
 import gameManagement.moveManagement.Move;
 import gameManagement.moveManagement.MoveFactory;
 import gameManagement.moveManagement.MoveHistory;
 import gameManagement.validation.InputValidator;
 import userInteraction.Output;
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Game {
 
     private GameState gameState;
-    private InputValidator mv;
+    private InputValidator mv = new InputValidator();
     private Referee referee;
     private Turn turn;
     private Output output;
     private Language language;
     private Move move;
-    private ArrayList<Observer> observers;
 
 
-    public Game(Turn turn, Board board, TilesToWin adjacentSigns, Output output, Language language, NumberOfMatches numberOfMatches, PointsForWin pointsForWin) {
-       createReferee(board, adjacentSigns, numberOfMatches,pointsForWin);
-       setGameStateToActive();
-       createValidator();
+    public Game(Turn turn, Output output, Language language,Referee referee) {
+        gameState=GameState.ACTIVE;
+        this.referee=referee;
         this.turn=turn;
         this.output=output;
         this.language=language;
-        observers = new ArrayList<>();
     }
-
-    private void createReferee(Board board1,TilesToWin tilesToWin, NumberOfMatches numberOfMatches, PointsForWin pointsForWin){
-        referee = new Referee(board1, tilesToWin,numberOfMatches,pointsForWin);
-    }
-
-    private void setGameStateToActive(){
-        gameState=GameState.ACTIVE;
-    }
-
-    private void createValidator(){
-        mv = new InputValidator();
-    }
-
 
      void play() {
        int number= obtainTheTileNumber();
-
         try {
             if (referee.checkIfWonHorizontally(turn.getCurrentPlayer())) printIfWon();
             if (referee.checkIfWonVertically(turn.getCurrentPlayer(), number))printIfWon();
@@ -99,11 +79,10 @@ public class Game {
         return move.getIndex();
     }
 
-    public void validateInput(){
+    private void validateInput(){
         try {
-            mv.checkIfTileTaken(move.getIndex(), turn.getCurrentPlayer().getTakenTileSign(), referee.getBoard());
+            mv.checkIfTileTaken(move.getIndex(), referee.getBoard());
             mv.validateMove(move.getIndex(), turn.getCurrentPlayer(), referee.getBoard());
-            //notifyObserver();
         } catch (IllegalArgumentException | IndexOutOfBoundsException e) {
             output.displayMessage(language.getLostMoveMessage());
             System.out.println();

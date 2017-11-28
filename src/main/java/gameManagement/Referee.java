@@ -1,5 +1,4 @@
 package gameManagement;
-
 import gameManagement.boardTools.TilesToWin;
 import gameManagement.tiles.TakenTileSign;
 import gameManagement.tiles.Tile;
@@ -13,28 +12,15 @@ public class Referee{
     private Board board;
     private TilesToWin tilesToWin;
     private Score score;
-    private List<Tile> playBoard;
-    private int moveCounter = 0;
 
-    public void populateTheBoard() {
-        for (int i = 0; i < board.getColumn() * board.getRow(); i++) {
-            playBoard.add(new Tile(i + 1));
-        }
-    }
 
-    public Referee(Board board, TilesToWin tilesToWin, NumberOfMatches numberOfMatches, PointsForWin pointsForWin) {
+    public Referee(Board board,TilesToWin tilesToWin,Score score) {
         this.board = board;
         this.tilesToWin = tilesToWin;
-        createScore(numberOfMatches,pointsForWin);
-        playBoard=new ArrayList<>();
-        populateTheBoard();
+        this.score=score;
     }
 
-    public void createScore(NumberOfMatches numberOfMatches, PointsForWin pointsForWin){
-        score = new Score(numberOfMatches,pointsForWin);
-    }
-
-    public boolean checkIfWonHorizontally(Player currentPlayer) {
+    boolean checkIfWonHorizontally(Player currentPlayer) {
         int counter = 0;
         for (int i = 0; i < board.getPlayBoard().size(); i++) {
             if (currentPlayer.getTakenTileSign().equals(board.getPlayBoard().get(i).getTakenTileSign())) counter++;
@@ -48,8 +34,7 @@ public class Referee{
         return false;
     }
 
-    public boolean checkDiagonalLeftToRight(Player currentPlayer, int index) {
-        int counter = 0;
+    boolean checkDiagonalLeftToRight(Player currentPlayer, int index) {
         ArrayList<Tile> tilesOnDiagonal = new ArrayList<>();
         while (index - board.getColumn() - 1 > 0) {
             index = index - board.getColumn() - 1;
@@ -65,8 +50,7 @@ public class Referee{
         return iterate(tilesOnDiagonal,currentPlayer);
     }
 
-    public boolean checkDiagonalRL(Player currentPlayer, int index) {
-        int counter = 0;
+    boolean checkDiagonalRL(Player currentPlayer, int index) {
         ArrayList<Tile> tiles = new ArrayList<>();
         while (index - board.getColumn() > 0) {
             index = index - board.getColumn() + 1;
@@ -85,7 +69,7 @@ public class Referee{
 
     }
 
-    public boolean iterate(List<Tile> tiles,Player currentPlayer){
+    private boolean iterate(List<Tile> tiles,Player currentPlayer){
         int counter =0;
         for (int i = 0; i < tiles.size(); i++) {
             if (currentPlayer.getTakenTileSign().equals(tiles.get(i).getTakenTileSign())) counter++;
@@ -99,7 +83,7 @@ public class Referee{
 
     }
 
-    public boolean checkIfDraw() {
+    boolean checkIfDraw() {
         if (board.getMoveCounter() == board.getPlayBoard().size()) {
             board.setMoveCounter(0);
             score.increaseScoreDraw();
@@ -108,7 +92,7 @@ public class Referee{
         return false;
     }
 
-    public boolean checkIfWonVertically(Player currentPlayer, int number) {
+    boolean checkIfWonVertically(Player currentPlayer, int number) {
         int counter = 0;
         for (int i = number - 1; i >= 0; i -= board.getColumn()) {
             if (currentPlayer.getTakenTileSign().equals(board.getPlayBoard().get(i).getTakenTileSign())) counter++;
@@ -128,7 +112,7 @@ public class Referee{
         return false;
     }
 
-    public boolean checkIfWonMatch(Player currentPlayer) {
+    boolean checkIfWonMatch(Player currentPlayer) {
 
         if (score.getRoundNumber() == score.getNumberOfMatches().getValue()) {
             if (currentPlayer.getTakenTileSign().equals(TakenTileSign.CROSS) && score.getCrossPlayerPoints() > score.getNoughtPlayerPoints()) {
@@ -145,7 +129,7 @@ public class Referee{
         return false;
     }
 
-    public Score getScore() {
+    Score getScore() {
         return score;
     }
 

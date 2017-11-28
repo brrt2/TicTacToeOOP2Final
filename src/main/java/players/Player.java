@@ -20,10 +20,6 @@ public class Player {
         return takenTileSign;
     }
 
-    public void setTakenTileSign(TakenTileSign takenTileSign) {
-        this.takenTileSign = takenTileSign;
-    }
-
     @Override
     public String toString() {
         return name;

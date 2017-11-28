@@ -4,6 +4,6 @@ import gameManagement.moveManagement.Move;
 
 public interface Observer {
 
-    public void update(Move move);
+    void update(Move move);
 
 }

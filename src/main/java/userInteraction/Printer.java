@@ -6,9 +6,8 @@ import gameManagement.boardTools.TilesToWin;
 import gameManagement.boardTools.Width;
 import gameManagement.locale.Language;
 import gameManagement.locale.LanguageFactory;
-import gameManagement.tiles.TakenTileSign;
 import gameManagement.validation.InputValidator;
-import players.Player;
+
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -34,14 +33,14 @@ public class Printer {
         printIntroduction();
     }
 
-    public void printIntroduction(){
+    private void printIntroduction(){
         System.out.println("Welcome to the OOP Tic Tac Toe game | Witaj w grze Kolko i Krzyzyk| Bienvenido");
         configureTarget();
     }
 
-    public void configureTarget(){
+    private void configureTarget(){
         String target=null;
-        while (keepTurning == false) {
+        while (!keepTurning) {
             System.out.println("Please select the ouptput target Sys.err - e | Sys.out - o");
             target = scan.nextLine();
             if (!inputValidator.validateTargetConfig(target)) {
@@ -51,16 +50,19 @@ public class Printer {
             }
         }
 
-        if(target.equals("e")) output=new SystemErrOutput();
-        else if(target.equals("o")) output= new SystemOutOutput();
+        try{
+            if(target.equals("e")) output=new SystemErrOutput();
+            else if(target.equals("o")) output= new SystemOutOutput();
+        }catch(NullPointerException e){
+           output.displayMessage(language.getIncorrectValue());
+        }
         configureLanguage();
     }
 
     private void configureLanguage(){
-       // Scanner scan1 = new Scanner(System.in);
         String lang=null;
         keepTurning=false;
-        while (keepTurning==false) {
+        while (!keepTurning) {
             System.out.println("Please select your language e - English | p - Polish | s - Spanish  Wybierz jezyk e-angielski | p-polski | s -hiszpanski" +
                     "| Seleccione su idioma e- ingles | p - polaco | s - español ");
             try {
@@ -89,12 +91,12 @@ public class Printer {
 
     }
 
-    public void obtainUsername1(String message) {
+    private void obtainUsername1(String message) {
         keepTurning=false;
-        while (keepTurning == false) {
+        while (!keepTurning) {
             output.displayMessage(message);
             name = scan.nextLine();
-            if (inputValidator.validatePlayerName(name) == false) {
+            if (!inputValidator.validatePlayerName(name)) {
                 output.displayMessage(language.getWrongName());
             } else {
                 keepTurning = true;
@@ -104,9 +106,9 @@ public class Printer {
         obtainUsername2(language.getAskForSecondUserName());
     }
 
-    public void obtainUsername2(String message) {
+    private void obtainUsername2(String message) {
         keepTurning=false;
-        while (keepTurning == false) {
+        while (!keepTurning) {
             output.displayMessage(message);
             name2 = scan.nextLine();
             if (!inputValidator.validatePlayerName(name2)) {
@@ -119,11 +121,11 @@ public class Printer {
         obtainBoardHeight(language.getAskForBoardHeight());
     }
 
-    public void obtainBoardHeight(String message) {
+    private void obtainBoardHeight(String message) {
         String boardHeight;
         int parsedInput3=0;
         keepTurning = false;
-        while (keepTurning == false) {
+        while (!keepTurning) {
             output.displayMessage(message);
             try {
                 boardHeight = String.valueOf(scan.next());
@@ -140,11 +142,11 @@ public class Printer {
                 keepTurning = true;
             }
         }
-        obtainBoardWidth(language.getAskForBoardWidth());
+        obtainBoardWidth();
 
     }
 
-    public void obtainBoardWidth(String msg) {
+    private void obtainBoardWidth() {
         String boardWidth;
         int parsedInput2=0;
         keepTurning = false;
@@ -168,7 +170,7 @@ public class Printer {
         obtainNumberOfAdjacentSigns();
     }
 
-    public void obtainNumberOfAdjacentSigns() {
+    private void obtainNumberOfAdjacentSigns() {
         String adjacentSigns;
         int parsedInput2=0;
         keepTurning = false;
@@ -177,12 +179,12 @@ public class Printer {
             try {
                 adjacentSigns = String.valueOf(scan.next());
                 parsedInput2 = Integer.parseInt(adjacentSigns);
-            } catch (InputMismatchException | NumberFormatException e) {
+            } catch (InputMismatchException | NumberFormatException exception) {
                 output.displayMessage(language.getIncorrectValue());
                 scan.next();
             }
             tilesToWin = new TilesToWin(parsedInput2);
-            if (!inputValidator.validateBoardDimensions(width.getValue())) {
+            if (!inputValidator.validateAdjacentSignsToWin(tilesToWin.getValue(),height.getValue(),width.getValue())) {
                 output.displayMessage(language.getBoardDimensionError());
             } else {
                 keepTurning = true;
@@ -193,7 +195,7 @@ public class Printer {
         obtainInformationHowManyMatches();
     }
 
-    public String obtainInformationOnWhoStarts(){
+    private String obtainInformationOnWhoStarts(){
         Scanner scan = new Scanner(System.in);
         String s1=null;
         keepTurning = false;
@@ -211,8 +213,8 @@ public class Printer {
         return s1;
     }
 
-    public void obtainInformationHowManyMatches() {
-        String numberofMatches1=null;
+    private void obtainInformationHowManyMatches() {
+        String numberofMatches1;
         int parsedInput=0;
         keepTurning = false;
         while (!keepTurning) {
@@ -237,7 +239,7 @@ public class Printer {
         }
 
 
-    public void obtainInformationHowManyPointsForWin() {
+    private void obtainInformationHowManyPointsForWin() {
         String inputFromUser;
         int parsedInput=0;
         keepTurning=false;
@@ -260,7 +262,7 @@ public class Printer {
         obtainInformationOnDataStructure();
     }
 
-    public void obtainInformationOnDataStructure() {
+    private void obtainInformationOnDataStructure() {
         keepTurning=false;
         while (!keepTurning) {
             output.displayMessage(language.getAskIfChangeDataStructure());
@@ -279,7 +281,7 @@ public class Printer {
         configureGame();
     }
 
-    public void configureGame(){
+    private void configureGame(){
         Configurator configurator = new Configurator();
         configurator.configureGame(whoStarts,name,name2,height,width,tilesToWin,output,language,numberOfMatches,pointsForWin,selectedDataStructure);
     }

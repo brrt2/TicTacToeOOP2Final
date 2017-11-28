@@ -5,6 +5,7 @@ import gameManagement.boardTools.TilesToWin;
 import gameManagement.boardTools.Width;
 import gameManagement.tiles.TakenTileSign;
 import gameManagement.tiles.Tile;
+import gameManagement.validation.Score;
 import players.Player;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -165,13 +166,13 @@ public class RefereeTest {
         TilesToWin tilesToWin1 = new TilesToWin(tilesToWin);
         NumberOfMatches numberOfMatches = new NumberOfMatches(3);
         PointsForWin pointsForWin = new PointsForWin(3);
-
+        Score score = new Score(numberOfMatches,pointsForWin);
         Board board = new Board.Builder()
                 .height(h)
                 .column(w)
                 .playBoard(list)
                 .build();
-        Referee referee = new Referee(board, tilesToWin1, numberOfMatches, pointsForWin);
+        Referee referee = new Referee(board, tilesToWin1, score);
         for (int i = 0; i < toMark.length; i++) {
             board.markTile(toMark[i], player1.getTakenTileSign());
         }
@@ -187,13 +188,13 @@ public class RefereeTest {
         TilesToWin tilesToWin1 = new TilesToWin(tilesToWin);
         NumberOfMatches numberOfMatches = new NumberOfMatches(3);
         PointsForWin pointsForWin = new PointsForWin(3);
-
+        Score score = new Score(numberOfMatches,pointsForWin);
         Board board = new Board.Builder()
                 .height(h)
                 .column(w)
                 .playBoard(list)
                 .build();
-        Referee referee = new Referee(board, tilesToWin1, numberOfMatches, pointsForWin);
+        Referee referee = new Referee(board, tilesToWin1, score);
 
         for (int i = 0; i < toMark.length; i++) {
             board.markTile(toMark[i], player1.getTakenTileSign());
@@ -211,13 +212,13 @@ public class RefereeTest {
         TilesToWin tilesToWin1 = new TilesToWin(tilesToWin);
         NumberOfMatches numberOfMatches = new NumberOfMatches(3);
         PointsForWin pointsForWin = new PointsForWin(3);
-
+        Score score = new Score(numberOfMatches,pointsForWin);
         Board board = new Board.Builder()
                 .height(h)
                 .column(w)
                 .playBoard(list)
                 .build();
-        Referee referee = new Referee(board, tilesToWin1, numberOfMatches, pointsForWin);
+        Referee referee = new Referee(board, tilesToWin1, score);
 
 
         for (int i = 0; i < toMark.length; i++) {
@@ -236,13 +237,13 @@ public class RefereeTest {
         TilesToWin tilesToWin1 = new TilesToWin(tilesToWin);
         NumberOfMatches numberOfMatches = new NumberOfMatches(3);
         PointsForWin pointsForWin = new PointsForWin(3);
-
+        Score score = new Score(numberOfMatches,pointsForWin);
         Board board = new Board.Builder()
                 .height(h)
                 .column(w)
                 .playBoard(list)
                 .build();
-        Referee referee = new Referee(board, tilesToWin1, numberOfMatches, pointsForWin);
+        Referee referee = new Referee(board, tilesToWin1, score);
 
 
         for (int i = 0; i < toMark.length; i++) {
@@ -260,13 +261,13 @@ public class RefereeTest {
         TilesToWin tilesToWin1 = new TilesToWin(tilesToWin);
         NumberOfMatches numberOfMatches = new NumberOfMatches(3);
         PointsForWin pointsForWin = new PointsForWin(3);
-
+        Score score = new Score(numberOfMatches,pointsForWin);
         Board board = new Board.Builder()
                 .height(h)
                 .column(w)
                 .playBoard(list)
                 .build();
-        Referee referee = new Referee(board, tilesToWin1, numberOfMatches, pointsForWin);
+        Referee referee = new Referee(board, tilesToWin1, score);
 
         for (int i = 0; i < toMark.length; i++) {
             board.markTile(toMark[i], TakenTileSign.CROSS);
@@ -274,6 +275,29 @@ public class RefereeTest {
 
         assertTrue(referee.checkIfWonVertically(player1,toMark[toMark.length - 1]));
     }
+
+    @Test(alwaysRun = true)
+    public void checkIfWonMatch() throws Exception {
+
+        Player currentPlayer = new Player("bartek",TakenTileSign.CROSS);
+        Height h = new Height(5);
+        Width w = new Width(5);
+        List<Tile> list = new ArrayList<>();
+        TilesToWin tilesToWin = new TilesToWin(3);
+        NumberOfMatches numberOfMatches = new NumberOfMatches(3);
+        PointsForWin pointsForWin = new PointsForWin(3);
+        Score score = new Score(numberOfMatches,pointsForWin);
+        Board board = new Board.Builder()
+                .height(h)
+                .column(w)
+                .playBoard(list)
+                .build();
+        Referee referee = new Referee(board,tilesToWin,score);
+
+        assertFalse(referee.checkIfWonMatch(currentPlayer));
+    }
+
+
 
 }
 

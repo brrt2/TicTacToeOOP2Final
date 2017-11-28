@@ -7,7 +7,7 @@ public class Move {
     private int index;
     private Player playerThatMadeTheMove;
 
-    public Move(int index, Player playerThatMadeTheMove) {
+    Move(int index, Player playerThatMadeTheMove) {
         this.index = index;
         this.playerThatMadeTheMove = playerThatMadeTheMove;
     }
@@ -16,7 +16,7 @@ public class Move {
         return index;
     }
 
-    public Player getPlayerThatMadeTheMove() {
+    Player getPlayerThatMadeTheMove() {
         return playerThatMadeTheMove;
     }
 }

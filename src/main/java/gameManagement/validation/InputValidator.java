@@ -4,10 +4,7 @@ import gameManagement.Board;
 import gameManagement.NumberOfMatches;
 import gameManagement.PointsForWin;
 import gameManagement.tiles.TakenTileSign;
-import gameManagement.tiles.Tile;
 import players.Player;
-
-import java.util.List;
 
 public class InputValidator {
 
@@ -56,7 +53,7 @@ public class InputValidator {
         }
     }
 
-    public void checkIfTileTaken(int numbertoMark, TakenTileSign takenTileSign, Board board) throws IllegalArgumentException {
+    public void checkIfTileTaken(int numbertoMark, Board board) throws IllegalArgumentException {
         if (board.getPlayBoard().get(numbertoMark - 1).getTakenTileSign().equals(TakenTileSign.CROSS) || board.getPlayBoard().get(numbertoMark - 1).getTakenTileSign().equals(TakenTileSign.NOUGHT)) {
             throw new IllegalArgumentException("The selected tile is already taken !");
         }
