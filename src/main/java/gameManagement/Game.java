@@ -1,5 +1,6 @@
 package gameManagement;
 
+import com.sun.deploy.util.StringUtils;
 import gameManagement.boardTools.TilesToWin;
 import gameManagement.locale.Language;
 import gameManagement.moveManagement.Move;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Game implements Subject{
+public class Game {
 
     private GameState gameState;
     private InputValidator mv;
@@ -45,24 +46,6 @@ public class Game implements Subject{
         mv = new InputValidator();
     }
 
-    @Override
-    public void register(Observer o) {
-        observers.add(o);
-    }
-
-    @Override
-    public void unregister(Observer o) {
-
-    }
-
-    @Override
-    public void notifyObserver() {
-
-        for(Observer observer : observers){
-            observer.update(move);
-        }
-
-    }
 
      void play() {
        int number= obtainTheTileNumber();
@@ -85,7 +68,6 @@ public class Game implements Subject{
 
     private void printMessage(){
         output.displayMessage(language.getNowIsTurnOf()+turn.getCurrentPlayer().getName()+ " " +language.getSignOfPlayer()+turn.getCurrentPlayer().getTakenTileSign()+ " " +language.getAskToProvideTileNumber());
-
     }
 
     private void addToArchive(){
@@ -93,33 +75,39 @@ public class Game implements Subject{
     }
 
     private int obtainTheTileNumber(){
+        int number1=0;
         System.out.println(referee.getBoard());
         System.out.println();
         printMessage();
         Scanner scan = new Scanner(System.in);
         try {
-
-          String number = scan.next();
-          if(number.equals("swap")) referee.getScore().swapScores();
+          String number = String.valueOf(scan.nextLine());
+          if(number.equals("swap")){
+              referee.getScore().swapScores();
+              output.displayMessage(language.getValuesSwapped());
+              obtainTheTileNumber();
+          }
           else if(number.equals("exit")) System.exit(0);
-          int number1 = Integer.parseInt(number);
-
-           move = MoveFactory.createMove(number1, turn.getCurrentPlayer());
+          else number1 = Integer.parseInt(number);
         } catch (NumberFormatException | InputMismatchException e) {
             output.displayMessage(language.getIncorrectValue());
+            scan.next();
         }
+        move = MoveFactory.createMove(number1, turn.getCurrentPlayer());
         addToArchive();
+        validateInput();
+        return move.getIndex();
+    }
+
+    public void validateInput(){
         try {
             mv.checkIfTileTaken(move.getIndex(), turn.getCurrentPlayer().getTakenTileSign(), referee.getBoard());
             mv.validateMove(move.getIndex(), turn.getCurrentPlayer(), referee.getBoard());
-            notifyObserver();
+            //notifyObserver();
         } catch (IllegalArgumentException | IndexOutOfBoundsException e) {
             output.displayMessage(language.getLostMoveMessage());
             System.out.println();
         }
-
-
-        return move.getIndex();
     }
 
     private void printIfWon(){

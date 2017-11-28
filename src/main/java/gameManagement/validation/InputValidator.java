@@ -24,10 +24,6 @@ public class InputValidator {
         return pointsForWin.getValue()>0&&pointsForWin.getValue()<100;
     }
 
-    public boolean validateIfWantsToSwapPlayers(String input) {
-        return input.equals("y")||input.equals("n");
-    }
-
     public boolean validateDataStructureSelection(String input) {
         return input.equals("a")||input.equals("l");
     }
@@ -52,22 +48,17 @@ public class InputValidator {
         return dimension>2&&dimension<1000;
     }
 
-    public void validateMove(int numbertoMark, Player player, Board board) throws IllegalArgumentException, ArrayIndexOutOfBoundsException {
-
-        //String str = String.valueOf(numbertoMark);
+    public void validateMove(int numbertoMark, Player player, Board board) throws IllegalArgumentException, IndexOutOfBoundsException {
         if (numbertoMark < 0 || numbertoMark > board.getPlayBoard().size()) {
             throw new IndexOutOfBoundsException("The provided number is outside the board ! ");
         } else {
             board.markTile(numbertoMark, player.getTakenTileSign());
         }
-        if (numbertoMark < 0) throw new ArrayIndexOutOfBoundsException();
     }
 
     public void checkIfTileTaken(int numbertoMark, TakenTileSign takenTileSign, Board board) throws IllegalArgumentException {
         if (board.getPlayBoard().get(numbertoMark - 1).getTakenTileSign().equals(TakenTileSign.CROSS) || board.getPlayBoard().get(numbertoMark - 1).getTakenTileSign().equals(TakenTileSign.NOUGHT)) {
             throw new IllegalArgumentException("The selected tile is already taken !");
         }
-
-
     }
 }

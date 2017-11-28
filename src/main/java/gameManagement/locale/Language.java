@@ -37,7 +37,7 @@ public class Language {
     private String askHowManyPointsForWin;
     private String askIfWantsToSwapXandO;
     private String askIfChangeDataStructure;
-
+    private String valuesSwapped;
     private String fileName = null;
 
     public Language(String fileName)  {
@@ -82,6 +82,7 @@ public class Language {
             askHowManyPointsForWin = properties.getProperty("askHowManyPointsForWin");
             askIfWantsToSwapXandO=properties.getProperty("askIfWantsToSwapXandO");
             askIfChangeDataStructure = properties.getProperty("askIfChangeDataStructure");
+            valuesSwapped=properties.getProperty("valuesSwapped");
 
         } catch (IOException ex) {
             System.out.println("An IOException has occurred");
@@ -119,10 +120,6 @@ public class Language {
 
     public String getWrongName() {
         return wrongName;
-    }
-
-    public String getPositiveLowerOrEqualError() {
-        return positiveLowerOrEqualError;
     }
 
     public String getBoardDimensionError() {
@@ -185,35 +182,9 @@ public class Language {
         return askIfChangeDataStructure;
     }
 
-    public String getWhoGoesFirstError() {
-        return whoGoesFirstError;
-    }
-
-    public String getWrongValueType() {
-        return wrongValueType;
-    }
-
-    public String getNumberOutsideTheBoard() {
-        return numberOutsideTheBoard;
-    }
-
-    public String getTileTaken() {
-        return tileTaken;
-    }
-
-    public String getSelectOutputTarget() {
-        return selectOutputTarget;
-    }
-
     public String getAskHowManyPointsForWin() {
         return askHowManyPointsForWin;
     }
 
-    public String getAskIfWantsToSwapXandO() {
-        return askIfWantsToSwapXandO;
-    }
-
-    public String getFileName() {
-        return fileName;
-    }
+    public String getValuesSwapped() { return valuesSwapped; }
 }

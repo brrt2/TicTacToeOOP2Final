@@ -32,8 +32,7 @@ public class Configurator {
         Turn turn = new Turn(first,second);
         Referee referee = new Referee(board,tilesTowin,numberOfMatches,pointsForWin);
         Game game = new Game(turn,board, tilesTowin,output,language,numberOfMatches,pointsForWin);
-        game.register(board);
-        game.register(referee);
+
 
         if(str.equals("x")) game.getTurn().setCurrentPlayer(second);
         else if(str.equals("o")) game.getTurn().setCurrentPlayer(first);

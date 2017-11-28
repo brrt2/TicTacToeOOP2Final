@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observer;
 
-public class MoveHistory implements gameManagement.Observer{
+public class MoveHistory{
 
     private static List<Move> moveArchive = new ArrayList<>();
 
@@ -16,8 +16,4 @@ public class MoveHistory implements gameManagement.Observer{
         return moveArchive;
     }
 
-    @Override
-    public void update(Move move) {
-        addToArchive(move);
-    }
 }

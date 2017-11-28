@@ -1,7 +1,6 @@
 package gameManagement;
 
 import gameManagement.boardTools.TilesToWin;
-import gameManagement.moveManagement.Move;
 import gameManagement.tiles.TakenTileSign;
 import gameManagement.tiles.Tile;
 import gameManagement.validation.Score;
@@ -9,19 +8,13 @@ import players.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Referee implements Observer{
+public class Referee{
 
     private Board board;
     private TilesToWin tilesToWin;
     private Score score;
     private List<Tile> playBoard;
     private int moveCounter = 0;
-
-    @Override
-    public void update(Move move) {
-        playBoard.get(move.getIndex() - 1).setTakenTileSign(move.getPlayerThatMadeTheMove().getTakenTileSign());
-        moveCounter++;
-    }
 
     public void populateTheBoard() {
         for (int i = 0; i < board.getColumn() * board.getRow(); i++) {

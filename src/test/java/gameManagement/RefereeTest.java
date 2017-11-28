@@ -19,7 +19,6 @@ public class RefereeTest {
 
     Player player1 = new Player("bartek", TakenTileSign.CROSS);
 
-
     @DataProvider(name = "horizontalCheck")
     public Object[][] getData() {
 
@@ -112,6 +111,52 @@ public class RefereeTest {
     }
 
 
+    @DataProvider(name = "CheckIfDraw")
+    public Object[][] getData4() {
+        return new Object[][]{
+
+                {3, 3, 3, new int[]{1,2,3,4,5,6,7,8,9}},
+                {4, 4, 3, new int[]{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16}},
+//                {4, 4, 3, new int[]{8, 11, 14}},
+//                {4, 4, 3, new int[]{3, 6, 9}},
+//                {5, 5, 3, new int[]{3, 7, 11}},
+//                {5, 5, 3, new int[]{4, 8, 12}},
+//                {6, 6, 3, new int[]{4, 9, 14}},
+//                {6, 6, 3, new int[]{5, 10, 15}},
+//                {6, 6, 3, new int[]{6, 11, 16}},
+//                {6, 6, 3, new int[]{12, 17, 22}},
+//                {3, 7, 3, new int[]{7, 13, 19}},
+//                {3, 7, 3, new int[]{6, 12, 18}},
+//                {3, 7, 3, new int[]{3, 9, 15}},
+//                {3, 7, 3, new int[]{4, 10, 16}},
+
+        };
+    }
+
+
+    @DataProvider(name = "CheckIfWonVertically")
+    public Object[][] getData5() {
+        return new Object[][]{
+
+                {3, 3, 3, new int[]{1,4,7}},
+                {4, 4, 3, new int[]{1,5,9}},
+//                {4, 4, 3, new int[]{8, 11, 14}},
+//                {4, 4, 3, new int[]{3, 6, 9}},
+//                {5, 5, 3, new int[]{3, 7, 11}},
+//                {5, 5, 3, new int[]{4, 8, 12}},
+//                {6, 6, 3, new int[]{4, 9, 14}},
+//                {6, 6, 3, new int[]{5, 10, 15}},
+//                {6, 6, 3, new int[]{6, 11, 16}},
+//                {6, 6, 3, new int[]{12, 17, 22}},
+//                {3, 7, 3, new int[]{7, 13, 19}},
+//                {3, 7, 3, new int[]{6, 12, 18}},
+//                {3, 7, 3, new int[]{3, 9, 15}},
+//                {3, 7, 3, new int[]{4, 10, 16}},
+
+        };
+    }
+
+
     @Test(dataProvider = "horizontalCheck")
     public void testCheckIfWonHorizontally(int row, int column, int tilesToWin, int[] toMark) throws Exception {
         Height h = new Height(row);
@@ -181,35 +226,54 @@ public class RefereeTest {
         assertTrue(referee.checkDiagonalRL(player1, toMark[toMark.length - 1]));
     }
 
+
+    @Test(dataProvider = "CheckIfDraw")
+    public void testCheckIfDraw(int row, int column, int tilesToWin, int[] toMark) throws Exception {
+
+        Height h = new Height(row);
+        Width w = new Width(column);
+        List<Tile> list = new ArrayList<>();
+        TilesToWin tilesToWin1 = new TilesToWin(tilesToWin);
+        NumberOfMatches numberOfMatches = new NumberOfMatches(3);
+        PointsForWin pointsForWin = new PointsForWin(3);
+
+        Board board = new Board.Builder()
+                .height(h)
+                .column(w)
+                .playBoard(list)
+                .build();
+        Referee referee = new Referee(board, tilesToWin1, numberOfMatches, pointsForWin);
+
+
+        for (int i = 0; i < toMark.length; i++) {
+            board.markTile(toMark[i], TakenTileSign.CROSS);
+        }
+        assertTrue(referee.checkIfDraw());
+    }
+
+    @Test(dataProvider = "CheckIfWonVertically")
+    public void testCheckIfWonVertically(int row, int column, int tilesToWin, int[] toMark) throws Exception {
+
+        Height h = new Height(row);
+        Width w = new Width(column);
+        List<Tile> list = new ArrayList<>();
+        TilesToWin tilesToWin1 = new TilesToWin(tilesToWin);
+        NumberOfMatches numberOfMatches = new NumberOfMatches(3);
+        PointsForWin pointsForWin = new PointsForWin(3);
+
+        Board board = new Board.Builder()
+                .height(h)
+                .column(w)
+                .playBoard(list)
+                .build();
+        Referee referee = new Referee(board, tilesToWin1, numberOfMatches, pointsForWin);
+
+        for (int i = 0; i < toMark.length; i++) {
+            board.markTile(toMark[i], TakenTileSign.CROSS);
+        }
+
+        assertTrue(referee.checkIfWonVertically(player1,toMark[toMark.length - 1]));
+    }
+
 }
 
-
-
-
-
-
-
-
-
-
-//    @Test
-//    public void testCheckIfDraw() throws Exception {
-//
-//        for (int i = 1; i < 10; i++) {
-//            board1.markTile(i, TakenTileSign.CROSS);
-//        }
-//
-//        assertTrue(referee.checkIfDraw());
-//
-//    }
-//
-//    @Test
-//    public void testCheckIfWonVertically() throws Exception {
-//        board1.markTile(2, TakenTileSign.CROSS);
-//        board1.markTile(5, TakenTileSign.CROSS);
-//        board1.markTile(8, TakenTileSign.CROSS);
-//
-//        assertTrue(referee.checkIfWonVertically(player1, 8));
-//    }
-
-//}

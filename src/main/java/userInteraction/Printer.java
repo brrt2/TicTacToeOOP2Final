@@ -63,7 +63,6 @@ public class Printer {
         while (keepTurning==false) {
             System.out.println("Please select your language e - English | p - Polish | s - Spanish  Wybierz jezyk e-angielski | p-polski | s -hiszpanski" +
                     "| Seleccione su idioma e- ingles | p - polaco | s - español ");
-
             try {
                 lang = scan.nextLine();
             } catch (InputMismatchException e) {
@@ -75,7 +74,6 @@ public class Printer {
             } else {
                 keepTurning = true;
             }
-            keepTurning=true;
         }
        setLanguage(lang);
     }
@@ -111,7 +109,7 @@ public class Printer {
         while (keepTurning == false) {
             output.displayMessage(message);
             name2 = scan.nextLine();
-            if (inputValidator.validatePlayerName(name2) == false) {
+            if (!inputValidator.validatePlayerName(name2)) {
                 output.displayMessage(language.getWrongName());
             } else {
                 keepTurning = true;
@@ -122,39 +120,45 @@ public class Printer {
     }
 
     public void obtainBoardHeight(String message) {
+        String boardHeight;
+        int parsedInput3=0;
         keepTurning = false;
         while (keepTurning == false) {
             output.displayMessage(message);
             try {
-                int h = scan.nextInt();
-                height= new Height(h);
-            } catch (InputMismatchException e) {
+                boardHeight = String.valueOf(scan.next());
+                parsedInput3 = Integer.parseInt(boardHeight);
+
+            } catch (InputMismatchException | NumberFormatException e) {
                 output.displayMessage(language.getIncorrectValue());
-                scan.next();
+                scan.nextLine();
             }
-            if (inputValidator.validateBoardDimensions(height.getValue()) == false) {
+            height = new Height(parsedInput3);
+            if (!inputValidator.validateBoardDimensions(height.getValue())) {
                 output.displayMessage(language.getBoardDimensionError());
             } else {
                 keepTurning = true;
             }
         }
-
         obtainBoardWidth(language.getAskForBoardWidth());
 
     }
 
     public void obtainBoardWidth(String msg) {
+        String boardWidth;
+        int parsedInput2=0;
         keepTurning = false;
-        while (keepTurning == false) {
+        while (!keepTurning) {
             output.displayMessage(language.getAskForBoardWidth());
             try {
-                int w = scan.nextInt();
-                width = new Width(w);
-            } catch (InputMismatchException e) {
+                boardWidth = String.valueOf(scan.next());
+                parsedInput2 = Integer.parseInt(boardWidth);
+            } catch (InputMismatchException | NumberFormatException e) {
                 output.displayMessage(language.getIncorrectValue());
                 scan.next();
             }
-            if (inputValidator.validateBoardDimensions(width.getValue()) == false) {
+            width = new Width(parsedInput2);
+            if (!inputValidator.validateBoardDimensions(width.getValue())) {
                 output.displayMessage(language.getBoardDimensionError());
             } else {
                 keepTurning = true;
@@ -165,36 +169,41 @@ public class Printer {
     }
 
     public void obtainNumberOfAdjacentSigns() {
+        String adjacentSigns;
+        int parsedInput2=0;
         keepTurning = false;
-        while (keepTurning == false) {
+        while (!keepTurning) {
             output.displayMessage(language.getAskForNumberofAdjacentSigns());
             try {
-                int adjacentSigns = scan.nextInt();
-                tilesToWin= new TilesToWin(adjacentSigns);
-            } catch (InputMismatchException e) {
+                adjacentSigns = String.valueOf(scan.next());
+                parsedInput2 = Integer.parseInt(adjacentSigns);
+            } catch (InputMismatchException | NumberFormatException e) {
                 output.displayMessage(language.getIncorrectValue());
                 scan.next();
             }
-            if (inputValidator.validateAdjacentSignsToWin(tilesToWin.getValue(), height.getValue(), width.getValue()) == false) {
-                output.displayMessage(language.getPositiveLowerOrEqualError());
+            tilesToWin = new TilesToWin(parsedInput2);
+            if (!inputValidator.validateBoardDimensions(width.getValue())) {
+                output.displayMessage(language.getBoardDimensionError());
             } else {
                 keepTurning = true;
             }
         }
-        scan.nextLine();
-        whoStarts = obtainInformationOnWhoStarts();
 
+       whoStarts = obtainInformationOnWhoStarts();
         obtainInformationHowManyMatches();
     }
 
     public String obtainInformationOnWhoStarts(){
+        Scanner scan = new Scanner(System.in);
         String s1=null;
         keepTurning = false;
         while (!keepTurning) {
+
             output.displayMessage(language.getAskWhoGoesFirst());
-             s1 = scan.nextLine();
+             s1 = String.valueOf(scan.nextLine());
+
             if (!inputValidator.validateWhoGoesFirstSign(s1)) {
-                output.displayMessage(language.getIncorrectValue());
+               output.displayMessage(language.getIncorrectValue());
             } else {
                 keepTurning = true;
             }
@@ -203,40 +212,45 @@ public class Printer {
     }
 
     public void obtainInformationHowManyMatches() {
-        int number=0;
+        String numberofMatches1=null;
+        int parsedInput=0;
         keepTurning = false;
-        while (keepTurning == false) {
+        while (!keepTurning) {
             output.displayMessage(language.getAskHowManyMatches());
             try {
-                number = scan.nextInt();
-                numberOfMatches = new NumberOfMatches(number);
+
+                numberofMatches1 = scan.next();
+                parsedInput = Integer.parseInt(numberofMatches1);
+
             } catch (InputMismatchException e) {
                 output.displayMessage(language.getIncorrectValue());
                 scan.next();
             }
-//            if (inputValidator.validateHowManyMatches(numberOfMatches)) {
-//                output.displayMessage(language.getIncorrectValue());
-//            } else {
-//                keepTurning = true;
-//            }
-            keepTurning = true;
+            numberOfMatches = new NumberOfMatches(parsedInput);
+            if (!inputValidator.validateHowManyMatches(numberOfMatches)) {
+                output.displayMessage(language.getIncorrectValue());
+            } else {
+                keepTurning = true;
+            }
         }
         obtainInformationHowManyPointsForWin();
         }
 
 
     public void obtainInformationHowManyPointsForWin() {
-        int pointsForWin1;
+        String inputFromUser;
+        int parsedInput=0;
         keepTurning=false;
         while (!keepTurning) {
             output.displayMessage(language.getAskHowManyPointsForWin());
             try {
-                pointsForWin1 = scan.nextInt();
-                pointsForWin = new PointsForWin(pointsForWin1);
-            } catch (InputMismatchException e) {
+                inputFromUser = scan.next();
+                parsedInput = Integer.parseInt(inputFromUser);
+            } catch (InputMismatchException | NumberFormatException e) {
                 output.displayMessage(language.getIncorrectValue());
                 scan.next();
             }
+            pointsForWin = new PointsForWin(parsedInput);
             if (!inputValidator.validateHowManyPointsForWin(pointsForWin)) {
                 output.displayMessage(language.getIncorrectValue());
             } else {
@@ -251,8 +265,8 @@ public class Printer {
         while (!keepTurning) {
             output.displayMessage(language.getAskIfChangeDataStructure());
             try {
-                selectedDataStructure = scan.next();
-            } catch (InputMismatchException e) {
+                selectedDataStructure = String.valueOf(scan.next());
+            } catch (InputMismatchException | NumberFormatException e) {
                 output.displayMessage(language.getIncorrectValue());
                 scan.next();
             }
