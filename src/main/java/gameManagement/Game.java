@@ -18,7 +18,7 @@ public class Game {
     private Output output;
     private Language language;
     private Move move;
-    Scanner scan;
+    private Scanner scan;
 
 
     public Game(Turn turn, Output output, Language language,Referee referee,Scanner scan) {

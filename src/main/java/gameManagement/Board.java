@@ -1,7 +1,7 @@
 package gameManagement;
 
-import gameManagement.boardTools.Height;
-import gameManagement.boardTools.Width;
+import gameManagement.configuration.Height;
+import gameManagement.configuration.Width;
 import gameManagement.tiles.TakenTileSign;
 import gameManagement.tiles.Tile;
 

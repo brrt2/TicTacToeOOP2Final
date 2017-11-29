@@ -1,9 +1,9 @@
 package userInteraction;
 
 import gameManagement.*;
-import gameManagement.boardTools.Height;
-import gameManagement.boardTools.TilesToWin;
-import gameManagement.boardTools.Width;
+import gameManagement.configuration.Height;
+import gameManagement.configuration.TilesToWin;
+import gameManagement.configuration.Width;
 import gameManagement.locale.Language;
 import gameManagement.locale.LanguageFactory;
 import gameManagement.validation.InputValidator;
@@ -33,7 +33,7 @@ public class Printer {
         printIntroduction();
     }
 
-    public void printIntroduction(){
+    private void printIntroduction(){
         System.out.println("Welcome to the  Tic Tac Toe game | Witaj w grze Kolko i Krzyzyk| Bienvenido al juego de Tres en Linea ");
         configureTarget();
     }
@@ -157,7 +157,7 @@ public class Printer {
                 parsedInput2 = Integer.parseInt(boardWidth);
             } catch (InputMismatchException | NumberFormatException e) {
                 output.displayMessage(language.getIncorrectValue());
-                scan.next();
+                scan.nextLine();
             }
             width = new Width(parsedInput2);
             if (!inputValidator.validateBoardDimensions(width.getValue())) {
@@ -180,9 +180,9 @@ public class Printer {
                 adjacentSigns = String.valueOf(scan.nextLine());
                 parsedInput2 = Integer.parseInt(adjacentSigns);
 
-            } catch (InputMismatchException | NumberFormatException e) {
+           } catch (InputMismatchException | NumberFormatException e) {
                 output.displayMessage(language.getIncorrectValue());
-                scan.next();
+                scan.nextLine();
             }
             tilesToWin = new TilesToWin(parsedInput2);
             if (!inputValidator.validateAdjacentSignsToWin(tilesToWin.getValue(),height.getValue(),width.getValue())) {
@@ -224,9 +224,9 @@ public class Printer {
                 numberofMatches1 = scan.nextLine();
                 parsedInput = Integer.parseInt(numberofMatches1);
 
-            } catch (InputMismatchException e) {
+            } catch (InputMismatchException | NumberFormatException e) {
                 output.displayMessage(language.getIncorrectValue());
-                scan.next();
+                scan.nextLine();
             }
             numberOfMatches = new NumberOfMatches(parsedInput);
             if (!inputValidator.validateHowManyMatches(numberOfMatches)) {
@@ -250,7 +250,7 @@ public class Printer {
                 parsedInput = Integer.parseInt(inputFromUser);
             } catch (InputMismatchException | NumberFormatException e) {
                 output.displayMessage(language.getIncorrectValue());
-                scan.next();
+                scan.nextLine();
             }
             pointsForWin = new PointsForWin(parsedInput);
             if (!inputValidator.validateHowManyPointsForWin(pointsForWin)) {
@@ -270,7 +270,7 @@ public class Printer {
                 selectedDataStructure = String.valueOf(scan.nextLine());
             } catch (InputMismatchException | NumberFormatException e) {
                 output.displayMessage(language.getIncorrectValue());
-                scan.next();
+                scan.nextLine();
             }
             if (!inputValidator.validateDataStructureSelection(selectedDataStructure)) {
                 output.displayMessage(language.getIncorrectValue());

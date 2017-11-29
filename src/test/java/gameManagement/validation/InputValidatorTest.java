@@ -3,8 +3,8 @@ package gameManagement.validation;
 import gameManagement.Board;
 import gameManagement.NumberOfMatches;
 import gameManagement.PointsForWin;
-import gameManagement.boardTools.Height;
-import gameManagement.boardTools.Width;
+import gameManagement.configuration.Height;
+import gameManagement.configuration.Width;
 import gameManagement.tiles.TakenTileSign;
 import gameManagement.tiles.Tile;
 import org.testng.annotations.DataProvider;
@@ -13,7 +13,6 @@ import players.Player;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
 
 import static org.testng.Assert.*;
 

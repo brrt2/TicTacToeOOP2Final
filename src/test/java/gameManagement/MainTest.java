@@ -30,8 +30,6 @@ public class MainTest {
         fw.close();
     }
 
-
-
     @DataProvider(name = "gameFlowSequence")
     public Object[][] getData3() {
 

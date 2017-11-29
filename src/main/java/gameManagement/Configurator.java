@@ -1,6 +1,6 @@
 package gameManagement;
 
-import gameManagement.boardTools.*;
+import gameManagement.configuration.*;
 import gameManagement.locale.Language;
 import gameManagement.tiles.TakenTileSign;
 import gameManagement.tiles.Tile;

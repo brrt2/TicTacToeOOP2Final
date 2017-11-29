@@ -1,5 +1,5 @@
 package gameManagement;
-import gameManagement.boardTools.TilesToWin;
+import gameManagement.configuration.TilesToWin;
 import gameManagement.tiles.TakenTileSign;
 import gameManagement.tiles.Tile;
 import gameManagement.validation.Score;

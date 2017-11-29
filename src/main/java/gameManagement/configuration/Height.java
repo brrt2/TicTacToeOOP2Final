@@ -1,4 +1,4 @@
-package gameManagement.boardTools;
+package gameManagement.configuration;
 
 public class Height {
 
