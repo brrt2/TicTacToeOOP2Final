@@ -20,10 +20,21 @@ public class Referee{
         this.score=score;
     }
 
-    boolean checkIfWonHorizontally(Player currentPlayer) {
-        int counter = 0;
-        for (int i = 0; i < board.getPlayBoard().size(); i++) {
-            if (currentPlayer.getTakenTileSign().equals(board.getPlayBoard().get(i).getTakenTileSign())) counter++;
+    boolean checkIfWonHorizontally(Player currentPlayer, int index) {
+        int row = (index-1)/board.getColumn();
+        ArrayList<Tile> tilesHorizontal = new ArrayList<>(board.getColumn());
+
+        for(int i=0; i<board.getColumn(); i++){
+            tilesHorizontal.add(board.getPlayBoard().get(row*board.getColumn()+i));
+        }
+
+        return horizontalIterator(tilesHorizontal,currentPlayer);
+    }
+
+    private boolean horizontalIterator(List<Tile> tilesHorizontal,Player currentPlayer){
+        int counter =0;
+        for (int i = 0; i <tilesHorizontal.size(); i++) {
+            if (currentPlayer.getTakenTileSign().equals(tilesHorizontal.get(i).getTakenTileSign())) counter++;
             else counter = 0;
             if (counter == tilesToWin.getValue()) {
                 score.increaseScore(currentPlayer);

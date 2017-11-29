@@ -33,7 +33,7 @@ public class Game {
      void play() {
        int number= obtainTheTileNumber();
         try {
-            if (referee.checkIfWonHorizontally(turn.getCurrentPlayer())) printIfWon();
+            if (referee.checkIfWonHorizontally(turn.getCurrentPlayer(),number)) printIfWon();
             if (referee.checkIfWonVertically(turn.getCurrentPlayer(), number))printIfWon();
             if (referee.checkDiagonalRL(turn.getCurrentPlayer(), number)) printIfWon();
             if (referee.checkDiagonalLeftToRight(turn.getCurrentPlayer(), number))printIfWon();

@@ -1,6 +1,5 @@
 package gameManagement;
 
-import com.sun.javafx.collections.ArrayListenerHelper;
 import gameManagement.boardTools.Height;
 import gameManagement.boardTools.Width;
 import gameManagement.tiles.TakenTileSign;
@@ -10,18 +9,14 @@ import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import static org.testng.Assert.*;
 
 public class BoardTest {
 
-
-    Height h = new Height(10);
-    Width w = new Width(10);
-    List<Tile> list = new ArrayList<>();
+    private Height h = new Height(10);
+    private Width w = new Width(10);
+    private List<Tile> list = new ArrayList<>();
 
 
     Board board = new Board.Builder()
@@ -29,7 +24,6 @@ public class BoardTest {
             .column(w)
             .playBoard(list)
             .build();
-
 
     @DataProvider(name = "markTile")
     public Object[][] getData() {

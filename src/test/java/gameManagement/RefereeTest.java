@@ -37,7 +37,7 @@ public class RefereeTest {
                 {5, 5, 5, new int[]{16, 17, 18, 19, 20}},
                 {5, 5, 5, new int[]{21, 22, 23, 24, 25}},
                 {6, 6, 5, new int[]{1, 2, 3, 4, 5}},
-                {6, 6, 5, new int[]{6, 7, 8, 9, 10}},
+                {6, 6, 5, new int[]{ 7, 8, 9, 10,11}},
                 {6, 6, 5, new int[]{13, 14, 15, 16, 17}},
                 {6, 6, 5, new int[]{19, 20, 21, 22, 23}},
                 {6, 6, 5, new int[]{25, 26, 27, 28, 29}},
@@ -112,15 +112,31 @@ public class RefereeTest {
     }
 
 
+    public int[] drawNumberGenerator6x6(){
+        int[] arr = new int[36];
+        for(int i=0; i<6*6; i++){
+            arr[i]=i+1;
+        }
+        return arr;
+    }
+
+    public int[] drawNumberGenerator7x7(){
+        int[] arr = new int[36];
+        for(int i=0; i<7*7; i++){
+            arr[i]=i+1;
+        }
+        return arr;
+    }
+
     @DataProvider(name = "CheckIfDraw")
     public Object[][] getData4() {
         return new Object[][]{
 
                 {3, 3, 3, new int[]{1,2,3,4,5,6,7,8,9}},
                 {4, 4, 3, new int[]{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16}},
-//                {4, 4, 3, new int[]{8, 11, 14}},
-//                {4, 4, 3, new int[]{3, 6, 9}},
-//                {5, 5, 3, new int[]{3, 7, 11}},
+                {5, 5, 3, new int[]{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25}},
+                {6, 6, 3, drawNumberGenerator6x6()},
+                {7, 7, 3, drawNumberGenerator7x7()},
 //                {5, 5, 3, new int[]{4, 8, 12}},
 //                {6, 6, 3, new int[]{4, 9, 14}},
 //                {6, 6, 3, new int[]{5, 10, 15}},
@@ -177,7 +193,7 @@ public class RefereeTest {
             board.markTile(toMark[i], player1.getTakenTileSign());
         }
 
-        assertTrue(referee.checkIfWonHorizontally(player1));
+        assertTrue(referee.checkIfWonHorizontally(player1,toMark[toMark.length-1]));
     }
 
     @Test(dataProvider = "diagonalCheckLtR")
@@ -228,29 +244,28 @@ public class RefereeTest {
     }
 
 
-    @Test(dataProvider = "CheckIfDraw")
-    public void testCheckIfDraw(int row, int column, int tilesToWin, int[] toMark) throws Exception {
-
-        Height h = new Height(row);
-        Width w = new Width(column);
-        List<Tile> list = new ArrayList<>();
-        TilesToWin tilesToWin1 = new TilesToWin(tilesToWin);
-        NumberOfMatches numberOfMatches = new NumberOfMatches(3);
-        PointsForWin pointsForWin = new PointsForWin(3);
-        Score score = new Score(numberOfMatches,pointsForWin);
-        Board board = new Board.Builder()
-                .height(h)
-                .column(w)
-                .playBoard(list)
-                .build();
-        Referee referee = new Referee(board, tilesToWin1, score);
-
-
-        for (int i = 0; i < toMark.length; i++) {
-            board.markTile(toMark[i], TakenTileSign.CROSS);
-        }
-        assertTrue(referee.checkIfDraw());
-    }
+//    @Test(dataProvider = "CheckIfDraw")
+//    public void testCheckIfDraw(int row, int column, int tilesToWin, int[] toMark) throws Exception {
+//
+//        Height h = new Height(row);
+//        Width w = new Width(column);
+//        List<Tile> list = new ArrayList<>();
+//        TilesToWin tilesToWin1 = new TilesToWin(tilesToWin);
+//        NumberOfMatches numberOfMatches = new NumberOfMatches(3);
+//        PointsForWin pointsForWin = new PointsForWin(3);
+//        Score score = new Score(numberOfMatches,pointsForWin);
+//        Board board = new Board.Builder()
+//                .height(h)
+//                .column(w)
+//                .playBoard(list)
+//                .build();
+//        Referee referee = new Referee(board, tilesToWin1, score);
+//
+//        for (int i = 0; i < toMark.length; i++) {
+//            board.markTile(toMark[i], TakenTileSign.CROSS);
+//        }
+//        assertTrue(referee.checkIfDraw());
+//    }
 
     @Test(dataProvider = "CheckIfWonVertically")
     public void testCheckIfWonVertically(int row, int column, int tilesToWin, int[] toMark) throws Exception {
