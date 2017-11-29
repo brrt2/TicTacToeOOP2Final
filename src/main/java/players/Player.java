@@ -1,6 +1,6 @@
 package players;
 
-import gameManagement.tiles.TakenTileSign;
+import gamemanagement.tiles.TakenTileSign;
 
 public class Player {
 
