@@ -1,0 +1,199 @@
+[Welcome to the  Tic Tac Toe game | Witaj w grze Kolko i Krzyzyk| Bienvenido al juego de Tres en Linea 
+Please select the ouptput target Sys.err - e | Sys.out - o | Wybierz strumien wyjscia Sys.err - e | Sys.out - o Seleccione el canal de salida Sys.err - e | Sys.out - o
+Press e for English | Wcisnij p aby wybrac jezyk polski | Pulse s para seleccionar la lengua española
+Please provide the name of the first user (o)
+Please provide the name of the second user(x)
+Please provide the board height 
+Please provide the board width
+Please provide the number of adjacent signs necessary to win
+Who goes first x/o ?
+How many matches do you want to play ? 
+How many points should a round winner get ? 
+What data structure would you like to use a - ArrayList | l - LinkedList ? 
+|  1 ||  2 ||  3 | 
+|  4 ||  5 ||  6 | 
+|  7 ||  8 ||  9 | 
+
+
+Now is the turn of :adam whose sign is :| x  | Please provide the  number of the tile you want to mark | Type "swap" at any time to swap the player's points !
+| x  ||  2 ||  3 | 
+|  4 ||  5 ||  6 | 
+|  7 ||  8 ||  9 | 
+
+
+Now is the turn of :bartek whose sign is :| o  | Please provide the  number of the tile you want to mark | Type "swap" at any time to swap the player's points !
+| x  ||  2 ||  3 | 
+| o  ||  5 ||  6 | 
+|  7 ||  8 ||  9 | 
+
+
+Now is the turn of :adam whose sign is :| x  | Please provide the  number of the tile you want to mark | Type "swap" at any time to swap the player's points !
+| x  || x  ||  3 | 
+| o  ||  5 ||  6 | 
+|  7 ||  8 ||  9 | 
+
+
+Now is the turn of :bartek whose sign is :| o  | Please provide the  number of the tile you want to mark | Type "swap" at any time to swap the player's points !
+| x  || x  ||  3 | 
+| o  || o  ||  6 | 
+|  7 ||  8 ||  9 | 
+
+
+Now is the turn of :adam whose sign is :| x  | Please provide the  number of the tile you want to mark | Type "swap" at any time to swap the player's points !
+adamwhose sign is :| x  |has won this round!
+Player O has : 0
+Player X has :3
+Playeradam has won the entire match ! 
+Do you want to play another match Y/N ?
+][Welcome to the  Tic Tac Toe game | Witaj w grze Kolko i Krzyzyk| Bienvenido al juego de Tres en Linea 
+Please select the ouptput target Sys.err - e | Sys.out - o | Wybierz strumien wyjscia Sys.err - e | Sys.out - o Seleccione el canal de salida Sys.err - e | Sys.out - o
+Press e for English | Wcisnij p aby wybrac jezyk polski | Pulse s para seleccionar la lengua española
+Please provide the name of the first user (o)
+Please provide the name of the second user(x)
+Please provide the board height 
+Please provide the board width
+Please provide the number of adjacent signs necessary to win
+Who goes first x/o ?
+How many matches do you want to play ? 
+How many points should a round winner get ? 
+What data structure would you like to use a - ArrayList | l - LinkedList ? 
+|  1 ||  2 ||  3 ||  4 | 
+|  5 ||  6 ||  7 ||  8 | 
+|  9 || 10 || 11 || 12 | 
+| 13 || 14 || 15 || 16 | 
+
+
+Now is the turn of :andrzej whose sign is :| x  | Please provide the  number of the tile you want to mark | Type "swap" at any time to swap the player's points !
+| x  ||  2 ||  3 ||  4 | 
+|  5 ||  6 ||  7 ||  8 | 
+|  9 || 10 || 11 || 12 | 
+| 13 || 14 || 15 || 16 | 
+
+
+Now is the turn of :roman whose sign is :| o  | Please provide the  number of the tile you want to mark | Type "swap" at any time to swap the player's points !
+| x  ||  2 ||  3 || o  | 
+|  5 ||  6 ||  7 ||  8 | 
+|  9 || 10 || 11 || 12 | 
+| 13 || 14 || 15 || 16 | 
+
+
+Now is the turn of :andrzej whose sign is :| x  | Please provide the  number of the tile you want to mark | Type "swap" at any time to swap the player's points !
+| x  || x  ||  3 || o  | 
+|  5 ||  6 ||  7 ||  8 | 
+|  9 || 10 || 11 || 12 | 
+| 13 || 14 || 15 || 16 | 
+
+
+Now is the turn of :roman whose sign is :| o  | Please provide the  number of the tile you want to mark | Type "swap" at any time to swap the player's points !
+| x  || x  ||  3 || o  | 
+| o  ||  6 ||  7 ||  8 | 
+|  9 || 10 || 11 || 12 | 
+| 13 || 14 || 15 || 16 | 
+
+
+Now is the turn of :andrzej whose sign is :| x  | Please provide the  number of the tile you want to mark | Type "swap" at any time to swap the player's points !
+andrzejwhose sign is :| x  |has won this round!
+Player O has : 0
+Player X has :3
+Playerandrzej has won the entire match ! 
+Do you want to play another match Y/N ?
+][Welcome to the  Tic Tac Toe game | Witaj w grze Kolko i Krzyzyk| Bienvenido al juego de Tres en Linea 
+Please select the ouptput target Sys.err - e | Sys.out - o | Wybierz strumien wyjscia Sys.err - e | Sys.out - o Seleccione el canal de salida Sys.err - e | Sys.out - o
+Press e for English | Wcisnij p aby wybrac jezyk polski | Pulse s para seleccionar la lengua española
+Please provide the name of the first user (o)
+Please provide the name of the second user(x)
+Please provide the board height 
+Please provide the board width
+Please provide the number of adjacent signs necessary to win
+Who goes first x/o ?
+How many matches do you want to play ? 
+How many points should a round winner get ? 
+What data structure would you like to use a - ArrayList | l - LinkedList ? 
+|  1 ||  2 ||  3 | 
+|  4 ||  5 ||  6 | 
+|  7 ||  8 ||  9 | 
+
+
+Now is the turn of :adam whose sign is :| x  | Please provide the  number of the tile you want to mark | Type "swap" at any time to swap the player's points !
+| x  ||  2 ||  3 | 
+|  4 ||  5 ||  6 | 
+|  7 ||  8 ||  9 | 
+
+
+Now is the turn of :bartek whose sign is :| o  | Please provide the  number of the tile you want to mark | Type "swap" at any time to swap the player's points !
+| x  ||  2 ||  3 | 
+| o  ||  5 ||  6 | 
+|  7 ||  8 ||  9 | 
+
+
+Now is the turn of :adam whose sign is :| x  | Please provide the  number of the tile you want to mark | Type "swap" at any time to swap the player's points !
+| x  || x  ||  3 | 
+| o  ||  5 ||  6 | 
+|  7 ||  8 ||  9 | 
+
+
+Now is the turn of :bartek whose sign is :| o  | Please provide the  number of the tile you want to mark | Type "swap" at any time to swap the player's points !
+| x  || x  ||  3 | 
+| o  || o  ||  6 | 
+|  7 ||  8 ||  9 | 
+
+
+Now is the turn of :adam whose sign is :| x  | Please provide the  number of the tile you want to mark | Type "swap" at any time to swap the player's points !
+adamwhose sign is :| x  |has won this round!
+Player O has : 0
+Player X has :3
+Playeradam has won the entire match ! 
+Do you want to play another match Y/N ?
+][Welcome to the  Tic Tac Toe game | Witaj w grze Kolko i Krzyzyk| Bienvenido al juego de Tres en Linea 
+Please select the ouptput target Sys.err - e | Sys.out - o | Wybierz strumien wyjscia Sys.err - e | Sys.out - o Seleccione el canal de salida Sys.err - e | Sys.out - o
+Press e for English | Wcisnij p aby wybrac jezyk polski | Pulse s para seleccionar la lengua española
+Please provide the name of the first user (o)
+Please provide the name of the second user(x)
+Please provide the board height 
+Please provide the board width
+Please provide the number of adjacent signs necessary to win
+Who goes first x/o ?
+How many matches do you want to play ? 
+How many points should a round winner get ? 
+What data structure would you like to use a - ArrayList | l - LinkedList ? 
+|  1 ||  2 ||  3 ||  4 | 
+|  5 ||  6 ||  7 ||  8 | 
+|  9 || 10 || 11 || 12 | 
+| 13 || 14 || 15 || 16 | 
+
+
+Now is the turn of :andrzej whose sign is :| x  | Please provide the  number of the tile you want to mark | Type "swap" at any time to swap the player's points !
+| x  ||  2 ||  3 ||  4 | 
+|  5 ||  6 ||  7 ||  8 | 
+|  9 || 10 || 11 || 12 | 
+| 13 || 14 || 15 || 16 | 
+
+
+Now is the turn of :roman whose sign is :| o  | Please provide the  number of the tile you want to mark | Type "swap" at any time to swap the player's points !
+| x  ||  2 ||  3 || o  | 
+|  5 ||  6 ||  7 ||  8 | 
+|  9 || 10 || 11 || 12 | 
+| 13 || 14 || 15 || 16 | 
+
+
+Now is the turn of :andrzej whose sign is :| x  | Please provide the  number of the tile you want to mark | Type "swap" at any time to swap the player's points !
+| x  || x  ||  3 || o  | 
+|  5 ||  6 ||  7 ||  8 | 
+|  9 || 10 || 11 || 12 | 
+| 13 || 14 || 15 || 16 | 
+
+
+Now is the turn of :roman whose sign is :| o  | Please provide the  number of the tile you want to mark | Type "swap" at any time to swap the player's points !
+| x  || x  ||  3 || o  | 
+| o  ||  6 ||  7 ||  8 | 
+|  9 || 10 || 11 || 12 | 
+| 13 || 14 || 15 || 16 | 
+
+
+Now is the turn of :andrzej whose sign is :| x  | Please provide the  number of the tile you want to mark | Type "swap" at any time to swap the player's points !
+andrzejwhose sign is :| x  |has won this round!
+Player O has : 0
+Player X has :3
+Playerandrzej has won the entire match ! 
+Do you want to play another match Y/N ?
+]

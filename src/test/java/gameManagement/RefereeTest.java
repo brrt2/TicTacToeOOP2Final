@@ -17,6 +17,10 @@ import static org.testng.Assert.*;
 
 public class RefereeTest {
 
+    RefereeTestHelper rth = new RefereeTestHelper();
+    NumberOfMatches numberOfMatches = new NumberOfMatches(3);
+    PointsForWin pointsForWin = new PointsForWin(3);
+
 
     Player player1 = new Player("bartek", TakenTileSign.CROSS);
 
@@ -37,7 +41,7 @@ public class RefereeTest {
                 {5, 5, 5, new int[]{16, 17, 18, 19, 20}},
                 {5, 5, 5, new int[]{21, 22, 23, 24, 25}},
                 {6, 6, 5, new int[]{1, 2, 3, 4, 5}},
-                {6, 6, 5, new int[]{ 7, 8, 9, 10,11}},
+                {6, 6, 5, new int[]{7, 8, 9, 10, 11}},
                 {6, 6, 5, new int[]{13, 14, 15, 16, 17}},
                 {6, 6, 5, new int[]{19, 20, 21, 22, 23}},
                 {6, 6, 5, new int[]{25, 26, 27, 28, 29}},
@@ -112,40 +116,24 @@ public class RefereeTest {
     }
 
 
-    public int[] drawNumberGenerator6x6(){
-        int[] arr = new int[36];
-        for(int i=0; i<6*6; i++){
-            arr[i]=i+1;
-        }
-        return arr;
-    }
-
-    public int[] drawNumberGenerator7x7(){
-        int[] arr = new int[36];
-        for(int i=0; i<7*7; i++){
-            arr[i]=i+1;
-        }
-        return arr;
-    }
-
     @DataProvider(name = "CheckIfDraw")
     public Object[][] getData4() {
+
         return new Object[][]{
 
-                {3, 3, 3, new int[]{1,2,3,4,5,6,7,8,9}},
-                {4, 4, 3, new int[]{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16}},
-                {5, 5, 3, new int[]{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25}},
-                {6, 6, 3, drawNumberGenerator6x6()},
-                {7, 7, 3, drawNumberGenerator7x7()},
-//                {5, 5, 3, new int[]{4, 8, 12}},
-//                {6, 6, 3, new int[]{4, 9, 14}},
-//                {6, 6, 3, new int[]{5, 10, 15}},
-//                {6, 6, 3, new int[]{6, 11, 16}},
-//                {6, 6, 3, new int[]{12, 17, 22}},
-//                {3, 7, 3, new int[]{7, 13, 19}},
-//                {3, 7, 3, new int[]{6, 12, 18}},
-//                {3, 7, 3, new int[]{3, 9, 15}},
-//                {3, 7, 3, new int[]{4, 10, 16}},
+
+                {3, 3, 3, rth.drawNumberGenerator(3, 3)},
+                {4, 4, 3, rth.drawNumberGenerator(4, 4)},
+                {5, 5, 3, rth.drawNumberGenerator(5, 5)},
+                {6, 6, 4, rth.drawNumberGenerator(6, 6)},
+                {7, 7, 5, rth.drawNumberGenerator(7, 7)},
+                {8, 8, 3, rth.drawNumberGenerator(8, 8)},
+                {4, 7, 4, rth.drawNumberGenerator(4, 7)},
+                {5, 8, 3, rth.drawNumberGenerator(5, 8)},
+                {9, 6, 5, rth.drawNumberGenerator(9, 6)},
+                {5, 11, 3, rth.drawNumberGenerator(5, 11)},
+                {3, 7, 3, rth.drawNumberGenerator(3, 7)},
+                {10, 15, 3, rth.drawNumberGenerator(10, 15)},
 
         };
     }
@@ -155,20 +143,16 @@ public class RefereeTest {
     public Object[][] getData5() {
         return new Object[][]{
 
-                {3, 3, 3, new int[]{1,4,7}},
-                {4, 4, 3, new int[]{1,5,9}},
-//                {4, 4, 3, new int[]{8, 11, 14}},
-//                {4, 4, 3, new int[]{3, 6, 9}},
-//                {5, 5, 3, new int[]{3, 7, 11}},
-//                {5, 5, 3, new int[]{4, 8, 12}},
-//                {6, 6, 3, new int[]{4, 9, 14}},
-//                {6, 6, 3, new int[]{5, 10, 15}},
-//                {6, 6, 3, new int[]{6, 11, 16}},
-//                {6, 6, 3, new int[]{12, 17, 22}},
-//                {3, 7, 3, new int[]{7, 13, 19}},
-//                {3, 7, 3, new int[]{6, 12, 18}},
-//                {3, 7, 3, new int[]{3, 9, 15}},
-//                {3, 7, 3, new int[]{4, 10, 16}},
+                {3, 3, 3, new int[]{1, 4, 7}},
+                {4, 4, 3, new int[]{1, 5, 9}},
+                {5, 5, 3, new int[]{1, 6, 11}},
+                {6, 6, 3, new int[]{1, 7, 13}},
+                {7, 7, 3, new int[]{1, 8, 15}},
+                {5, 9, 3, new int[]{1, 10, 19}},
+                {11, 7, 3, new int[]{1, 8, 15}},
+                {5, 12, 3, new int[]{1, 13, 25}},
+                {6, 13, 3, new int[]{1, 14, 27}},
+                {9, 15, 3, new int[]{1, 16, 31}},
 
         };
     }
@@ -180,9 +164,7 @@ public class RefereeTest {
         Width w = new Width(column);
         List<Tile> list = new ArrayList<>();
         TilesToWin tilesToWin1 = new TilesToWin(tilesToWin);
-        NumberOfMatches numberOfMatches = new NumberOfMatches(3);
-        PointsForWin pointsForWin = new PointsForWin(3);
-        Score score = new Score(numberOfMatches,pointsForWin);
+        Score score = new Score(numberOfMatches, pointsForWin);
         Board board = new Board.Builder()
                 .height(h)
                 .column(w)
@@ -193,7 +175,7 @@ public class RefereeTest {
             board.markTile(toMark[i], player1.getTakenTileSign());
         }
 
-        assertTrue(referee.checkIfWonHorizontally(player1,toMark[toMark.length-1]));
+        assertTrue(referee.checkIfWonHorizontally(player1, toMark[toMark.length - 1]));
     }
 
     @Test(dataProvider = "diagonalCheckLtR")
@@ -202,9 +184,7 @@ public class RefereeTest {
         Width w = new Width(column);
         List<Tile> list = new ArrayList<>();
         TilesToWin tilesToWin1 = new TilesToWin(tilesToWin);
-        NumberOfMatches numberOfMatches = new NumberOfMatches(3);
-        PointsForWin pointsForWin = new PointsForWin(3);
-        Score score = new Score(numberOfMatches,pointsForWin);
+        Score score = new Score(numberOfMatches, pointsForWin);
         Board board = new Board.Builder()
                 .height(h)
                 .column(w)
@@ -226,9 +206,7 @@ public class RefereeTest {
         Width w = new Width(column);
         List<Tile> list = new ArrayList<>();
         TilesToWin tilesToWin1 = new TilesToWin(tilesToWin);
-        NumberOfMatches numberOfMatches = new NumberOfMatches(3);
-        PointsForWin pointsForWin = new PointsForWin(3);
-        Score score = new Score(numberOfMatches,pointsForWin);
+        Score score = new Score(numberOfMatches, pointsForWin);
         Board board = new Board.Builder()
                 .height(h)
                 .column(w)
@@ -244,28 +222,26 @@ public class RefereeTest {
     }
 
 
-//    @Test(dataProvider = "CheckIfDraw")
-//    public void testCheckIfDraw(int row, int column, int tilesToWin, int[] toMark) throws Exception {
-//
-//        Height h = new Height(row);
-//        Width w = new Width(column);
-//        List<Tile> list = new ArrayList<>();
-//        TilesToWin tilesToWin1 = new TilesToWin(tilesToWin);
-//        NumberOfMatches numberOfMatches = new NumberOfMatches(3);
-//        PointsForWin pointsForWin = new PointsForWin(3);
-//        Score score = new Score(numberOfMatches,pointsForWin);
-//        Board board = new Board.Builder()
-//                .height(h)
-//                .column(w)
-//                .playBoard(list)
-//                .build();
-//        Referee referee = new Referee(board, tilesToWin1, score);
-//
-//        for (int i = 0; i < toMark.length; i++) {
-//            board.markTile(toMark[i], TakenTileSign.CROSS);
-//        }
-//        assertTrue(referee.checkIfDraw());
-//    }
+    @Test(dataProvider = "CheckIfDraw")
+    public void testCheckIfDraw(int row, int column, int tilesToWin, int[] toMark) throws Exception {
+
+        Height h = new Height(row);
+        Width w = new Width(column);
+        List<Tile> list = new ArrayList<>();
+        TilesToWin tilesToWin1 = new TilesToWin(tilesToWin);
+        Score score = new Score(numberOfMatches, pointsForWin);
+        Board board = new Board.Builder()
+                .height(h)
+                .column(w)
+                .playBoard(list)
+                .build();
+        Referee referee = new Referee(board, tilesToWin1, score);
+
+        for (int i = 0; i < toMark.length; i++) {
+            board.markTile(toMark[i], TakenTileSign.CROSS);
+        }
+        assertTrue(referee.checkIfDraw());
+    }
 
     @Test(dataProvider = "CheckIfWonVertically")
     public void testCheckIfWonVertically(int row, int column, int tilesToWin, int[] toMark) throws Exception {
@@ -274,9 +250,7 @@ public class RefereeTest {
         Width w = new Width(column);
         List<Tile> list = new ArrayList<>();
         TilesToWin tilesToWin1 = new TilesToWin(tilesToWin);
-        NumberOfMatches numberOfMatches = new NumberOfMatches(3);
-        PointsForWin pointsForWin = new PointsForWin(3);
-        Score score = new Score(numberOfMatches,pointsForWin);
+        Score score = new Score(numberOfMatches, pointsForWin);
         Board board = new Board.Builder()
                 .height(h)
                 .column(w)
@@ -288,30 +262,27 @@ public class RefereeTest {
             board.markTile(toMark[i], TakenTileSign.CROSS);
         }
 
-        assertTrue(referee.checkIfWonVertically(player1,toMark[toMark.length - 1]));
+        assertTrue(referee.checkIfWonVertically(player1, toMark[toMark.length - 1]));
     }
 
     @Test(alwaysRun = true)
     public void checkIfWonMatch() throws Exception {
 
-        Player currentPlayer = new Player("bartek",TakenTileSign.CROSS);
+        Player currentPlayer = new Player("bartek", TakenTileSign.CROSS);
         Height h = new Height(5);
         Width w = new Width(5);
         List<Tile> list = new ArrayList<>();
         TilesToWin tilesToWin = new TilesToWin(3);
-        NumberOfMatches numberOfMatches = new NumberOfMatches(3);
-        PointsForWin pointsForWin = new PointsForWin(3);
-        Score score = new Score(numberOfMatches,pointsForWin);
+        Score score = new Score(numberOfMatches, pointsForWin);
         Board board = new Board.Builder()
                 .height(h)
                 .column(w)
                 .playBoard(list)
                 .build();
-        Referee referee = new Referee(board,tilesToWin,score);
+        Referee referee = new Referee(board, tilesToWin, score);
 
         assertFalse(referee.checkIfWonMatch(currentPlayer));
     }
-
 
 
 }
