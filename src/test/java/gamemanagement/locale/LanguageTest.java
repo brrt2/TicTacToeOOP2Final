@@ -97,15 +97,7 @@ public class LanguageTest {
         assertEquals(language.getThankYouForPlaying(),"Thank you for playing");
     }
 
-    @Test
-    public void testGetPlayerXhas() throws Exception {
-        assertEquals(language.getPlayerXhas(),"Player X has :");
-    }
 
-    @Test
-    public void testGetPlayerOhas() throws Exception {
-        assertEquals(language.getPlayerOhas(),"Player O has : ");
-    }
 
     @Test
     public void testGetAskHowManyMatches() throws Exception {
@@ -117,11 +109,7 @@ public class LanguageTest {
         assertEquals(language.getAskIfChangeDataStructure(),"What data structure would you like to use a - ArrayList | l - LinkedList ? ");
     }
 
-    @Test
-    public void testGetAskHowManyPointsForWin() throws Exception {
-        assertEquals(language.getAskHowManyPointsForWin(),"How many points should a round winner get ? ");
 
-    }
 
     @Test
     public void testGetValuesSwapped() throws Exception {
