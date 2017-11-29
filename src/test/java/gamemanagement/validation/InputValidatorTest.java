@@ -1,7 +1,7 @@
 package gamemanagement.validation;
 
 import gamemanagement.Board;
-import gamemanagement.NumberOfMatches;
+import gamemanagement.NumberOfRounds;
 import gamemanagement.PointsForWin;
 import gamemanagement.configuration.Height;
 import gamemanagement.configuration.Width;
@@ -49,10 +49,10 @@ public class InputValidatorTest {
 
     @Test
     public void validateHowManyMatches() {
-        NumberOfMatches numberOfMatches = new NumberOfMatches(-3);
-        NumberOfMatches numberOfMatches1 = new NumberOfMatches(5);
-        assertFalse(iv.validateHowManyMatches(numberOfMatches));
-        assertTrue(iv.validateHowManyMatches(numberOfMatches1));
+        NumberOfRounds numberOfRounds = new NumberOfRounds(-3);
+        NumberOfRounds numberOfRounds1 = new NumberOfRounds(5);
+        assertFalse(iv.validateHowManyMatches(numberOfRounds));
+        assertTrue(iv.validateHowManyMatches(numberOfRounds1));
     }
 
     @Test

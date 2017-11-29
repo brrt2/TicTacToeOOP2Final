@@ -93,22 +93,23 @@ public class Game {
     private void printIfWon(){
         gameState=GameState.WIN;
         output.displayMessage(turn.getCurrentPlayer().getName()+ language.getSignOfPlayer()+turn.getCurrentPlayer().getTakenTileSign()+language.getHasWonThisRound());
+        System.out.println();
         output.displayMessage(language.getPlayerOhas()+referee.getScore().getNoughtPlayerPoints());
         output.displayMessage(language.getPlayerXhas()+referee.getScore().getCrossPlayerPoints());
-        if (!referee.checkIfWonMatch(turn.getCurrentPlayer())) askIfWantsToContinue();
-        else askIfWantsToContinueWonMatchOrDraw(language.getAskIfwantsToPlayAnotherMatch());
-    }
+        System.out.println();
 
-    private void askIfWantsToContinue() {
-        output.displayMessage(language.getAskIfWantsToContinue());
-        char choice = scan.nextLine().toUpperCase().charAt(0);
-        if (choice == 'Y') {
+        if (referee.checkIfWonMatch(turn.getCurrentPlayer())){
+            askIfWantsToContinueWonMatchOrDraw(language.getAskIfwantsToPlayAnotherMatch());
+            gameState=GameState.WIN;
+        }
+        else if(referee.checkIfDrawEndMatch()){
+            askIfWantsToContinueWonMatchOrDraw(language.getAskIfWantsToContinueAfterDraw());
+            gameState=GameState.DRAW;
+        }else{
             gameState=GameState.ACTIVE;
             referee.getBoard().clearBoard();
-        } else if (choice == 'N') gameState=GameState.WIN;
-        else {
-            terminateGame();
         }
+
     }
 
     private void askIfWantsToContinueWonMatchOrDraw(String string) {

@@ -1,10 +1,10 @@
 package gamemanagement;
 
-public class NumberOfMatches {
+public class NumberOfRounds {
 
     private final int value;
 
-    public NumberOfMatches(int value) {
+    public NumberOfRounds(int value) {
         this.value = value;
     }
 

@@ -23,7 +23,7 @@ public class InputHandler {
     private Width width;
     private TilesToWin tilesToWin;
     private Language language;
-    private NumberOfMatches numberOfMatches;
+    private NumberOfRounds numberOfRounds;
     private PointsForWin pointsForWin;
     private boolean keepTurning;
     private String whoStarts;
@@ -228,8 +228,8 @@ public class InputHandler {
                 output.displayMessage(language.getIncorrectValue());
                 scan.nextLine();
             }
-            numberOfMatches = new NumberOfMatches(parsedInput);
-            if (!inputValidator.validateHowManyMatches(numberOfMatches)) {
+            numberOfRounds = new NumberOfRounds(parsedInput);
+            if (!inputValidator.validateHowManyMatches(numberOfRounds)) {
                 output.displayMessage(language.getIncorrectValue());
             } else {
                 keepTurning = true;
@@ -283,6 +283,6 @@ public class InputHandler {
 
     private void configureGame(){
         Configurator configurator = new Configurator();
-        configurator.configureGame(whoStarts,name,name2,height,width,tilesToWin,output,language,numberOfMatches,pointsForWin,selectedDataStructure,scan);
+        configurator.configureGame(whoStarts,name,name2,height,width,tilesToWin,output,language, numberOfRounds,pointsForWin,selectedDataStructure,scan);
     }
 }

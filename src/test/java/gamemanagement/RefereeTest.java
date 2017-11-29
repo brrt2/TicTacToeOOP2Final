@@ -18,7 +18,7 @@ import static org.testng.Assert.*;
 public class RefereeTest {
 
     RefereeTestHelper rth = new RefereeTestHelper();
-    NumberOfMatches numberOfMatches = new NumberOfMatches(3);
+    NumberOfRounds numberOfRounds = new NumberOfRounds(3);
     PointsForWin pointsForWin = new PointsForWin(3);
 
 
@@ -164,7 +164,7 @@ public class RefereeTest {
         Width w = new Width(column);
         List<Tile> list = new ArrayList<>();
         TilesToWin tilesToWin1 = new TilesToWin(tilesToWin);
-        Score score = new Score(numberOfMatches, pointsForWin);
+        Score score = new Score(numberOfRounds, pointsForWin);
         Board board = new Board.Builder()
                 .height(h)
                 .column(w)
@@ -184,7 +184,7 @@ public class RefereeTest {
         Width w = new Width(column);
         List<Tile> list = new ArrayList<>();
         TilesToWin tilesToWin1 = new TilesToWin(tilesToWin);
-        Score score = new Score(numberOfMatches, pointsForWin);
+        Score score = new Score(numberOfRounds, pointsForWin);
         Board board = new Board.Builder()
                 .height(h)
                 .column(w)
@@ -206,7 +206,7 @@ public class RefereeTest {
         Width w = new Width(column);
         List<Tile> list = new ArrayList<>();
         TilesToWin tilesToWin1 = new TilesToWin(tilesToWin);
-        Score score = new Score(numberOfMatches, pointsForWin);
+        Score score = new Score(numberOfRounds, pointsForWin);
         Board board = new Board.Builder()
                 .height(h)
                 .column(w)
@@ -229,7 +229,7 @@ public class RefereeTest {
         Width w = new Width(column);
         List<Tile> list = new ArrayList<>();
         TilesToWin tilesToWin1 = new TilesToWin(tilesToWin);
-        Score score = new Score(numberOfMatches, pointsForWin);
+        Score score = new Score(numberOfRounds, pointsForWin);
         Board board = new Board.Builder()
                 .height(h)
                 .column(w)
@@ -250,7 +250,7 @@ public class RefereeTest {
         Width w = new Width(column);
         List<Tile> list = new ArrayList<>();
         TilesToWin tilesToWin1 = new TilesToWin(tilesToWin);
-        Score score = new Score(numberOfMatches, pointsForWin);
+        Score score = new Score(numberOfRounds, pointsForWin);
         Board board = new Board.Builder()
                 .height(h)
                 .column(w)
@@ -273,7 +273,7 @@ public class RefereeTest {
         Width w = new Width(5);
         List<Tile> list = new ArrayList<>();
         TilesToWin tilesToWin = new TilesToWin(3);
-        Score score = new Score(numberOfMatches, pointsForWin);
+        Score score = new Score(numberOfRounds, pointsForWin);
         Board board = new Board.Builder()
                 .height(h)
                 .column(w)

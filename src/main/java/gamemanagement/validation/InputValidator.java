@@ -1,7 +1,7 @@
 package gamemanagement.validation;
 
 import gamemanagement.Board;
-import gamemanagement.NumberOfMatches;
+import gamemanagement.NumberOfRounds;
 import gamemanagement.PointsForWin;
 import gamemanagement.tiles.TakenTileSign;
 import players.Player;
@@ -13,8 +13,8 @@ public class InputValidator {
         return name.matches(expression);
     }
 
-    public boolean validateHowManyMatches(NumberOfMatches numberOfMatches) {
-        return numberOfMatches.getValue()>0;
+    public boolean validateHowManyMatches(NumberOfRounds numberOfRounds) {
+        return numberOfRounds.getValue()>0;
     }
 
     public boolean validateHowManyPointsForWin(PointsForWin pointsForWin) {

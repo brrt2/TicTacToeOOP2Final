@@ -1,11 +1,9 @@
 package gamemanagement;
 import gamemanagement.configuration.TilesToWin;
-import gamemanagement.locale.Language;
 import gamemanagement.tiles.TakenTileSign;
 import gamemanagement.tiles.Tile;
 import gamemanagement.validation.Score;
 import players.Player;
-import userInteraction.Output;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -128,12 +126,19 @@ public class Referee{
 
     boolean checkIfWonMatch(Player currentPlayer) {
 
-        if (score.getRoundNumber() == score.getNumberOfMatches().getValue()) {
+        if (score.getRoundNumber() == score.getNumberOfRounds().getValue()) {
             if (currentPlayer.getTakenTileSign().equals(TakenTileSign.CROSS) && score.getCrossPlayerPoints() > score.getNoughtPlayerPoints()) {
                 return true;
             } else if (currentPlayer.getTakenTileSign().equals(TakenTileSign.NOUGHT) && score.getCrossPlayerPoints() < score.getNoughtPlayerPoints()) {
                 return true;
-            } else if (score.getNoughtPlayerPoints() == score.getCrossPlayerPoints()) {
+            }
+        }
+        return false;
+    }
+
+    boolean checkIfDrawEndMatch() {
+        if (score.getRoundNumber() == score.getNumberOfRounds().getValue()) {
+            if (score.getNoughtPlayerPoints() == score.getCrossPlayerPoints()) {
                 return true;
             }
         }

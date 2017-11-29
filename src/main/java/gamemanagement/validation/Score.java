@@ -1,6 +1,6 @@
 package gamemanagement.validation;
 
-import gamemanagement.NumberOfMatches;
+import gamemanagement.NumberOfRounds;
 import gamemanagement.PointsForWin;
 import gamemanagement.tiles.TakenTileSign;
 import players.Player;
@@ -10,11 +10,11 @@ public class Score {
     private int crossPlayerPoints = 0;
     private int noughtPlayerPoints = 0;
     private int roundNumber;
-    private NumberOfMatches numberOfMatches;
+    private NumberOfRounds numberOfRounds;
     private PointsForWin pointsForWin;
 
-    public Score(NumberOfMatches numberOfMatches, PointsForWin pointsForWin) {
-        this.numberOfMatches = numberOfMatches;
+    public Score(NumberOfRounds numberOfRounds, PointsForWin pointsForWin) {
+        this.numberOfRounds = numberOfRounds;
         this.pointsForWin=pointsForWin;
     }
 
@@ -57,8 +57,8 @@ public class Score {
     }
 
 
-    public NumberOfMatches getNumberOfMatches() {
-        return numberOfMatches;
+    public NumberOfRounds getNumberOfRounds() {
+        return numberOfRounds;
     }
 
 }

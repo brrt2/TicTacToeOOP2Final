@@ -57,15 +57,7 @@ public class LanguageTest {
         assertEquals(language.getBoardDimensionError(),"Please provide a number higher than 2 and lower than 1000!");
     }
 
-    @Test
-    public void testGetAskIfWantsToContinueAfterDraw() throws Exception {
-        assertEquals(language.getAskIfWantsToContinueAfterDraw(),"It is a draw ! Do you want to continue ?");
-    }
 
-    @Test
-    public void testGetAskIfWantsToContinue() throws Exception {
-        assertEquals(language.getAskIfWantsToContinue(),"Do you wish to continue Y/N ?");
-    }
 
     @Test
     public void testGetLostMoveMessage() throws Exception {
@@ -107,10 +99,10 @@ public class LanguageTest {
         assertEquals(language.getPlayerOhas(),"Player O has : ");
     }
 
-    @Test
-    public void testGetAskHowManyMatches() throws Exception {
-        assertEquals(language.getAskHowManyMatches(),"How many matches do you want to play ? ");
-    }
+//    @Test
+//    public void testGetAskHowManyMatches() throws Exception {
+//        assertEquals(language.getAskHowManyMatches(),"How many matches do you want to play ? ");
+//    }
 
     @Test
     public void testGetAskIfChangeDataStructure() throws Exception {
