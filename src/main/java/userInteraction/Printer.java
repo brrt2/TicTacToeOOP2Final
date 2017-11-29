@@ -39,7 +39,7 @@ public class Printer {
     }
 
     private void configureTarget(){
-        String target=null;
+        String target="";
         while (!keepTurning) {
             System.out.println("Please select the ouptput target Sys.err - e | Sys.out - o | Wybierz strumien wyjscia Sys.err - e | Sys.out - o " +
                     "Seleccione el canal de salida Sys.err - e | Sys.out - o");
@@ -61,7 +61,7 @@ public class Printer {
     }
 
     private void configureLanguage(){
-        String lang=null;
+        String lang="";
         keepTurning=false;
         while (!keepTurning) {
             System.out.println("Press e for English | Wcisnij p aby wybrac jezyk polski | Pulse s para seleccionar la lengua española");
