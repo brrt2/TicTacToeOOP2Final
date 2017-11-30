@@ -58,8 +58,9 @@ public class Game {
 
     private int obtainTheTileNumber(){
         int number1=0;
-        System.out.println(referee.getBoard());
-        System.out.println();
+        output.displayBoard(referee.getBoard());
+        //System.out.println(referee.getBoard());
+        //System.out.println();
         printMessage();
             try {
                 String number = String.valueOf(scan.nextLine());
