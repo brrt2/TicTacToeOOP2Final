@@ -91,11 +91,6 @@ public class LanguageTest {
 
 
 
-//    @Test
-//    public void testGetAskHowManyMatches() throws Exception {
-//        assertEquals(language.getAskHowManyMatches(),"How many matches do you want to play ? ");
-//    }
-
     @Test
     public void testGetAskIfChangeDataStructure() throws Exception {
         assertEquals(language.getAskIfChangeDataStructure(),"What data structure would you like to use a - ArrayList | l - LinkedList ? ");

@@ -1,4 +1,4 @@
-package gamemanagement;
+package gamemanagement.configuration;
 
 public class NumberOfRounds {
 

@@ -1,7 +1,7 @@
 package gamemanagement.validation;
 
-import gamemanagement.NumberOfRounds;
-import gamemanagement.PointsForWin;
+import gamemanagement.configuration.NumberOfRounds;
+import gamemanagement.configuration.PointsForWin;
 import gamemanagement.tiles.TakenTileSign;
 import players.Player;
 

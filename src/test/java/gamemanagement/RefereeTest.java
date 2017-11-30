@@ -1,8 +1,6 @@
 package gamemanagement;
 
-import gamemanagement.configuration.Height;
-import gamemanagement.configuration.TilesToWin;
-import gamemanagement.configuration.Width;
+import gamemanagement.configuration.*;
 import gamemanagement.tiles.TakenTileSign;
 import gamemanagement.tiles.Tile;
 import gamemanagement.validation.Score;

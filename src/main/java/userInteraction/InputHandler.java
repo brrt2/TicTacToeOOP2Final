@@ -1,9 +1,7 @@
 package userInteraction;
 
 import gamemanagement.*;
-import gamemanagement.configuration.Height;
-import gamemanagement.configuration.TilesToWin;
-import gamemanagement.configuration.Width;
+import gamemanagement.configuration.*;
 import gamemanagement.locale.Language;
 import gamemanagement.locale.LanguageFactory;
 import gamemanagement.validation.InputValidator;
