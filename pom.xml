@@ -17,7 +17,7 @@
                         <archive>
                             <manifest>
                                 <addClasspath>true</addClasspath>
-                                <mainClass>gameManagement.Main</mainClass>
+                                <mainClass>gamemanagement.Main</mainClass>
                             </manifest>
                         </archive>
                     </configuration>
