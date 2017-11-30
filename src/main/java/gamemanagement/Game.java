@@ -93,10 +93,11 @@ public class Game {
     private void printIfWon(){
         gameState=GameState.WIN;
         output.displayMessage(turn.getCurrentPlayer().getName()+ language.getSignOfPlayer()+turn.getCurrentPlayer().getTakenTileSign()+language.getHasWonThisRound());
+
         System.out.println();
         output.displayMessage(language.getPlayerOhas()+referee.getScore().getNoughtPlayerPoints());
         output.displayMessage(language.getPlayerXhas()+referee.getScore().getCrossPlayerPoints());
-        System.out.println();
+        askIfWantsToContinueWonMatchOrDraw(language.getAskIfWantsToContinue());
 
         if (referee.checkIfWonMatch(turn.getCurrentPlayer())){
             askIfWantsToContinueWonMatchOrDraw(language.getAskIfwantsToPlayAnotherMatch());
@@ -105,10 +106,12 @@ public class Game {
         else if(referee.checkIfDrawEndMatch()){
             askIfWantsToContinueWonMatchOrDraw(language.getAskIfWantsToContinueAfterDraw());
             gameState=GameState.DRAW;
-        }else{
-            gameState=GameState.ACTIVE;
-            referee.getBoard().clearBoard();
         }
+
+//        else{
+//            gameState=GameState.ACTIVE;
+//            referee.getBoard().clearBoard();
+//        }
 
     }
 
