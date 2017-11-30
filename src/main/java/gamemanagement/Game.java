@@ -42,7 +42,7 @@ public class Game {
                 askIfWantsToContinueWonMatchOrDraw(language.getAskIfWantsToContinueAfterDraw());
             }
         } catch (IndexOutOfBoundsException e) {
-            output.displayMessage(language.getIncorrectValue());
+
         }
         turn.switchCurrentPlayer();
     }
@@ -61,19 +61,20 @@ public class Game {
         System.out.println(referee.getBoard());
         System.out.println();
         printMessage();
-        try {
-          String number = String.valueOf(scan.nextLine());
-          if(number.equals("swap")){
-              referee.getScore().swapScores();
-              output.displayMessage(language.getValuesSwapped());
-              obtainTheTileNumber();
-          }
-          else if(number.equals("exit")) System.exit(0);
-          else number1 = Integer.parseInt(number);
-        } catch (NumberFormatException | InputMismatchException e) {
-            output.displayMessage(language.getIncorrectValue());
-            scan.nextLine();
-        }
+            try {
+                String number = String.valueOf(scan.nextLine());
+                if(number.equals("swap")){
+                    referee.getScore().swapScores();
+                    output.displayMessage(language.getValuesSwapped());
+                    obtainTheTileNumber();
+                }
+                else if(number.equals("exit")) System.exit(0);
+                else number1 = Integer.parseInt(number);
+            } catch (NumberFormatException | InputMismatchException | IndexOutOfBoundsException e) {
+                output.displayMessage(language.getPressAnyKeyToContinue());
+                scan.nextLine();
+            }
+
         move = MoveFactory.createMove(number1, turn.getCurrentPlayer());
         addToArchive();
         validateInput();
@@ -97,16 +98,17 @@ public class Game {
         System.out.println();
         output.displayMessage(language.getPlayerOhas()+referee.getScore().getNoughtPlayerPoints());
         output.displayMessage(language.getPlayerXhas()+referee.getScore().getCrossPlayerPoints());
-        askIfWantsToContinueWonMatchOrDraw(language.getAskIfWantsToContinue());
+
 
         if (referee.checkIfWonMatch(turn.getCurrentPlayer())){
-            askIfWantsToContinueWonMatchOrDraw(language.getAskIfwantsToPlayAnotherMatch());
-            gameState=GameState.WIN;
+          output.displayMessage(language.getAskIfwantsToPlayAnotherMatch());
+            referee.getScore().resetScore();
         }
         else if(referee.checkIfDrawEndMatch()){
-            askIfWantsToContinueWonMatchOrDraw(language.getAskIfWantsToContinueAfterDraw());
-            gameState=GameState.DRAW;
+            output.displayMessage(language.getAskIfWantsToContinueAfterDraw());
+            referee.getScore().resetScore();
         }
+        askIfWantsToContinueWonMatchOrDraw(language.getAskIfWantsToContinue());
 
 //        else{
 //            gameState=GameState.ACTIVE;
@@ -121,7 +123,6 @@ public class Game {
         if (choice == 'Y') {
             gameState=GameState.ACTIVE;
             referee.getBoard().clearBoard();
-            referee.getScore().resetScore();
         } else if (choice == 'N') gameState=GameState.WIN;
         else {
             terminateGame();

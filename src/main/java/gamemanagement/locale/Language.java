@@ -31,6 +31,7 @@ public class Language {
     private String askHowManyPointsForWin;
     private String askIfChangeDataStructure;
     private String valuesSwapped;
+    private String pressAnyKeyToContinue;
     private String fileName = null;
 
     public Language(String fileName)  {
@@ -69,7 +70,7 @@ public class Language {
             askHowManyPointsForWin = properties.getProperty("askHowManyPointsForWin");
             askIfChangeDataStructure = properties.getProperty("askIfChangeDataStructure");
             valuesSwapped=properties.getProperty("valuesSwapped");
-
+            pressAnyKeyToContinue=properties.getProperty("pressAnyKeyToContinue");
         } catch (IOException ex) {
             System.out.println("An IOException has occurred");
         }
@@ -173,4 +174,8 @@ public class Language {
     }
 
     public String getValuesSwapped() { return valuesSwapped; }
+
+    public String getPressAnyKeyToContinue() {
+        return pressAnyKeyToContinue;
+    }
 }
