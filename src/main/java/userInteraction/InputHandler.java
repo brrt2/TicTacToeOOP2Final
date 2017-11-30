@@ -45,7 +45,7 @@ public class InputHandler {
                     "Seleccione el canal de salida Sys.err - e | Sys.out - o");
             target = scan.nextLine();
             if (!inputValidator.validateTargetConfig(target)) {
-                System.out.println("Wrong value ! ");
+                System.out.println("Wrong value ! | Nieprawidlowa wartosc ! | Valor incorrecto !  ");
             } else {
                 keepTurning = true;
             }
@@ -72,7 +72,7 @@ public class InputHandler {
             }
 
             if (!inputValidator.validateLanguage(lang)) {
-                System.out.println("Wrong value !");
+                System.out.println("Wrong value ! | Nieprawidlowa wartosc ! | Valor incorrecto !  ");
             } else {
                 keepTurning = true;
             }

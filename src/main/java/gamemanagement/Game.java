@@ -42,7 +42,7 @@ public class Game {
                 askIfWantsToContinueWonMatchOrDraw(language.getAskIfWantsToContinueAfterDraw());
             }
         } catch (IndexOutOfBoundsException e) {
-            output.displayMessage("An issue with win checking in the Game class");
+            output.displayMessage(language.getIncorrectValue());
         }
         turn.switchCurrentPlayer();
     }
@@ -72,7 +72,7 @@ public class Game {
           else number1 = Integer.parseInt(number);
         } catch (NumberFormatException | InputMismatchException e) {
             output.displayMessage(language.getIncorrectValue());
-            scan.next();
+            scan.nextLine();
         }
         move = MoveFactory.createMove(number1, turn.getCurrentPlayer());
         addToArchive();
